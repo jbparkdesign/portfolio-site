@@ -456,7 +456,7 @@ nav {
 .sep--swap {
   display: grid;
   place-items: center;
-  padding: 0 16px;
+  padding: 0 calc(var(--size-display) * 0.2);
 }
 
 .sep--swap .amp,
