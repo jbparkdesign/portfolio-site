@@ -343,14 +343,9 @@ body.sidebar-mode .logo:hover .firstname-clip { max-width: 0; }
 body.sidebar-mode .logo:hover .lastname-clip  { max-width: 0; }
 body.sidebar-mode .logo:hover .name-space     { width: 0; }
 
-/* LinkedIn branded icon hidden by default */
-.nav-icon-linkedin { display: none; }
 
-/* Sidebar mode: icon-only nav — hide labels + arrow, show branded icons */
-body.sidebar-mode .nav-label       { display: none; }
-body.sidebar-mode .nav-icon-arrow  { display: none; }
-body.sidebar-mode .nav-icon-linkedin { display: flex; }
-body.sidebar-mode .nav-link        { padding: 0 10px; }
+/* Sidebar mode: keep labels + arrow visible */
+body.sidebar-mode .nav-link { padding: 0 10px; }
 
 /* ─── Nav links ──────────────────────────────────────────── */
 nav {
@@ -586,18 +581,22 @@ footer {
   transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1), width 0.2s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
-/* Icon container: stacked absolutely */
+/* Icon container: stacked absolutely, vertically centered */
 .email-icons {
   position: relative;
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .icon-copy,
 .icon-thumb {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .icon-thumb { opacity: 0; }
 
