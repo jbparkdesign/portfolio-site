@@ -132,13 +132,13 @@ header nav .nav-link:nth-child(2) {
   animation: rise-in-nofade 0.8s cubic-bezier(0, 0.3, 0.24, 1) both;
 }
 
-/* Divider stagger — direct children at odd positions */
-.project-list > :nth-child(1)  { animation-delay: 460ms; }
-.project-list > :nth-child(3)  { animation-delay: 520ms; }
-.project-list > :nth-child(5)  { animation-delay: 580ms; }
-.project-list > :nth-child(7)  { animation-delay: 640ms; }
-.project-list > :nth-child(9)  { animation-delay: 700ms; }
-.project-list > :nth-child(11) { animation-delay: 760ms; }
+/* Divider stagger — 400ms ahead of everything else */
+.project-list > :nth-child(1)  { animation-delay: 60ms; }
+.project-list > :nth-child(3)  { animation-delay: 120ms; }
+.project-list > :nth-child(5)  { animation-delay: 180ms; }
+.project-list > :nth-child(7)  { animation-delay: 240ms; }
+.project-list > :nth-child(9)  { animation-delay: 300ms; }
+.project-list > :nth-child(11) { animation-delay: 360ms; }
 
 /* Row stagger — target .list-row inside each clip wrapper */
 .project-list > :nth-child(2)  .list-row { animation-delay: 500ms; }
