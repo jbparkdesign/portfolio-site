@@ -391,6 +391,14 @@ nav {
   color: var(--color-hover-text);
 }
 
+.nav-link.active {
+  color: var(--color-text);
+}
+
+.nav-link.active:hover {
+  color: var(--color-hover-text);
+}
+
 .nav-link:hover::before {
   background-color: var(--color-hover-bg);
 }
@@ -556,6 +564,7 @@ footer {
   overflow: hidden;
   display: inline-flex;
   align-items: center;
+  margin-right: 4px;
 }
 .email-label {
   white-space: nowrap;
@@ -581,11 +590,11 @@ footer {
   transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1), width 0.2s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
-/* Icon container: stacked absolutely, vertically centered */
+/* Icon container: stacked absolutely, sized to largest icon */
 .email-icons {
   position: relative;
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -594,9 +603,9 @@ footer {
 .icon-copy,
 .icon-thumb {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  transform-origin: center;
 }
 .icon-thumb { opacity: 0; }
 
