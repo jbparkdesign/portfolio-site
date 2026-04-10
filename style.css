@@ -570,7 +570,7 @@ footer {
 
 /* ─── Hero ───────────────────────────────────────────────── */
 .proj-hero {
-  padding: 40px 80px;
+  padding: 80px 80px 40px;
   display: flex;
   flex-direction: column;
   gap: 16px;

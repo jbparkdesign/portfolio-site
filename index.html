@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>jbpark.design</title>
-  <link rel="stylesheet" href="style.css?v=27">
+  <link rel="stylesheet" href="style.css?v=28">
 </head>
 <body>
 
@@ -564,6 +564,10 @@
       void closeBtn.offsetWidth;
       closeBtn.classList.add('is-exiting');
       if (!suppressLabelSwap && !emailBtn.classList.contains('copied')) swapLabel('jbpark.design@gmail.com');
+      // Reset all project pages so they don't animate scrolling up on next open
+      document.querySelectorAll('.proj-content').forEach(c => { c.hidden = true; });
+      projectScroll.scrollTop = 0;
+      lastScrollY = 0;
     }
 
     function copyEmail() {
