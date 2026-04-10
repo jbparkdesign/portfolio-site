@@ -95,50 +95,66 @@ body.sidebar-mode {
   to   { transform: scaleX(1); }
 }
 
+/* With fade — nav + footer */
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Nav */
-header nav .nav-link:nth-child(1) {
-  animation: rise-in 0.55s cubic-bezier(0, 0.3, 0.24, 1) both;
-  animation-delay: 20ms;
-}
-header nav .nav-link:nth-child(2) {
-  animation: rise-in 0.55s cubic-bezier(0, 0.3, 0.24, 1) both;
-  animation-delay: 60ms;
+/* No fade — rows slide up from behind the divider below */
+@keyframes rise-in-nofade {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
 }
 
-/* Dividers: children 1, 3, 5, 7, 9, 11 */
+/* Nav */
+header nav .nav-link:nth-child(1) {
+  animation: rise-in 0.8s cubic-bezier(0, 0.3, 0.24, 1) both;
+  animation-delay: 420ms;
+}
+header nav .nav-link:nth-child(2) {
+  animation: rise-in 0.8s cubic-bezier(0, 0.3, 0.24, 1) both;
+  animation-delay: 460ms;
+}
+
+/* Dividers */
 .project-list .divider {
-  animation: divider-draw 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: divider-draw 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
-/* List rows: children 2, 4, 6, 8, 10 */
+
+/* Clip wrapper — hides row below its slot until it animates up */
+.list-row-clip {
+  overflow: hidden;
+}
+
+/* List rows — no opacity fade, rises up from behind divider below */
 .project-list .list-row {
-  animation: rise-in 0.55s cubic-bezier(0, 0.3, 0.24, 1) both;
+  animation: rise-in-nofade 0.8s cubic-bezier(0, 0.3, 0.24, 1) both;
 }
-/* Stagger each child in order */
-.project-list > :nth-child(1)  { animation-delay: 60ms; }
-.project-list > :nth-child(2)  { animation-delay: 100ms; }
-.project-list > :nth-child(3)  { animation-delay: 120ms; }
-.project-list > :nth-child(4)  { animation-delay: 160ms; }
-.project-list > :nth-child(5)  { animation-delay: 180ms; }
-.project-list > :nth-child(6)  { animation-delay: 220ms; }
-.project-list > :nth-child(7)  { animation-delay: 240ms; }
-.project-list > :nth-child(8)  { animation-delay: 280ms; }
-.project-list > :nth-child(9)  { animation-delay: 300ms; }
-.project-list > :nth-child(10) { animation-delay: 340ms; }
-.project-list > :nth-child(11) { animation-delay: 360ms; }
+
+/* Divider stagger — direct children at odd positions */
+.project-list > :nth-child(1)  { animation-delay: 460ms; }
+.project-list > :nth-child(3)  { animation-delay: 520ms; }
+.project-list > :nth-child(5)  { animation-delay: 580ms; }
+.project-list > :nth-child(7)  { animation-delay: 640ms; }
+.project-list > :nth-child(9)  { animation-delay: 700ms; }
+.project-list > :nth-child(11) { animation-delay: 760ms; }
+
+/* Row stagger — target .list-row inside each clip wrapper */
+.project-list > :nth-child(2)  .list-row { animation-delay: 500ms; }
+.project-list > :nth-child(4)  .list-row { animation-delay: 560ms; }
+.project-list > :nth-child(6)  .list-row { animation-delay: 620ms; }
+.project-list > :nth-child(8)  .list-row { animation-delay: 680ms; }
+.project-list > :nth-child(10) .list-row { animation-delay: 740ms; }
 
 /* Footer */
 footer .copyright {
-  animation: rise-in 0.55s cubic-bezier(0, 0.3, 0.24, 1) both;
-  animation-delay: 380ms;
+  animation: rise-in 0.8s cubic-bezier(0, 0.3, 0.24, 1) both;
+  animation-delay: 780ms;
 }
 footer .email-btn {
-  animation: rise-in 0.55s cubic-bezier(0, 0.3, 0.24, 1) both;
-  animation-delay: 420ms;
+  animation: rise-in 0.8s cubic-bezier(0, 0.3, 0.24, 1) both;
+  animation-delay: 820ms;
 }
 
 /* ─── Project panel ──────────────────────────────────────── */
