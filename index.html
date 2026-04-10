@@ -566,6 +566,7 @@
     }, { passive: false });
 
     function enterProject() {
+      const alreadyOpen = document.body.classList.contains('sidebar-mode');
       document.body.classList.add('sidebar-mode');
       closeBtn.classList.remove('is-exiting');
       void closeBtn.offsetWidth; // force reflow to restart animation
@@ -574,7 +575,7 @@
       lastScrollY = 0;
       lastBoundaryArrivalTime = Date.now();
       prevWheelDeltaAbs = Infinity;
-      if (!suppressLabelSwap && !emailBtn.classList.contains('copied')) swapLabel('Email');
+      if (!suppressLabelSwap && !alreadyOpen && !emailBtn.classList.contains('copied')) swapLabel('Email');
     }
 
     function exitProject() {
