@@ -392,6 +392,10 @@
     }
 
     // ── Progressive reveal ────────────────────────────────────
+    const closeBtn     = document.querySelector('.close-btn');
+    const eyebrow      = document.querySelector('.proj-eyebrow');
+    const projectScroll = document.querySelector('.project-scroll');
+
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -403,25 +407,23 @@
 
     function setupReveal(content) {
       const items = content.querySelectorAll('.proj-reveal');
-      // Reset state for re-entry
+      // Reset all items
       items.forEach(el => {
         el.classList.remove('is-visible');
         el.style.transitionDelay = '0ms';
-        revealObserver.observe(el);
       });
-      // Stagger the above-fold hero elements relative to panel slide (400ms)
+      // Stagger the above-fold hero elements relative to panel slide
       const heroReveals = content.querySelectorAll('.proj-hero .proj-reveal');
       heroReveals.forEach((el, i) => {
         el.style.transitionDelay = `${220 + i * 80}ms`;
       });
-      // Hero media comes in slightly after the text
       const heroMedia = content.querySelector('.proj-hero-media.proj-reveal');
       if (heroMedia) heroMedia.style.transitionDelay = `${220 + heroReveals.length * 80}ms`;
+      // Wait for panel to be painted before observing
+      requestAnimationFrame(() => {
+        items.forEach(el => revealObserver.observe(el));
+      });
     }
-
-    const closeBtn     = document.querySelector('.close-btn');
-    const eyebrow      = document.querySelector('.proj-eyebrow');
-    const projectScroll = document.querySelector('.project-scroll');
 
     // ── Eyebrow scroll behaviour ──────────────────────────────
     let lastScrollY = 0;
