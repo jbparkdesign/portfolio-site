@@ -343,19 +343,6 @@ body.sidebar-mode .logo:hover .firstname-clip { max-width: 0; }
 body.sidebar-mode .logo:hover .lastname-clip  { max-width: 0; }
 body.sidebar-mode .logo:hover .name-space     { width: 0; }
 
-/* Nav icons: circle container for both */
-.nav-icon-about,
-.nav-icon-linkedin {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  flex-shrink: 0;
-}
-
 /* LinkedIn branded icon hidden by default */
 .nav-icon-linkedin { display: none; }
 
