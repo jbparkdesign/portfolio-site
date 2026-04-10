@@ -89,6 +89,58 @@ body.sidebar-mode {
   --size-icon: 17px;
 }
 
+/* ─── Page load entrance animations ─────────────────────── */
+@keyframes divider-draw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Nav */
+header nav .nav-link:nth-child(1) {
+  animation: rise-in 0.55s cubic-bezier(0, 0.3, 0.24, 1) both;
+  animation-delay: 20ms;
+}
+header nav .nav-link:nth-child(2) {
+  animation: rise-in 0.55s cubic-bezier(0, 0.3, 0.24, 1) both;
+  animation-delay: 60ms;
+}
+
+/* Dividers: children 1, 3, 5, 7, 9, 11 */
+.project-list .divider {
+  animation: divider-draw 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+/* List rows: children 2, 4, 6, 8, 10 */
+.project-list .list-row {
+  animation: rise-in 0.55s cubic-bezier(0, 0.3, 0.24, 1) both;
+}
+/* Stagger each child in order */
+.project-list > :nth-child(1)  { animation-delay: 60ms; }
+.project-list > :nth-child(2)  { animation-delay: 100ms; }
+.project-list > :nth-child(3)  { animation-delay: 120ms; }
+.project-list > :nth-child(4)  { animation-delay: 160ms; }
+.project-list > :nth-child(5)  { animation-delay: 180ms; }
+.project-list > :nth-child(6)  { animation-delay: 220ms; }
+.project-list > :nth-child(7)  { animation-delay: 240ms; }
+.project-list > :nth-child(8)  { animation-delay: 280ms; }
+.project-list > :nth-child(9)  { animation-delay: 300ms; }
+.project-list > :nth-child(10) { animation-delay: 340ms; }
+.project-list > :nth-child(11) { animation-delay: 360ms; }
+
+/* Footer */
+footer .copyright {
+  animation: rise-in 0.55s cubic-bezier(0, 0.3, 0.24, 1) both;
+  animation-delay: 380ms;
+}
+footer .email-btn {
+  animation: rise-in 0.55s cubic-bezier(0, 0.3, 0.24, 1) both;
+  animation-delay: 420ms;
+}
+
 /* ─── Project panel ──────────────────────────────────────── */
 .project-panel {
   flex: 1;
@@ -320,6 +372,7 @@ nav {
 .divider {
   height: 1px;
   background-color: var(--color-divider);
+  transform-origin: left;
 }
 
 /* ─── List row ───────────────────────────────────────────── */
