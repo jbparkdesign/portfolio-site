@@ -343,6 +343,15 @@ body.sidebar-mode .logo:hover .firstname-clip { max-width: 0; }
 body.sidebar-mode .logo:hover .lastname-clip  { max-width: 0; }
 body.sidebar-mode .logo:hover .name-space     { width: 0; }
 
+/* Nav icons: LinkedIn branded icon hidden by default */
+.nav-icon-linkedin { display: none; }
+
+/* Sidebar mode: icon-only nav — hide labels + arrow, show branded icons */
+body.sidebar-mode .nav-label       { display: none; }
+body.sidebar-mode .nav-icon-arrow  { display: none; }
+body.sidebar-mode .nav-icon-linkedin { display: block; }
+body.sidebar-mode .nav-link        { padding: 0 10px; }
+
 /* ─── Nav links ──────────────────────────────────────────── */
 nav {
   display: flex;
