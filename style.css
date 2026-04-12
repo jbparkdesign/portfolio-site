@@ -782,14 +782,14 @@ footer {
 /* ─── Section header (2-col) ─────────────────────────────── */
 .proj-section-header {
   display: flex;
-  gap: 32px;
+  gap: clamp(16px, 2.22vw, 40px);
 }
 
 .proj-section-left {
-  flex: 0 0 420px;
+  flex: 0 0 clamp(180px, 29.17vw, 420px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: clamp(8px, 1.11vw, 20px);
 }
 
 .proj-section-right {
@@ -826,10 +826,6 @@ footer {
 .proj-body {
   font-size: 14px;
   line-height: 1.5;
-  color: var(--color-text);
-}
-
-.proj-muted {
   color: var(--color-muted);
 }
 
