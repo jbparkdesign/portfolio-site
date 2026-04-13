@@ -592,21 +592,17 @@ footer {
   transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1), width 0.2s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
-/* Icon container: stacked absolutely, sized to largest icon */
+/* Icon container: stacked via grid, sized to match out-link icon */
 .email-icons {
-  position: relative;
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
 }
 .icon-copy,
 .icon-thumb {
-  position: absolute;
-  top: 0;
-  left: 0;
+  grid-area: 1 / 1;
   transform-origin: center;
 }
 .icon-thumb { opacity: 0; }
@@ -735,10 +731,11 @@ footer {
   padding: 40px 80px 80px;
 }
 
-.proj-hero-media video {
+.proj-hero-media video,
+.proj-hero-media img {
   width: 100%;
   display: block;
-  border-radius: 8px;
+  border-radius: clamp(8px, 1.5vw, 16px);
 }
 
 /* ─── Pull quote (white card) ────────────────────────────── */
@@ -866,14 +863,14 @@ footer {
 .proj-media-card {
   background: #000000;
   padding: clamp(10px, 1.5vw, 20px);
-  border-radius: 32px;
+  border-radius: clamp(20px, 3.5vw, 40px);
 }
 
 .proj-media-card video,
 .proj-media-card img {
   width: 100%;
   display: block;
-  border-radius: calc(32px - clamp(10px, 1.5vw, 20px));
+  border-radius: calc(clamp(20px, 3.5vw, 40px) - clamp(10px, 1.5vw, 20px));
 }
 
 /* ─── Feature cards (3-col) ──────────────────────────────── */
@@ -886,7 +883,7 @@ footer {
 .proj-feature {
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
+  border-radius: clamp(8px, 1.5vw, 16px);
   overflow: hidden;
   background: #1a1b1c;
 }
