@@ -107,6 +107,30 @@ body.sidebar-mode {
   to   { transform: translateY(0); }
 }
 
+/* Logo — expand to "Jeffrey Park", hold, collapse to "JP" */
+@keyframes logo-firstname {
+  0%   { max-width: 0; }
+  20%  { max-width: 56px; }
+  70%  { max-width: 56px; }
+  100% { max-width: 0; }
+}
+@keyframes logo-lastname {
+  0%   { max-width: 0; }
+  20%  { max-width: 40px; }
+  70%  { max-width: 40px; }
+  100% { max-width: 0; }
+}
+@keyframes logo-space {
+  0%   { width: 0; }
+  20%  { width: 5px; }
+  70%  { width: 5px; }
+  100% { width: 0; }
+}
+
+.firstname-clip { animation: logo-firstname 2.4s cubic-bezier(0, 0.3, 0.24, 1); }
+.lastname-clip  { animation: logo-lastname  2.4s cubic-bezier(0, 0.3, 0.24, 1); }
+.name-space     { animation: logo-space     2.4s cubic-bezier(0, 0.3, 0.24, 1); }
+
 /* Nav */
 header nav .nav-link:nth-child(1) {
   animation: rise-in 0.8s cubic-bezier(0, 0.3, 0.24, 1) both;
@@ -319,6 +343,10 @@ body.sidebar-mode .logo:hover .firstname-clip { max-width: 0; }
 body.sidebar-mode .logo:hover .lastname-clip  { max-width: 0; }
 body.sidebar-mode .logo:hover .name-space     { width: 0; }
 
+
+/* Sidebar mode: keep labels + arrow visible */
+body.sidebar-mode .nav-link { padding: 0 10px; }
+
 /* ─── Nav links ──────────────────────────────────────────── */
 nav {
   display: flex;
@@ -360,6 +388,14 @@ nav {
 }
 
 .nav-link:hover {
+  color: var(--color-hover-text);
+}
+
+.nav-link.active {
+  color: var(--color-text);
+}
+
+.nav-link.active:hover {
   color: var(--color-hover-text);
 }
 
@@ -528,6 +564,7 @@ footer {
   overflow: hidden;
   display: inline-flex;
   align-items: center;
+  margin-right: 4px;
 }
 .email-label {
   white-space: nowrap;
@@ -553,18 +590,22 @@ footer {
   transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1), width 0.2s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
-/* Icon container: stacked absolutely */
+/* Icon container: stacked absolutely, sized to largest icon */
 .email-icons {
   position: relative;
   width: 18px;
   height: 18px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .icon-copy,
 .icon-thumb {
   position: absolute;
   top: 0;
   left: 0;
+  transform-origin: center;
 }
 .icon-thumb { opacity: 0; }
 
@@ -692,15 +733,10 @@ footer {
   padding: 40px 80px 80px;
 }
 
-.proj-hero-media video,
-.proj-hero-media img {
+.proj-hero-media video {
   width: 100%;
   display: block;
   border-radius: 8px;
-}
-
-.proj-hero-img--rounded {
-  border-radius: 40px;
 }
 
 /* ─── Pull quote (white card) ────────────────────────────── */
@@ -746,14 +782,14 @@ footer {
 /* ─── Section header (2-col) ─────────────────────────────── */
 .proj-section-header {
   display: flex;
-  gap: 32px;
+  gap: clamp(16px, 2.22vw, 40px);
 }
 
 .proj-section-left {
-  flex: 0 0 420px;
+  flex: 0 0 clamp(180px, 29.17vw, 420px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: clamp(8px, 1.11vw, 20px);
 }
 
 .proj-section-right {
@@ -790,10 +826,6 @@ footer {
 .proj-body {
   font-size: 14px;
   line-height: 1.5;
-  color: var(--color-text);
-}
-
-.proj-muted {
   color: var(--color-muted);
 }
 
@@ -925,28 +957,4 @@ footer {
 
 .proj-cta a:hover {
   color: #9b9b9b;
-}
-
-/* ─── CTA banner (Rivian Assistant, Security & Access) ───── */
-.proj-cta-banner {
-  padding: 0 80px 80px;
-}
-
-.proj-cta-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 24px;
-  background: #ffffff;
-  border-radius: 40px;
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  color: rgba(19, 20, 21, 0.5);
-  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
-}
-
-.proj-cta-link:hover {
-  color: rgba(19, 20, 21, 0.85);
 }

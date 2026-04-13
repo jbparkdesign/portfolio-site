@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>jbpark.design</title>
-  <link rel="stylesheet" href="style.css?v=30">
+  <link rel="stylesheet" href="style.css?v=36">
 </head>
 <body>
 
@@ -24,10 +24,10 @@
       </a>
 
       <nav>
-        <a href="#" class="nav-link">About</a>
+        <a href="#" class="nav-link about-btn" data-project="about">About</a>
         <a href="https://www.linkedin.com/in/jeffreybpark/" target="_blank" rel="noopener" class="nav-link">
           LinkedIn
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
@@ -89,7 +89,7 @@
         <div class="divider"></div>
 
         <div class="list-row-clip">
-          <a href="#" class="list-row">
+          <a href="#" class="list-row" data-project="energy-charging">
             <div class="project-item">
               <span class="word">Energy</span>
               <span class="sep sep--swap">
@@ -106,7 +106,7 @@
         <div class="divider"></div>
 
         <div class="list-row-clip">
-          <a href="#" class="list-row">
+          <a href="#" class="list-row" data-project="archive">
             <div class="project-item">
               <span class="word">Archive</span>
               <span class="sep sep--icon-only">
@@ -161,75 +161,21 @@
 
     <div class="project-scroll">
 
-      <!-- ── Rivian Assistant ──────────────────────────────── -->
-      <div id="proj-rivian-assistant" class="proj-content" hidden>
-
-        <!-- Hero -->
+      <!-- ── About ──────────────────────────────────────────── -->
+      <div id="proj-about" class="proj-content" hidden>
         <section class="proj-hero">
-          <h1 class="proj-headline proj-reveal">Rivian's agentic copilot that unlocks productivity while you stay focused on the road.</h1>
-          <p class="proj-subtext proj-reveal">I led the design leading up to it's reveal on AI &amp; Autonomy Day and beyond.</p>
-          <div class="proj-meta proj-reveal">
-            <div class="proj-meta-val">
-              <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle Feature + Mobile</span><span class="proj-dot">•</span><span>Shipped 2026</span>
-            </div>
-          </div>
+          <h1 class="proj-headline proj-reveal">Jeffrey Park</h1>
+          <p class="proj-subtext proj-reveal">Product designer based in Los Angeles. Currently at Rivian.</p>
         </section>
-
-        <!-- Hero image -->
-        <div class="proj-hero-media proj-reveal">
-          <img src="assets/images/rivian-assistant/hero.png" alt="Rivian Assistant">
-        </div>
-
-        <!-- CTA -->
-        <div class="proj-cta-banner proj-reveal">
-          <a href="#" target="_blank" rel="noopener" class="proj-cta-link">
-            See the highlights from Rivian Autonomy &amp; AI day
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-
-      </div><!-- /proj-rivian-assistant -->
-
-      <!-- ── Security & Access ───────────────────────────── -->
-      <div id="proj-security-access" class="proj-content" hidden>
-
-        <!-- Hero -->
-        <section class="proj-hero">
-          <h1 class="proj-headline proj-reveal">Add a layer of security to protect personal information and prevent vehicle theft.</h1>
-          <p class="proj-subtext proj-reveal">A release that pushes the approach to vehicle security.</p>
-          <div class="proj-meta proj-reveal">
-            <div class="proj-meta-val">
-              <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle Feature + Mobile</span><span class="proj-dot">•</span><span>Shipped 2025–2026</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- Hero image -->
-        <div class="proj-hero-media proj-reveal">
-          <img src="assets/images/security-access/hero.png" alt="Security &amp; Access" class="proj-hero-img--rounded">
-        </div>
-
-        <!-- CTA -->
-        <div class="proj-cta-banner proj-reveal">
-          <a href="#" target="_blank" rel="noopener" class="proj-cta-link">
-            See the highlights from Rivian Autonomy &amp; AI day
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-
-      </div><!-- /proj-security-access -->
+      </div>
 
       <!-- ── Joyful Utilities ─────────────────────────────── -->
       <div id="proj-joyful-utilities" class="proj-content" hidden>
 
         <!-- Hero -->
         <section class="proj-hero">
-          <h1 class="proj-headline proj-reveal">A collection of vehicle features designed for the ins and outs of daily life with a Rivian.</h1>
-          <p class="proj-subtext proj-reveal">An overview of products shipped between 2022–2026 reflecting end-to-end design ownership across vehicle systems and apps.</p>
+          <h1 class="proj-headline proj-reveal">Vehicle features designed for the comfort, atmosphere, and daily life inside a Rivian.</h1>
+          <p class="proj-subtext proj-reveal">Products shipped between 2022–2026 reflecting end-to-end design ownership across vehicle systems and apps.</p>
         </section>
 
         <!-- Hero video -->
@@ -250,7 +196,12 @@
             <div class="proj-section-right">
               <h3 class="proj-section-sub">Meaningful control for rear-seat passengers.</h3>
               <p class="proj-body">Passengers can control media, view trip details, and manage climate from the rear display.</p>
-              <p class="proj-body proj-muted">The rear display was largely underutilized, limited to seat warmers and basic view-only climate indicators. Expanding its role added value for passengers while preserving the driver's sense of control.</p>
+              <p class="proj-body">The rear display was largely underutilized, limited to seat warmers and basic view-only climate indicators. Expanding its role added value for passengers while preserving the driver's sense of control.</p>
+              <div class="proj-meta">
+                <div class="proj-meta-val">
+                  <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle OS</span><span class="proj-dot">•</span><span>Shipped 2023</span>
+                </div>
+              </div>
             </div>
           </div>
           <div class="proj-media-card">
@@ -271,7 +222,7 @@
             <div class="proj-section-right">
               <h3 class="proj-section-sub">Transform your vehicle into a campsite.</h3>
               <p class="proj-body">An in-vehicle app that manages climate, lighting, battery usage, and power access for multi-day outdoor stays or something as simple as a backyard movie night.</p>
-              <p class="proj-body proj-muted">Camping is one of the clearest expressions of what makes Rivian different. Elevating it from a hidden toggle to a dedicated experience strengthened brand recognition and helped owners trust the vehicle in non-traditional use cases.</p>
+              <p class="proj-body">Camping is one of the clearest expressions of what makes Rivian different. Elevating it from a hidden toggle to a dedicated experience strengthened brand recognition and helped owners trust the vehicle in non-traditional use cases.</p>
               <div class="proj-meta">
                 <div class="proj-meta-val">
                   <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle App</span><span class="proj-dot">•</span><span>Shipped 2023</span>
@@ -297,7 +248,7 @@
             <div class="proj-section-right">
               <h3 class="proj-section-sub">A vehicle that adapts to your schedule.</h3>
               <p class="proj-body">Drivers can schedule cabin climate ahead of commutes or trips so the vehicle is ready before they get in.</p>
-              <p class="proj-body proj-muted">Preconditioning improves comfort, efficiency, and battery health, but those benefits aren't obvious to most drivers. Designing around routine made the feature feel useful without requiring technical understanding.</p>
+              <p class="proj-body">Preconditioning improves comfort, efficiency, and battery health, but those benefits aren't obvious to most drivers. Designing around routine made the feature feel useful without requiring technical understanding.</p>
               <div class="proj-meta">
                 <div class="proj-meta-val">
                   <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle App</span><span class="proj-dot">•</span><span>Shipped 2023</span>
@@ -321,7 +272,7 @@
             <div class="proj-section-right">
               <h3 class="proj-section-sub">Personalize the cabin with ambient lighting.</h3>
               <p class="proj-body">Drivers can choose from a set of interior lighting presets to match their mood or personal taste.</p>
-              <p class="proj-body proj-muted">Ambient lighting can easily feel decorative or distracting. A restrained system keeps the interior cohesive and reinforces Rivian's design language.</p>
+              <p class="proj-body">Ambient lighting can easily feel decorative or distracting. A restrained system keeps the interior cohesive and reinforces Rivian's design language.</p>
               <div class="proj-meta">
                 <div class="proj-meta-val">
                   <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle Feature</span><span class="proj-dot">•</span><span>Shipped 2024</span>
@@ -347,7 +298,7 @@
             <div class="proj-section-right">
               <h3 class="proj-section-sub">Peace of mind for pets and people.</h3>
               <p class="proj-body">A safety feature that maintains safe cabin conditions when the owner steps away.</p>
-              <p class="proj-body proj-muted">The challenge was communicating safety and trust to owners while also reassuring passersby. A small moment of delight helps prevent confusion or concern when someone looks inside.</p>
+              <p class="proj-body">The challenge was communicating safety and trust to owners while also reassuring passersby. A small moment of delight helps prevent confusion or concern when someone looks inside.</p>
               <div class="proj-meta">
                 <div class="proj-meta-val">
                   <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle Feature</span><span class="proj-dot">•</span><span>Shipped 2023</span>
@@ -367,7 +318,7 @@
         <section class="proj-closing proj-reveal">
           <div class="proj-closing-statement">
             <h2 class="proj-closing-headline">Small design decisions in each of these features shape how customers experience Rivian.</h2>
-            <p class="proj-body proj-muted">Rivian leads the industry in customer satisfaction according to Consumer Reports, reflecting how these features connect with real drivers.</p>
+            <p class="proj-body">Rivian leads the industry in customer satisfaction according to Consumer Reports, reflecting how these features connect with real drivers.</p>
           </div>
         </section>
 
@@ -377,6 +328,54 @@
         </footer>
 
       </div><!-- /proj-joyful-utilities -->
+
+      <!-- ── Rivian Assistant ────────────────────────────────── -->
+      <div id="proj-rivian-assistant" class="proj-content" hidden>
+        <section class="proj-hero">
+          <h1 class="proj-headline proj-reveal">Rivian Assistant</h1>
+          <p class="proj-subtext proj-reveal">A conversational AI experience designed for the vehicle and app, helping drivers get things done hands-free.</p>
+        </section>
+        <div class="proj-divider proj-reveal"></div>
+        <section class="proj-section proj-reveal">
+          <p class="proj-section-body">Content coming soon.</p>
+        </section>
+      </div><!-- /proj-rivian-assistant -->
+
+      <!-- ── Security & Access ───────────────────────────────── -->
+      <div id="proj-security-access" class="proj-content" hidden>
+        <section class="proj-hero">
+          <h1 class="proj-headline proj-reveal">Security &amp; Access</h1>
+          <p class="proj-subtext proj-reveal">Vehicle security and access features spanning phone key, keycard, guest driver, and lock/unlock experiences.</p>
+        </section>
+        <div class="proj-divider proj-reveal"></div>
+        <section class="proj-section proj-reveal">
+          <p class="proj-section-body">Content coming soon.</p>
+        </section>
+      </div><!-- /proj-security-access -->
+
+      <!-- ── Energy & Charging ───────────────────────────────── -->
+      <div id="proj-energy-charging" class="proj-content" hidden>
+        <section class="proj-hero">
+          <h1 class="proj-headline proj-reveal">Energy &amp; Charging</h1>
+          <p class="proj-subtext proj-reveal">End-to-end charging and energy management experiences across the vehicle and Rivian app ecosystem.</p>
+        </section>
+        <div class="proj-divider proj-reveal"></div>
+        <section class="proj-section proj-reveal">
+          <p class="proj-section-body">Content coming soon.</p>
+        </section>
+      </div><!-- /proj-energy-charging -->
+
+      <!-- ── Archive ─────────────────────────────────────────── -->
+      <div id="proj-archive" class="proj-content" hidden>
+        <section class="proj-hero">
+          <h1 class="proj-headline proj-reveal">Archive</h1>
+          <p class="proj-subtext proj-reveal">A collection of earlier work spanning product, visual, and interaction design.</p>
+        </section>
+        <div class="proj-divider proj-reveal"></div>
+        <section class="proj-section proj-reveal">
+          <p class="proj-section-body">Content coming soon.</p>
+        </section>
+      </div><!-- /proj-archive -->
 
     </div><!-- /project-scroll -->
   </div><!-- /project-panel -->
@@ -419,8 +418,22 @@
             setupReveal(content);
           }
         }
+        // Clear about active state
+        document.querySelector('.about-btn').classList.remove('active');
         enterProject();
       });
+    });
+
+    // About panel
+    const aboutBtn = document.querySelector('.about-btn');
+    aboutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.list-row').forEach(r => r.classList.remove('active'));
+      aboutBtn.classList.add('active');
+      document.querySelectorAll('.proj-content').forEach(c => { c.hidden = true; });
+      const content = document.getElementById('proj-about');
+      if (content) { content.hidden = false; setupReveal(content); }
+      enterProject();
     });
 
     const emailBtn = document.querySelector('.email-btn');
@@ -619,6 +632,7 @@
     }, { passive: false });
 
     function enterProject() {
+      const alreadyOpen = document.body.classList.contains('sidebar-mode');
       document.body.classList.add('sidebar-mode');
       closeBtn.classList.remove('is-exiting');
       void closeBtn.offsetWidth; // force reflow to restart animation
@@ -627,7 +641,7 @@
       lastScrollY = 0;
       lastBoundaryArrivalTime = Date.now();
       prevWheelDeltaAbs = Infinity;
-      if (!suppressLabelSwap && !emailBtn.classList.contains('copied')) swapLabel('Email');
+      if (!suppressLabelSwap && !alreadyOpen && !emailBtn.classList.contains('copied')) swapLabel('Email');
     }
 
     function exitProject() {
@@ -636,6 +650,8 @@
       void closeBtn.offsetWidth;
       closeBtn.classList.add('is-exiting');
       if (!suppressLabelSwap && !emailBtn.classList.contains('copied')) swapLabel('jbpark.design@gmail.com');
+      document.querySelectorAll('.list-row').forEach(r => r.classList.remove('active'));
+      aboutBtn.classList.remove('active');
       // Reset all project pages so they don't animate scrolling up on next open
       document.querySelectorAll('.proj-content').forEach(c => { c.hidden = true; });
       projectScroll.scrollTop = 0;
