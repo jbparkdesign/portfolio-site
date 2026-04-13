@@ -726,6 +726,35 @@ footer {
   max-width: 800px;
 }
 
+/* ─── About hero (split: text + portrait) ───────────────── */
+.proj-hero--split {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 32px 40px;
+  padding-bottom: 80px;
+}
+
+.proj-hero--split .proj-about-text {
+  flex: 1;
+  min-width: 200px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.proj-hero--split .proj-about-portrait {
+  width: clamp(120px, 18vw, 280px);
+  flex-shrink: 0;
+}
+
+.proj-hero--split .proj-about-portrait img {
+  width: 100%;
+  display: block;
+  border-radius: clamp(8px, 1.5vw, 16px);
+}
+
 /* ─── Hero media ─────────────────────────────────────────── */
 .proj-hero-media {
   padding: 40px 80px 80px;
