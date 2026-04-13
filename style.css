@@ -385,6 +385,8 @@ nav {
 
 .nav-link svg {
   transition: stroke 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+  position: relative;
+  top: 1px;
 }
 
 .nav-link:hover {
@@ -926,6 +928,31 @@ footer {
   color: #ffffff;
   max-width: 780px;
 }
+
+/* ─── AI Day CTA ─────────────────────────────────────────── */
+.proj-ai-day-cta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 24px 0;
+  color: var(--color-muted);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-ai-day-cta:hover {
+  color: var(--color-text);
+}
+
+.proj-ai-day-cta svg {
+  position: relative;
+  top: 1px;
+  flex-shrink: 0;
+}
+
 
 /* ─── Project footer ─────────────────────────────────────── */
 .proj-footer {
