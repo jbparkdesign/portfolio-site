@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>jbpark.design</title>
-  <link rel="stylesheet" href="style.css?v=36">
+  <link rel="stylesheet" href="style.css?v=107">
 </head>
 <body>
 
@@ -108,7 +108,7 @@
         <div class="list-row-clip">
           <a href="#" class="list-row" data-project="archive">
             <div class="project-item">
-              <span class="word">Archive</span>
+              <span class="word">Earlier Work</span>
               <span class="sep sep--icon-only">
                 <span class="icon">
                   <div class="lottie-canvas" data-src="assets/lotties/archive/animation.json" data-loop="false"></div>
@@ -163,13 +163,34 @@
 
       <!-- ── About ──────────────────────────────────────────── -->
       <div id="proj-about" class="proj-content" hidden>
-        <section class="proj-hero proj-hero--split proj-reveal">
-          <div class="proj-about-text">
-            <h1 class="proj-headline">Jeffrey Park</h1>
-            <p class="proj-subtext">Product designer with roots in industrial design. I've designed eyewear for Nike, Google, and VSP — and vehicle and app experiences for Rivian. Working across physical and digital has shaped how I think: I care as much about how something feels in hand as how it behaves on screen.</p>
-          </div>
-          <div class="proj-about-portrait">
-            <img src="assets/images/about/portrait.png" alt="Jeffrey Park">
+        <section class="proj-hero proj-about-hero">
+          <div class="proj-about-columns">
+            <div class="proj-about-portrait-col proj-reveal">
+              <img src="assets/images/about/portrait-main.jpg" alt="Jeffrey Park">
+            </div>
+            <div class="proj-about-content-col">
+              <h1 class="proj-section-sub proj-reveal">Product Designer at <a href="https://www.rivian.com" target="_blank" rel="noopener" class="proj-inline-link">Rivian</a>, drawn to simple interfaces, intelligent systems, and turning ambiguity into a clear direction.</h1>
+              <p class="proj-subtext proj-reveal">I joined Rivian before a single vehicle had shipped. Since then, I've led design across vehicle features, mobile app, charging network, and most recently <a href="#" data-project-link="rivian-assistant" class="proj-inline-link">Rivian Assistant (AI)</a>.</p>
+              <div class="proj-about-divider proj-reveal"></div>
+              <div class="proj-about-facts proj-reveal">
+                <div class="proj-about-fact">
+                  <span class="proj-about-fact-label">Based in</span>
+                  <span class="proj-about-fact-value">San Francisco</span>
+                </div>
+                <div class="proj-about-fact">
+                  <span class="proj-about-fact-label">Past life</span>
+                  <span class="proj-about-fact-value">Wearable tech, eyewear design, and agency work</span>
+                </div>
+                <div class="proj-about-fact">
+                  <span class="proj-about-fact-label">Currently</span>
+                  <span class="proj-about-fact-value">Getting better with a camera &nbsp;<span class="proj-about-camera-trigger" data-default-emoji="📷" data-hover-emoji="📸">📷</span></span>
+                </div>
+                <div class="proj-about-fact">
+                  <span class="proj-about-fact-label">Outside of work</span>
+                  <span class="proj-about-fact-value">Chasing down good coffee and pastries</span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </div>
@@ -179,7 +200,7 @@
 
         <!-- Hero -->
         <section class="proj-hero">
-          <h1 class="proj-headline proj-reveal">Vehicle features designed for the comfort, atmosphere, and daily life inside a Rivian.</h1>
+          <h1 class="proj-headline proj-reveal">Vehicle features designed for daily life inside a Rivian.</h1>
           <p class="proj-subtext proj-reveal">Products shipped between 2022–2026 reflecting end-to-end design ownership across vehicle systems and apps.</p>
         </section>
 
@@ -339,8 +360,8 @@
 
         <!-- Hero -->
         <section class="proj-hero">
-          <h1 class="proj-headline proj-reveal">Rivian's agentic copilot that unlocks productivity while you stay focused on the road.</h1>
-          <p class="proj-subtext proj-reveal">I led the design leading up to its reveal on AI &amp; Autonomy Day and beyond.</p>
+          <h1 class="proj-headline proj-reveal">Bringing conversational AI to the software-defined vehicle.</h1>
+          <p class="proj-subtext proj-reveal">Rivian Assistant brings together your vehicle, the world around you, and your own apps and habits, combining all of it to understand your intent, and to do things that simply weren't possible while driving.</p>
           <div class="proj-meta proj-reveal">
             <div class="proj-meta-val">
               <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle Feature + Mobile</span><span class="proj-dot">•</span><span>Shipped 2026</span>
@@ -348,18 +369,90 @@
           </div>
         </section>
 
-        <!-- Hero video + caption -->
-        <div class="proj-hero-media proj-reveal">
-          <video autoplay loop muted playsinline>
-            <source src="assets/videos/rivian-assistant/autonomy-&-ai-day-highlights.mp4" type="video/mp4">
-          </video>
-          <a href="https://stories.rivian.com/rivian-autonomy-ai-day" class="proj-ai-day-cta" target="_blank" rel="noopener">
-            <span>See the highlights from Rivian Autonomy &amp; AI day</span>
-            <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
+        <!-- Sidekick: press-to-talk + in-vehicle response -->
+        <div class="proj-panels-wrap proj-reveal">
+          <div class="proj-sidekick-row">
+            <div class="proj-sidekick-diagram">
+              <video autoplay loop muted playsinline>
+                <source src="assets/videos/rivian-assistant/VA_DD_L_diagram.mp4" type="video/mp4">
+              </video>
+              <div class="proj-sidekick-caption">
+                <span class="proj-feature-label">Press and start speaking.</span>
+                <p class="proj-body">Ask naturally, Hands free.</p>
+              </div>
+            </div>
+            <div class="proj-sidekick-display">
+              <video autoplay loop muted playsinline>
+                <source src="assets/videos/rivian-assistant/RA-Sidekick_R1-DD.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
         </div>
+
+        <!-- Voice in context -->
+        <section class="proj-section proj-reveal">
+          <div class="proj-section-header">
+            <div class="proj-section-left">
+              <h2 class="proj-section-title">Voice in context</h2>
+            </div>
+            <div class="proj-section-right">
+              <p class="proj-body">Expressive wave provides visual feedback through a uniquely Rivian personality.</p>
+            </div>
+          </div>
+          <div class="proj-voice-card">
+            <div class="proj-voice-tags">
+              <span class="proj-voice-tag proj-voice-tag--listening">Listening</span><span class="proj-voice-tag-sep">/</span><span class="proj-voice-tag proj-voice-tag--thinking">Thinking</span><span class="proj-voice-tag-sep">/</span><span class="proj-voice-tag proj-voice-tag--speaking">Speaking</span><span class="proj-voice-tag-sep">/</span><span class="proj-voice-tag proj-voice-tag--error">Error</span>
+            </div>
+            <div class="proj-voice-wave">
+              <video autoplay loop muted playsinline>
+                <source src="assets/videos/rivian-assistant/wave_range.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </section>
+
+        <!-- In-vehicle response: contextual suggestions -->
+        <div class="proj-panels-wrap proj-reveal">
+          <h2 class="proj-section-title proj-reveal">Deeply integrated</h2>
+          <div class="proj-media-card">
+            <img src="assets/images/rivian-assistant/integrated-placeholder.png" alt="Rivian Assistant suggesting nearby coffee spots on the driver display">
+          </div>
+        </div>
+
+        <div class="proj-divider proj-reveal"></div>
+
+        <!-- AI & Autonomy Day -->
+        <section class="proj-section proj-reveal">
+          <div class="proj-section-header">
+            <div class="proj-section-left">
+              <h2 class="proj-section-title">AI &amp; Autonomy Day</h2>
+            </div>
+            <div class="proj-section-right">
+              <h3 class="proj-section-sub">Meaningful control for rear-seat passengers.</h3>
+              <p class="proj-body">Passengers can control media, view trip details, and manage climate from the rear display.</p>
+              <p class="proj-body">Small design decisions in each of these features shape how customers experience Rivian.</p>
+              <p class="proj-body">Rivian leads the industry in customer satisfaction according to Consumer Reports, reflecting how these features connect with real drivers.</p>
+              <div class="proj-meta">
+                <div class="proj-meta-val">
+                  <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle OS</span><span class="proj-dot">•</span><span>Shipped 2023</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="proj-media-card">
+              <video autoplay loop muted playsinline>
+                <source src="assets/videos/rivian-assistant/autonomy-&-ai-day-highlights.mp4" type="video/mp4">
+              </video>
+            </div>
+            <a href="https://stories.rivian.com/rivian-autonomy-ai-day" class="proj-ai-day-cta" target="_blank" rel="noopener">
+              <span>See the highlights from Rivian Autonomy &amp; AI day</span>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </section>
 
       </div><!-- /proj-rivian-assistant -->
 
@@ -394,9 +487,17 @@
           </div>
         </section>
 
-        <!-- Hero image -->
+        <!-- Hero video -->
         <div class="proj-hero-media proj-reveal">
-          <img src="assets/images/energy-charging/hero-adventure-network.jpg" alt="Energy &amp; Charging">
+          <video autoplay loop muted playsinline>
+            <source src="assets/videos/energy/energy-loop.mp4" type="video/mp4">
+          </video>
+          <a href="https://stories.rivian.com/ran-charging-infastructure-scaling-r2-rivian" class="proj-ai-day-cta" target="_blank" rel="noopener">
+            <span>Read about scaling Rivian's charging infrastructure</span>
+            <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
         </div>
 
       </div><!-- /proj-energy-charging -->
@@ -482,6 +583,13 @@
 
       </div><!-- /proj-archive -->
 
+      <div class="scroll-meter" aria-hidden="true" hidden>
+        <span class="scroll-meter-label">Keep scrolling for the next project</span>
+        <div class="scroll-meter-track">
+          <div class="scroll-meter-fill"></div>
+        </div>
+      </div>
+
     </div><!-- /project-scroll -->
   </div><!-- /project-panel -->
 
@@ -528,6 +636,87 @@
         enterProject();
       });
     });
+
+    // In-copy links to a project (e.g. "Rivian Assistant (AI)" in the About text)
+    document.querySelectorAll('[data-project-link]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const row = document.querySelector(`.list-row[data-project="${link.dataset.projectLink}"]`);
+        if (row) row.click();
+      });
+    });
+
+    // Camera emoji easter egg — flashes a photo that follows the cursor while fading out
+    (function () {
+      const trigger = document.querySelector('.proj-about-camera-trigger');
+      if (!trigger) return;
+      const photos = [
+        'assets/images/about/portrait-3.jpg',
+        'assets/images/about/dsc2900.jpg'
+      ];
+      let photoIndex = 0;
+      let floatEl = null;
+      let moveHandler = null;
+      let removeTimer = null;
+      let emojiRevertTimer = null;
+      const FOLLOW_OFFSET_Y = -160; // keeps the photo clear of the emoji/text it's triggered from
+
+      function cleanup() {
+        if (moveHandler) document.removeEventListener('mousemove', moveHandler);
+        if (removeTimer) clearTimeout(removeTimer);
+        if (emojiRevertTimer) clearTimeout(emojiRevertTimer);
+        if (floatEl) { floatEl.remove(); floatEl = null; }
+        trigger.textContent = trigger.dataset.defaultEmoji;
+      }
+
+      trigger.addEventListener('click', (e) => {
+        cleanup();
+        trigger.textContent = trigger.dataset.hoverEmoji;
+
+        floatEl = document.createElement('img');
+        floatEl.src = photos[photoIndex];
+        photoIndex = (photoIndex + 1) % photos.length;
+        floatEl.className = 'proj-about-camera-float';
+        floatEl.style.left = e.clientX + 'px';
+        floatEl.style.top = (e.clientY + FOLLOW_OFFSET_Y) + 'px';
+        document.body.appendChild(floatEl);
+
+        moveHandler = (ev) => {
+          floatEl.style.left = ev.clientX + 'px';
+          floatEl.style.top = (ev.clientY + FOLLOW_OFFSET_Y) + 'px';
+        };
+        document.addEventListener('mousemove', moveHandler);
+
+        requestAnimationFrame(() => {
+          floatEl.classList.add('is-visible');
+          requestAnimationFrame(() => floatEl.classList.add('is-fading'));
+        });
+
+        emojiRevertTimer = setTimeout(() => {
+          trigger.textContent = trigger.dataset.defaultEmoji;
+        }, 300);
+
+        removeTimer = setTimeout(cleanup, 2500);
+      });
+    })();
+
+    // Voice-in-context wave — cycles the active state label in sync with the wave video
+    (function () {
+      const video = document.querySelector('.proj-voice-wave video');
+      const tags = document.querySelectorAll('.proj-voice-tag');
+      if (!video || !tags.length) return;
+
+      function updateActiveTag() {
+        const duration = video.duration;
+        if (!duration) return;
+        const segment = duration / tags.length;
+        const index = Math.min(tags.length - 1, Math.floor(video.currentTime / segment));
+        tags.forEach((tag, i) => tag.classList.toggle('is-active', i === index));
+      }
+
+      video.addEventListener('timeupdate', updateActiveTag);
+      video.addEventListener('loadedmetadata', updateActiveTag);
+    })();
 
     // About panel
     const aboutBtn = document.querySelector('.about-btn');
@@ -617,21 +806,11 @@
 
     // ── Eyebrow scroll behaviour ──────────────────────────────
     let lastScrollY = 0;
-    // Track when momentum scroll arrives at a boundary so we can ignore
-    // momentum wheel events that follow
-    let lastBoundaryArrivalTime = 0;
-    const BOUNDARY_COOLDOWN = 400; // ms after arriving at boundary before overscroll is allowed
 
     projectScroll.addEventListener('scroll', function () {
       const st = this.scrollTop;
       const atTop    = st <= 0;
       const atBottom = st + this.clientHeight >= this.scrollHeight - 2;
-
-      if (atTop || atBottom) {
-        // Page just arrived at a boundary — reset accumulator and start cooldown
-        lastBoundaryArrivalTime = Date.now();
-        overscrollDelta = 0;
-      }
 
       if (st > lastScrollY && st > 40) {
         eyebrow.classList.add('is-scrolled');
@@ -639,100 +818,88 @@
         eyebrow.classList.remove('is-scrolled');
       }
       lastScrollY = Math.max(0, st);
+
+      if (!atBottom) resetScrollMeter();
     }, { passive: true });
 
-    // ── Overscroll project navigation ─────────────────────────
-    const OVERSCROLL_THRESHOLD = 720;
-    let overscrollDelta    = 0;
-    let prevWheelDeltaAbs  = Infinity; // track deceleration to detect momentum
-    let snapBackTimer      = null;
+    // ── Scroll meter: hold at the bottom to advance to the next project ──
+    const scrollMeter     = document.querySelector('.scroll-meter');
+    const scrollMeterFill = scrollMeter.querySelector('.scroll-meter-fill');
+
+    const SCROLL_METER_THRESHOLD  = 4000; // total wheel delta needed to fill the meter
+    const SCROLL_METER_IDLE_RESET = 2000; // ms of no scrolling before the meter resets
+
     let isProjectTransitioning = false;
     let suppressLabelSwap      = false;
+    let meterProgress          = 0; // 0–1
+    let meterIdleTimer         = null;
 
-    function snapBack() {
-      if (overscrollDelta === 0 || isProjectTransitioning) return;
-      overscrollDelta   = 0;
-      prevWheelDeltaAbs = Infinity;
-      projectScroll.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      projectScroll.style.transform  = 'translateY(0)';
+    function nextProjectRow() {
+      const active = document.querySelector('.list-row.active');
+      if (!active) return null; // About doesn't cycle
+      const rows = Array.from(document.querySelectorAll('.list-row'));
+      const idx  = rows.indexOf(active);
+      return rows[(idx + 1) % rows.length];
     }
 
-    function goToAdjacentProject(dir) {
+    // Embedded as a permanent part of each project page (not a scroll-linked
+    // overlay), so it's only ever hidden entirely on About, which doesn't
+    // participate in the project cycle.
+    function updateScrollMeterVisibility() {
+      scrollMeter.hidden = !nextProjectRow();
+    }
+
+    function resetScrollMeter() {
+      clearTimeout(meterIdleTimer);
+      meterProgress = 0;
+      scrollMeterFill.classList.add('is-resetting');
+      scrollMeterFill.style.width = '0%';
+      setTimeout(() => scrollMeterFill.classList.remove('is-resetting'), 500);
+    }
+
+    function armMeterIdleReset() {
+      clearTimeout(meterIdleTimer);
+      meterIdleTimer = setTimeout(resetScrollMeter, SCROLL_METER_IDLE_RESET);
+    }
+
+    function goToAdjacentProject() {
       if (isProjectTransitioning) return;
+      const target = nextProjectRow();
+      if (!target) return;
       isProjectTransitioning = true;
       suppressLabelSwap      = true;
-      overscrollDelta        = 0;
-      prevWheelDeltaAbs      = Infinity;
-      clearTimeout(snapBackTimer);
-      const rows   = Array.from(document.querySelectorAll('.list-row'));
-      const active = document.querySelector('.list-row.active');
-      const idx    = rows.indexOf(active);
-      const next   = rows[(idx + dir + rows.length) % rows.length];
-      // Animate rubber-band snap, then switch project
-      projectScroll.style.transition = 'transform 0.2s cubic-bezier(0.25, 1, 0.5, 1)';
-      projectScroll.style.transform  = 'translateY(0)';
+      resetScrollMeter();
+      target.click();
       setTimeout(() => {
-        projectScroll.style.transition = 'none';
-        next.click();
-        suppressLabelSwap = false;
-        // Hold lock long enough to absorb remaining trackpad momentum
-        setTimeout(() => {
-          isProjectTransitioning = false;
-          overscrollDelta        = 0;
-          prevWheelDeltaAbs      = Infinity;
-        }, 800);
-      }, 200);
+        isProjectTransitioning = false;
+        suppressLabelSwap      = false;
+      }, 500);
     }
 
     projectScroll.addEventListener('wheel', (e) => {
       if (isProjectTransitioning) { e.preventDefault(); return; }
+      if (aboutBtn.classList.contains('active')) return;
 
       const atBottom  = projectScroll.scrollTop + projectScroll.clientHeight >= projectScroll.scrollHeight - 2;
-      const atTop     = projectScroll.scrollTop <= 0;
       const goingDown = e.deltaY > 0;
 
-      if ((atBottom && goingDown) || (atTop && !goingDown)) {
+      if (atBottom && goingDown) {
         e.preventDefault();
 
-        // Arm snap-back: if wheel events stop (finger lifts), revert
-        clearTimeout(snapBackTimer);
-        snapBackTimer = setTimeout(snapBack, 120);
+        const target = nextProjectRow();
+        if (!target) return;
 
-        // Cooldown: ignore events right after momentum carried us to the boundary
-        if (Date.now() - lastBoundaryArrivalTime < BOUNDARY_COOLDOWN) {
-          overscrollDelta   = 0;
-          prevWheelDeltaAbs = Math.abs(e.deltaY);
-          return;
-        }
+        meterProgress = Math.min(1, meterProgress + Math.abs(e.deltaY) / SCROLL_METER_THRESHOLD);
+        scrollMeterFill.classList.remove('is-resetting');
+        scrollMeterFill.style.width = `${meterProgress * 100}%`;
 
-        // Deceleration guard: if delta is shrinking and accumulation hasn't started,
-        // this is still inertia from a previous gesture — discard
-        const curr = Math.abs(e.deltaY);
-        if (overscrollDelta === 0 && curr < prevWheelDeltaAbs * 0.75) {
-          prevWheelDeltaAbs = curr;
-          return;
-        }
-        prevWheelDeltaAbs = curr;
+        armMeterIdleReset();
 
-        overscrollDelta += e.deltaY;
-        // Rubber-band: sqrt curve gives natural resistance feel, capped at 48px
-        const pull = Math.sign(overscrollDelta) * Math.min(Math.sqrt(Math.abs(overscrollDelta)) * 2.5, 48);
-        projectScroll.style.transition = 'none';
-        projectScroll.style.transform  = `translateY(${-pull}px)`;
-
-        if (Math.abs(overscrollDelta) >= OVERSCROLL_THRESHOLD) {
-          clearTimeout(snapBackTimer);
-          goToAdjacentProject(goingDown ? 1 : -1);
+        if (meterProgress >= 0.999) { // tolerance for floating-point summation error
+          goToAdjacentProject();
         }
-      } else {
-        // Mid-scroll: clear any partial overscroll state
-        clearTimeout(snapBackTimer);
-        prevWheelDeltaAbs = Math.abs(e.deltaY);
-        if (overscrollDelta !== 0) {
-          overscrollDelta = 0;
-          projectScroll.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
-          projectScroll.style.transform  = 'translateY(0)';
-        }
+      } else if (!atBottom) {
+        resetScrollMeter();
       }
     }, { passive: false });
 
@@ -742,10 +909,10 @@
       closeBtn.classList.remove('is-exiting');
       void closeBtn.offsetWidth; // force reflow to restart animation
       closeBtn.classList.add('is-entering');
-      projectScroll.scrollTop = 0;
+      projectScroll.scrollTo({ top: 0, behavior: 'instant' }); // bypass scroll-behavior: smooth
       lastScrollY = 0;
-      lastBoundaryArrivalTime = Date.now();
-      prevWheelDeltaAbs = Infinity;
+      resetScrollMeter();
+      updateScrollMeterVisibility();
       if (!suppressLabelSwap && !alreadyOpen && !emailBtn.classList.contains('copied')) swapLabel('Email');
     }
 
@@ -759,8 +926,9 @@
       aboutBtn.classList.remove('active');
       // Reset all project pages so they don't animate scrolling up on next open
       document.querySelectorAll('.proj-content').forEach(c => { c.hidden = true; });
-      projectScroll.scrollTop = 0;
+      projectScroll.scrollTo({ top: 0, behavior: 'instant' }); // bypass scroll-behavior: smooth
       lastScrollY = 0;
+      resetScrollMeter();
     }
 
     function copyEmail() {

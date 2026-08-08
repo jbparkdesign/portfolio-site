@@ -77,17 +77,32 @@ a {
   transition: width 0.4s cubic-bezier(0, 0.3, 0.24, 1);
   position: relative;
   z-index: 1;
+  container-type: inline-size;
 }
 
 body.sidebar-mode .sidebar {
-  width: 25vw;
+  width: 20vw;
   border-right: 1px solid var(--color-divider);
 }
 
 body.sidebar-mode {
-  --size-display: clamp(14px, 1.67vw, 32px);
+  /* Sized off the sidebar's own inline-size (cqw) rather than the viewport,
+     so labels stay proportional to their actual column — including mid-transition,
+     when the sidebar's width and the viewport's width are momentarily out of the
+     ratio the old vw-based value assumed. */
+  --size-display: clamp(14px, 7.2cqw, 32px);
   --size-icon: 17px;
 }
+
+/* Below the breakpoint, the sidebar (project list, About/LinkedIn, email)
+   hides entirely while a project is open — the close button is the only
+   way back to the home list, which already surfaces all of these. */
+@media (max-width: 1200px) {
+  body.sidebar-mode .sidebar {
+    display: none;
+  }
+}
+
 
 /* ─── Page load entrance animations ─────────────────────── */
 @keyframes divider-draw {
@@ -193,6 +208,7 @@ footer .email-btn {
 
 .project-scroll {
   height: 100vh;
+  overflow-x: hidden;
   overflow-y: auto;
   scroll-behavior: smooth;
   background: #131415;
@@ -269,7 +285,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 16px 0 24px;
   height: 40px;
 }
 
@@ -432,7 +448,7 @@ nav {
 /* ─── List row ───────────────────────────────────────────── */
 .list-row {
   display: block;
-  padding: max(6px, calc(var(--size-display) * 0.1)) 24px;
+  padding: 8px 24px;
   cursor: pointer;
   transition: padding 0.4s cubic-bezier(0, 0.3, 0.24, 1);
 }
@@ -543,7 +559,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 16px 0 24px;
   height: 40px;
 }
 
@@ -710,49 +726,186 @@ footer {
   opacity: 0;
 }
 
+/* ─── Scroll meter (advance to next project) ─────────────── */
+.scroll-meter {
+  margin: 80px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.scroll-meter[hidden] {
+  display: none;
+}
+
+.scroll-meter-label {
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.scroll-meter-track {
+  width: 160px;
+  height: 2px;
+  border-radius: 9999px;
+  background: var(--color-divider);
+  overflow: hidden;
+}
+
+.scroll-meter-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--color-text);
+  border-radius: 9999px;
+  transition: width 0.1s linear;
+}
+
+/* Slower, eased transition only for the moment the meter resets back to 0 */
+.scroll-meter-fill.is-resetting {
+  transition: width 0.5s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
 .proj-headline {
-  font-size: clamp(36px, 4.44vw, 96px);
+  font-size: clamp(36px, 6vw, 120px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: 0.02em;
   color: #ffffff;
-  max-width: 800px;
+  width: 100%;
 }
 
 .proj-subtext {
   font-size: 14px;
   line-height: 1.5;
   color: var(--color-muted);
-  max-width: 800px;
+  max-width: 540px;
 }
 
-/* ─── About hero (split: text + portrait) ───────────────── */
-.proj-hero--split {
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 32px 40px;
+/* ─── About hero: portrait (1/3) + content (2/3) ─────────── */
+.proj-about-hero {
   padding-bottom: 80px;
+  min-height: 100vh;
+  justify-content: center;
 }
 
-.proj-hero--split .proj-about-text {
-  flex: 1;
-  min-width: 200px;
-  max-width: 500px;
+.proj-about-columns {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+  column-gap: 64px;
+}
+
+@media (max-width: 1200px) {
+  .proj-about-columns {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+}
+
+.proj-about-portrait-col img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 160px);
+  border-radius: clamp(8px, 1.5vw, 16px);
+  filter: grayscale(100%);
+}
+
+.proj-about-content-col {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
-.proj-hero--split .proj-about-portrait {
-  width: clamp(120px, 18vw, 280px);
-  flex-shrink: 0;
+.proj-about-content-col h1 {
+  margin-bottom: 16px;
 }
 
-.proj-hero--split .proj-about-portrait img {
-  width: 100%;
-  display: block;
-  border-radius: clamp(8px, 1.5vw, 16px);
+.proj-about-content-col .proj-subtext {
+  margin-bottom: 40px;
+}
+
+.proj-about-divider {
+  height: 1px;
+  background: var(--color-divider);
+  margin: 0;
+}
+
+.proj-about-facts {
+  display: flex;
+  flex-direction: column;
+}
+
+.proj-about-fact {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.proj-about-fact-label {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.proj-about-fact-value {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-hover-bg);
+}
+
+@media (max-width: 600px) {
+  .proj-about-fact {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+.proj-about-camera-trigger {
+  display: inline-block;
+  cursor: pointer;
+  animation: proj-camera-wiggle 3s ease-in-out infinite;
+}
+
+@keyframes proj-camera-wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  4% { transform: rotate(-18deg) scale(1.08); }
+  8% { transform: rotate(14deg) scale(1.08); }
+  12% { transform: rotate(-10deg) scale(1.05); }
+  16% { transform: rotate(6deg) scale(1.02); }
+  20% { transform: rotate(-2deg) scale(1); }
+  24% { transform: rotate(0deg) scale(1); }
+}
+
+.proj-about-camera-float {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.94);
+  transition: left 0.1s ease-out, top 0.1s ease-out, transform 0.15s ease-out;
+}
+
+.proj-about-camera-float.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.proj-about-camera-float.is-fading {
+  opacity: 0;
+  transition: left 0.1s ease-out, top 0.1s ease-out, transform 0.15s ease-out, opacity 2s ease-out 0.5s;
 }
 
 /* ─── Hero media ─────────────────────────────────────────── */
@@ -801,7 +954,7 @@ footer {
 
 /* ─── Content section ────────────────────────────────────── */
 .proj-section {
-  padding: 56px 80px 80px;
+  padding: 80px 80px 104px;
   display: flex;
   flex-direction: column;
   gap: 56px;
@@ -836,11 +989,12 @@ footer {
 }
 
 .proj-section-title {
-  font-size: clamp(28px, 2.78vw, 64px);
+  font-size: clamp(28px, 5vw, 96px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: 0.02em;
   color: var(--color-text);
+  margin-top: -0.13em;
 }
 
 .proj-section-sub {
@@ -849,6 +1003,45 @@ footer {
   line-height: 1.1;
   letter-spacing: 0.02em;
   color: var(--color-text);
+}
+
+.proj-inline-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-inline-link:hover {
+  color: var(--color-muted);
+}
+
+.proj-inline-link svg {
+  flex-shrink: 0;
+}
+
+/* "Rivian" in the About headline: icon sits flush against the word with
+   no underline, relying on the icon alone to signal it's a link.
+   Normal inline flow + vertical-align tracks the text baseline more
+   reliably here than flex's baseline alignment did for a replaced SVG. */
+h1 .proj-inline-link {
+  display: inline;
+  gap: 0;
+  text-decoration: none;
+}
+
+/* The icon's own artwork sits inset within its viewBox (path spans 4–14
+   of an 18x18 box), so its visible strokes end ~3px above its bounding
+   box's bottom edge even when that box is baseline-aligned. Nudge the
+   box down so the ink itself lands on the baseline. */
+h1 .proj-inline-link svg {
+  vertical-align: baseline;
+  position: relative;
+  top: 3px;
 }
 
 .proj-body {
@@ -936,6 +1129,110 @@ footer {
   color: var(--color-text);
 }
 
+/* ─── Panel wrapping rows ────────────────────────────────── */
+.proj-panels-wrap {
+  padding: 56px 80px 80px;
+}
+
+.proj-panels-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ─── Sidekick row: diagram (fixed, centered) + display (fills + crops) ─── */
+.proj-sidekick-row {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(24px, 3.5vw, 64px);
+  height: clamp(360px, 36vw, 560px);
+}
+
+.proj-sidekick-diagram {
+  flex: 0 0 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+.proj-sidekick-diagram video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.proj-sidekick-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.proj-sidekick-display {
+  flex: 1 1 auto;
+  min-width: 0;
+  position: relative;
+  border-radius: clamp(8px, 1.5vw, 16px);
+  overflow: visible;
+  background: #0e0f10;
+}
+
+.proj-sidekick-display video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: 100%;
+  display: block;
+}
+
+
+/* ─── Voice-in-context card ──────────────────────────────── */
+.proj-voice-card {
+  background: #000000;
+  border-radius: clamp(8px, 1.5vw, 16px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.proj-voice-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  padding: 32px 32px 0;
+}
+
+.proj-voice-tag-sep {
+  color: var(--color-muted);
+}
+
+.proj-voice-tag {
+  opacity: 0.4;
+  transition: opacity 0.3s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-voice-tag.is-active {
+  opacity: 1;
+}
+
+.proj-voice-tag--listening { color: #f5a623; }
+.proj-voice-tag--thinking  { color: #5ac8fa; }
+.proj-voice-tag--speaking  { color: #34c759; }
+.proj-voice-tag--error     { color: #ff453a; }
+
+.proj-voice-wave {
+  padding: 24px 0 32px;
+  overflow: hidden;
+}
+
+.proj-voice-wave video {
+  width: 200%;
+  height: auto;
+  display: block;
+}
+
 /* ─── Closing ────────────────────────────────────────────── */
 .proj-closing-statement {
   padding: 80px;
@@ -947,7 +1244,7 @@ footer {
 }
 
 .proj-closing-headline {
-  font-size: clamp(28px, 2.78vw, 64px);
+  font-size: clamp(28px, 5vw, 96px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: 0.02em;
@@ -1010,4 +1307,35 @@ footer {
 
 .proj-cta a:hover {
   color: #9b9b9b;
+}
+
+/* Project pages carry a generous 80px side gutter on desktop; that's far
+   too much on mobile, so it collapses to 16px below the breakpoint. */
+@media (max-width: 1200px) {
+  .proj-hero,
+  .proj-hero-media,
+  .proj-quote-wrap,
+  .proj-section,
+  .proj-panels-wrap,
+  .proj-closing-statement,
+  .proj-footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .proj-section-header {
+    display: contents;
+  }
+
+  .proj-section-left {
+    flex: 0 0 auto;
+  }
+
+  .proj-media-card {
+    order: 2;
+  }
+
+  .proj-section-right {
+    order: 3;
+  }
 }
