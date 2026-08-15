@@ -1681,3 +1681,35 @@ h1 .proj-inline-link svg {
     order: 3;
   }
 }
+
+/* ─── Coming soon page ───────────────────────────────────── */
+/* Standalone placeholder page (coming-soon branch) — overrides the base
+   body's sidebar/panel flex-row layout to simply center everything. */
+body.coming-soon-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 32px;
+  text-align: center;
+}
+
+.coming-soon-headline {
+  font-size: clamp(32px, 6vw, 80px);
+  font-weight: 700;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text);
+}
+
+.coming-soon-icons {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.coming-soon-icon {
+  width: 24px;
+  height: 24px;
+}
