@@ -77,7 +77,6 @@ a {
   transition: width 0.4s cubic-bezier(0, 0.3, 0.24, 1);
   position: relative;
   z-index: 1;
-  container-type: inline-size;
 }
 
 body.sidebar-mode .sidebar {
@@ -86,18 +85,22 @@ body.sidebar-mode .sidebar {
 }
 
 body.sidebar-mode {
-  /* Sized off the sidebar's own inline-size (cqw) rather than the viewport,
-     so labels stay proportional to their actual column — including mid-transition,
-     when the sidebar's width and the viewport's width are momentarily out of the
-     ratio the old vw-based value assumed. */
-  --size-display: clamp(14px, 7.2cqw, 32px);
+  /* The sidebar is always exactly 20vw here, so this is a plain vw value
+     equivalent to 7.2% of the sidebar's own width (the clipping-safe ratio
+     calibrated against the longest label) — same resting size as a cqw-based
+     value, but since it doesn't track the sidebar's width live during the
+     open/close transition, font-size's own transition animates toward a
+     single fixed target instead of a moving one, keeping it in sync with
+     the sidebar's width transition instead of lagging behind it. */
+  --size-display: clamp(14px, 1.44vw, 32px);
   --size-icon: 17px;
 }
 
-/* Below the breakpoint, the sidebar (project list, About/LinkedIn, email)
-   hides entirely while a project is open — the close button is the only
-   way back to the home list, which already surfaces all of these. */
-@media (max-width: 1200px) {
+/* Tablet: sidebar (project list, About/LinkedIn, email) hides entirely
+   while a project is open — the close button is the only way back to
+   the home list, which already surfaces all of these. The project page's
+   own layout stays desktop-style here; only the sidebar goes away. */
+@media (max-width: 1024px) {
   body.sidebar-mode .sidebar {
     display: none;
   }
@@ -727,45 +730,131 @@ footer {
 }
 
 /* ─── Scroll meter (advance to next project) ─────────────── */
+/* The elongating "o" pill alone communicates scroll progress — the text
+   stays a static muted color (no fill sweep) so it doesn't compete with
+   that motion. Hover is the only thing that brightens it, as a plain
+   affordance that the whole group is clickable. */
 .scroll-meter {
-  margin: 80px 0;
+  margin: 160px 0 85px;
+  padding: 0 80px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  align-items: flex-start;
 }
 
 .scroll-meter[hidden] {
   display: none;
 }
 
-.scroll-meter-label {
-  font-size: 14px;
-  line-height: 1.5;
+.scroll-meter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: clamp(36px, 6vw, 120px);
+  font-weight: 700;
+  line-height: 1.1;
   letter-spacing: 0.02em;
-  color: var(--color-muted);
+}
+
+.scroll-meter-line {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.scroll-meter-line1 {
+  align-items: center;
+}
+
+.scroll-meter-line2 {
+  align-items: flex-end;
+}
+
+.scroll-meter-seg {
   white-space: nowrap;
+  color: var(--color-muted);
+  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
-.scroll-meter-track {
-  width: 160px;
-  height: 2px;
-  border-radius: 9999px;
-  background: var(--color-divider);
-  overflow: hidden;
+.scroll-meter-group:hover .scroll-meter-seg {
+  color: var(--color-text);
 }
 
-.scroll-meter-fill {
-  width: 0%;
+/* The "o" in "project": a real SVG ring instead of a stretched letterform, so
+   its rounded ends stay true semicircles (fixed radius = half its fixed
+   height) no matter how wide JS grows it, and its stroke weight (not a fill)
+   stays constant to match the surrounding letters' stroke thickness — a
+   scaleX'd glyph would smear those ends into an ellipse and thicken its
+   stroke as it stretched. Sized and baseline-aligned to read as a real
+   lowercase "o" among the other letters, with a little breathing room on
+   each side standing in for letter-spacing (which doesn't carry across
+   sibling elements the way it does within a single text run). */
+.scroll-meter-o-svg {
+  display: inline-block;
+  height: 0.58em;
+  margin: 0 0.05em 0.16em;
+  color: var(--color-muted);
+  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.scroll-meter-o-rect {
+  fill: none;
+}
+
+.scroll-meter-group:hover .scroll-meter-o-svg {
+  color: var(--color-text);
+}
+
+/* Classic "scroll down" mouse glyph: a pill outline with a dot that eases
+   down the inside, fading in as it starts and out as it reaches the bottom
+   before resetting — reads as a continuous drip rather than a mechanical
+   tick. */
+.scroll-meter-mouse {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 0.4em;
+  height: 0.64em;
+  margin-left: 0.3em;
+  color: var(--color-muted);
+  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.scroll-meter-mouse svg {
+  display: block;
+  width: 100%;
   height: 100%;
-  background: var(--color-text);
-  border-radius: 9999px;
-  transition: width 0.1s linear;
 }
 
-/* Slower, eased transition only for the moment the meter resets back to 0 */
-.scroll-meter-fill.is-resetting {
-  transition: width 0.5s cubic-bezier(0, 0.3, 0.24, 1);
+.scroll-meter-group:hover .scroll-meter-mouse {
+  color: var(--color-text);
+}
+
+.scroll-meter-mouse-ball {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  width: 0.075em;
+  height: 0.075em;
+  border-radius: 50%;
+  background: currentColor;
+  animation: scroll-meter-mouse-scroll 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes scroll-meter-mouse-scroll {
+  0%   { transform: translate(-50%, 0);      opacity: 0; }
+  15%  { opacity: 1; }
+  55%  { transform: translate(-50%, 0.26em); opacity: 1; }
+  75%  { transform: translate(-50%, 0.26em); opacity: 0; }
+  76%  { transform: translate(-50%, 0); }
+  100% { transform: translate(-50%, 0);      opacity: 0; }
 }
 
 .proj-headline {
@@ -793,28 +882,60 @@ footer {
 
 .proj-about-columns {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  align-items: start;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: center;
   max-width: 1200px;
   margin: 0 auto;
   column-gap: 64px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
   .proj-about-columns {
     grid-template-columns: 1fr;
     row-gap: 40px;
   }
 }
 
-.proj-about-portrait-col img {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
+.proj-about-photos-col {
+  position: relative;
+  aspect-ratio: 1 / 1;
   max-height: calc(100vh - 160px);
+}
+
+.proj-about-photo {
+  position: absolute;
+  display: block;
+  width: 47%;
+  height: auto;
   border-radius: clamp(8px, 1.5vw, 16px);
+  pointer-events: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.proj-about-photo--1 {
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.proj-about-photo--2 {
+  right: 0;
+  top: 32%;
+  z-index: 2;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: 10% center;
   filter: grayscale(100%);
+}
+
+@media (max-width: 600px) {
+  .proj-about-photos-col {
+    aspect-ratio: auto;
+    min-height: 320px;
+  }
 }
 
 .proj-about-content-col {
@@ -868,9 +989,31 @@ footer {
 }
 
 .proj-about-camera-trigger {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 26px;
+  height: 26px;
+  border-radius: 9999px;
   cursor: pointer;
   animation: proj-camera-wiggle 3s ease-in-out infinite;
+}
+
+.proj-about-camera-trigger::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid var(--color-divider);
+  background: none;
+  z-index: -1;
+  transition: background-color 0.2s cubic-bezier(0, 0.3, 0.24, 1), border-color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-about-camera-trigger:hover::before {
+  background-color: var(--color-hover-bg);
+  border-color: var(--color-hover-bg);
 }
 
 @keyframes proj-camera-wiggle {
@@ -884,28 +1027,28 @@ footer {
 }
 
 .proj-about-camera-float {
+  --rot: 0deg;
   position: fixed;
   top: 0;
   left: 0;
-  width: 180px;
-  height: auto;
-  border-radius: 8px;
+  border-radius: clamp(8px, 1.5vw, 16px);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  object-fit: cover;
   pointer-events: none;
   z-index: 9999;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.94);
-  transition: left 0.1s ease-out, top 0.1s ease-out, transform 0.15s ease-out;
+  transform: translate(-50%, -50%) rotate(var(--rot)) scale(0.94);
+  transition: transform 0.15s ease-out;
 }
 
 .proj-about-camera-float.is-visible {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) rotate(var(--rot)) scale(1);
 }
 
 .proj-about-camera-float.is-fading {
   opacity: 0;
-  transition: left 0.1s ease-out, top 0.1s ease-out, transform 0.15s ease-out, opacity 2s ease-out 0.5s;
+  transition: transform 0.15s ease-out, opacity 2s ease-out 1.2s;
 }
 
 /* ─── Hero media ─────────────────────────────────────────── */
@@ -1003,6 +1146,52 @@ footer {
   line-height: 1.1;
   letter-spacing: 0.02em;
   color: var(--color-text);
+}
+
+/* ─── Stacked section block: label + headline + copy, image-above pattern ── */
+.proj-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.proj-section-label {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.proj-section-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 560px;
+}
+
+/* Left-border callout: a single emphasized statement set apart from
+   surrounding body copy, e.g. a design principle. */
+.proj-callout {
+  border-left: 3px solid var(--color-text);
+  padding-left: 20px;
+}
+
+.proj-callout-headline {
+  font-size: clamp(18px, 1.67vw, 32px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+}
+
+/* Plain full-bleed photo (no device bezel) — for real photography rather
+   than UI/screen mockups, which use .proj-media-card instead. */
+.proj-photo {
+  width: 100%;
+  display: block;
+  border-radius: clamp(8px, 1.5vw, 16px);
 }
 
 .proj-inline-link {
@@ -1233,6 +1422,158 @@ h1 .proj-inline-link svg {
   display: block;
 }
 
+/* ─── Scenario carousel ──────────────────────────────────── */
+/* Scroll-jack: the zone is tall enough to give the page's normal scroll
+   somewhere to go while the layout stays pinned; JS maps how far the user
+   has scrolled through it directly onto the carousel's scrollLeft. Once
+   the zone is exhausted, the sticky element unpins and page scroll carries
+   on to the next section as usual. */
+.proj-scenario-scrollzone {
+  position: relative;
+  height: 320vh;
+}
+
+.proj-scenario-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.proj-scenario-layout {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  width: 100%;
+}
+
+.proj-scenario-carousel-wrap {
+  flex: 1 1 60%;
+  min-width: 0;
+}
+
+.proj-scenario-carousel {
+  --slide-w: 220px;
+  position: relative;
+  overflow: hidden;
+  padding: 40px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 18%, black 82%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, black 18%, black 82%, transparent 100%);
+}
+
+/* The track holds every slide and is the thing that actually moves — its
+   transform is what gets a real CSS transition, so sliding from one
+   scenario to the next always eases along the site's cubic-bezier curve
+   instead of jumping straight to the new position. */
+.proj-scenario-track {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  transition: transform 0.6s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-scenario-slide {
+  flex: 0 0 var(--slide-w);
+  border-radius: clamp(8px, 1.5vw, 16px);
+  overflow: hidden;
+  opacity: 0.2;
+  transform: scale(0.9);
+  transition: opacity 0.3s cubic-bezier(0, 0.3, 0.24, 1), transform 0.3s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-scenario-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.proj-scenario-slide video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.proj-scenario-copy {
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.proj-scenario-headline {
+  font-size: clamp(18px, 1.67vw, 36px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+}
+
+.proj-scenario-icons {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.proj-scenario-icon {
+  display: flex;
+  color: var(--color-muted);
+  opacity: 0.35;
+  cursor: pointer;
+  transition: opacity 0.3s cubic-bezier(0, 0.3, 0.24, 1), color 0.3s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-scenario-icon:hover {
+  opacity: 0.7;
+}
+
+.proj-scenario-icon.is-active {
+  color: var(--color-text);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .proj-scenario-scrollzone {
+    height: 220vh;
+  }
+
+  .proj-scenario-sticky {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .proj-scenario-layout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .proj-scenario-carousel {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ─── Unmute toggle ───────────────────────────────────────── */
+.proj-scenario-unmute {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  border: none;
+  background: var(--color-hover-bg);
+  color: var(--color-hover-text);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: opacity 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-scenario-unmute:hover {
+  opacity: 0.85;
+}
+
 /* ─── Closing ────────────────────────────────────────────── */
 .proj-closing-statement {
   padding: 80px;
@@ -1311,14 +1652,15 @@ h1 .proj-inline-link svg {
 
 /* Project pages carry a generous 80px side gutter on desktop; that's far
    too much on mobile, so it collapses to 16px below the breakpoint. */
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
   .proj-hero,
   .proj-hero-media,
   .proj-quote-wrap,
   .proj-section,
   .proj-panels-wrap,
   .proj-closing-statement,
-  .proj-footer {
+  .proj-footer,
+  .scroll-meter {
     padding-left: 16px;
     padding-right: 16px;
   }

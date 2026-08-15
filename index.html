@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>jbpark.design</title>
-  <link rel="stylesheet" href="style.css?v=107">
+  <link rel="stylesheet" href="style.css?v=150">
 </head>
 <body>
 
@@ -165,9 +165,6 @@
       <div id="proj-about" class="proj-content" hidden>
         <section class="proj-hero proj-about-hero">
           <div class="proj-about-columns">
-            <div class="proj-about-portrait-col proj-reveal">
-              <img src="assets/images/about/portrait-main.jpg" alt="Jeffrey Park">
-            </div>
             <div class="proj-about-content-col">
               <h1 class="proj-section-sub proj-reveal">Product Designer at <a href="https://www.rivian.com" target="_blank" rel="noopener" class="proj-inline-link">Rivian</a>, drawn to simple interfaces, intelligent systems, and turning ambiguity into a clear direction.</h1>
               <p class="proj-subtext proj-reveal">I joined Rivian before a single vehicle had shipped. Since then, I've led design across vehicle features, mobile app, charging network, and most recently <a href="#" data-project-link="rivian-assistant" class="proj-inline-link">Rivian Assistant (AI)</a>.</p>
@@ -190,6 +187,10 @@
                   <span class="proj-about-fact-value">Chasing down good coffee and pastries</span>
                 </div>
               </div>
+            </div>
+            <div class="proj-about-photos-col proj-reveal">
+              <img class="proj-about-photo proj-about-photo--1" src="assets/images/about/portrait-main.jpg" alt="Jeffrey Park">
+              <img class="proj-about-photo proj-about-photo--2" src="assets/images/about/portrait-5.jpg" alt="Jeffrey Park outdoors with a dog">
             </div>
           </div>
         </section>
@@ -340,8 +341,8 @@
         </section>
 
         <!-- Closing (white bg) -->
-        <div class="proj-divider proj-reveal"></div>
-        <section class="proj-closing proj-reveal">
+        <div class="proj-divider proj-reveal" hidden></div>
+        <section class="proj-closing proj-reveal" hidden>
           <div class="proj-closing-statement">
             <h2 class="proj-closing-headline">Small design decisions in each of these features shape how customers experience Rivian.</h2>
             <p class="proj-body">Rivian leads the industry in customer satisfaction according to Consumer Reports, reflecting how these features connect with real drivers.</p>
@@ -358,47 +359,56 @@
       <!-- ── Rivian Assistant ────────────────────────────────── -->
       <div id="proj-rivian-assistant" class="proj-content" hidden>
 
-        <!-- Hero -->
+        <!-- 1. Hero -->
         <section class="proj-hero">
-          <h1 class="proj-headline proj-reveal">Bringing conversational AI to the software-defined vehicle.</h1>
+          <h1 class="proj-headline proj-reveal">An assistant designed to stay out of the way.</h1>
           <p class="proj-subtext proj-reveal">Rivian Assistant brings together your vehicle, the world around you, and your own apps and habits, combining all of it to understand your intent, and to do things that simply weren't possible while driving.</p>
-          <div class="proj-meta proj-reveal">
-            <div class="proj-meta-val">
-              <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle Feature + Mobile</span><span class="proj-dot">•</span><span>Shipped 2026</span>
+        </section>
+
+        <!-- 2. Hero image: activation screen + map UI -->
+        <div class="proj-hero-media proj-reveal">
+          <video autoplay loop muted playsinline>
+            <source src="assets/videos/rivian-assistant/RA-Sidekick_R1-DD.mp4" type="video/mp4">
+          </video>
+        </div>
+        <!-- Not placed: assets/videos/rivian-assistant/VA_DD_L_diagram.mp4 (press-to-talk
+             steering wheel diagram, previously captioned "Press and start speaking. / Ask
+             naturally, Hands free.") — didn't map to a section in the new structure. Left
+             here in case it belongs somewhere. -->
+
+        <div class="proj-divider proj-reveal"></div>
+
+        <!-- 3. The starting point -->
+        <section class="proj-section proj-reveal">
+          <div class="proj-section-block">
+            <span class="proj-section-label">The starting point</span>
+            <div class="proj-section-copy">
+              <p class="proj-body"><!-- PLACEHOLDER: paragraph 1 — the starting point --></p>
+              <p class="proj-body"><!-- PLACEHOLDER: paragraph 2 --></p>
             </div>
           </div>
         </section>
 
-        <!-- Sidekick: press-to-talk + in-vehicle response -->
-        <div class="proj-panels-wrap proj-reveal">
-          <div class="proj-sidekick-row">
-            <div class="proj-sidekick-diagram">
-              <video autoplay loop muted playsinline>
-                <source src="assets/videos/rivian-assistant/VA_DD_L_diagram.mp4" type="video/mp4">
-              </video>
-              <div class="proj-sidekick-caption">
-                <span class="proj-feature-label">Press and start speaking.</span>
-                <p class="proj-body">Ask naturally, Hands free.</p>
-              </div>
-            </div>
-            <div class="proj-sidekick-display">
-              <video autoplay loop muted playsinline>
-                <source src="assets/videos/rivian-assistant/RA-Sidekick_R1-DD.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-        </div>
+        <div class="proj-divider proj-reveal"></div>
 
-        <!-- Voice in context -->
+        <!-- 4. The principle -->
         <section class="proj-section proj-reveal">
-          <div class="proj-section-header">
-            <div class="proj-section-left">
-              <h2 class="proj-section-title">Voice in context</h2>
-            </div>
-            <div class="proj-section-right">
-              <p class="proj-body">Expressive wave provides visual feedback through a uniquely Rivian personality.</p>
+          <div class="proj-section-block">
+            <span class="proj-section-label">The principle</span>
+            <div class="proj-section-copy">
+              <div class="proj-callout">
+                <p class="proj-callout-headline">Show UI only when there's an action item.</p>
+              </div>
+              <p class="proj-body">An address the driver can navigate to. A contact they can call or message. An owner's guide entry they can open. These warrant a screen. A list of nearby cafes doesn't — Maps handles that without adding another layer.</p>
+              <p class="proj-body">Transcripts, muting controls, audio chimes on every state: all removed. The result is an assistant that feels confident rather than anxious. Less on screen, more trust in the system.</p>
             </div>
           </div>
+        </section>
+
+        <div class="proj-divider proj-reveal"></div>
+
+        <!-- 5. The wave -->
+        <section class="proj-section proj-reveal">
           <div class="proj-voice-card">
             <div class="proj-voice-tags">
               <span class="proj-voice-tag proj-voice-tag--listening">Listening</span><span class="proj-voice-tag-sep">/</span><span class="proj-voice-tag proj-voice-tag--thinking">Thinking</span><span class="proj-voice-tag-sep">/</span><span class="proj-voice-tag proj-voice-tag--speaking">Speaking</span><span class="proj-voice-tag-sep">/</span><span class="proj-voice-tag proj-voice-tag--error">Error</span>
@@ -409,48 +419,141 @@
               </video>
             </div>
           </div>
-        </section>
-
-        <!-- In-vehicle response: contextual suggestions -->
-        <div class="proj-panels-wrap proj-reveal">
-          <h2 class="proj-section-title proj-reveal">Deeply integrated</h2>
-          <div class="proj-media-card">
-            <img src="assets/images/rivian-assistant/integrated-placeholder.png" alt="Rivian Assistant suggesting nearby coffee spots on the driver display">
+          <div class="proj-section-block">
+            <span class="proj-section-label">The wave</span>
+            <h2 class="proj-section-title">Feedback you can read without looking.</h2>
+            <div class="proj-section-copy">
+              <p class="proj-body">Expressive wave provides visual feedback through a uniquely Rivian personality.</p>
+              <p class="proj-body"><!-- PLACEHOLDER: second paragraph --></p>
+            </div>
           </div>
-        </div>
+        </section>
 
         <div class="proj-divider proj-reveal"></div>
 
-        <!-- AI & Autonomy Day -->
+        <!-- 6. Deeply integrated -->
         <section class="proj-section proj-reveal">
-          <div class="proj-section-header">
-            <div class="proj-section-left">
-              <h2 class="proj-section-title">AI &amp; Autonomy Day</h2>
+          <div class="proj-media-card">
+            <img src="assets/images/rivian-assistant/integrated-placeholder.png" alt="Rivian Assistant suggesting nearby coffee spots on the driver display">
+          </div>
+          <div class="proj-section-block">
+            <span class="proj-section-label">Deeply integrated</span>
+            <h2 class="proj-section-title">The assistant knows when to offer, not just when to respond.</h2>
+            <div class="proj-section-copy">
+              <p class="proj-body"><!-- PLACEHOLDER: paragraph 1 --></p>
+              <p class="proj-body"><!-- PLACEHOLDER: paragraph 2 --></p>
             </div>
-            <div class="proj-section-right">
-              <h3 class="proj-section-sub">Meaningful control for rear-seat passengers.</h3>
+          </div>
+        </section>
+
+        <div class="proj-divider proj-reveal"></div>
+
+        <!-- 7. AI & Autonomy Day -->
+        <section class="proj-section proj-reveal">
+          <img class="proj-photo" src="assets/images/rivian-assistant/hero.png" alt="Rivian's Autonomy &amp; AI Day event on stage">
+          <div class="proj-section-block">
+            <span class="proj-section-label">AI &amp; Autonomy Day</span>
+            <div class="proj-section-copy">
               <p class="proj-body">Passengers can control media, view trip details, and manage climate from the rear display.</p>
-              <p class="proj-body">Small design decisions in each of these features shape how customers experience Rivian.</p>
-              <p class="proj-body">Rivian leads the industry in customer satisfaction according to Consumer Reports, reflecting how these features connect with real drivers.</p>
-              <div class="proj-meta">
-                <div class="proj-meta-val">
-                  <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle OS</span><span class="proj-dot">•</span><span>Shipped 2023</span>
+              <a href="https://stories.rivian.com/rivian-autonomy-ai-day" class="proj-ai-day-cta" target="_blank" rel="noopener">
+                <span>See the highlights from Rivian Autonomy &amp; AI day</span>
+                <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </section>
+        <!-- Not placed: assets/videos/rivian-assistant/autonomy-&-ai-day-highlights.mp4 —
+             the spec calls for a still event photo here (now assets/images/rivian-assistant/hero.png,
+             previously unused despite its filename). Highlights video left in the asset
+             folder in case it belongs elsewhere. -->
+
+        <div class="proj-divider proj-reveal"></div>
+
+        <!-- 8. Closing -->
+        <section class="proj-closing proj-reveal">
+          <div class="proj-closing-statement">
+            <h2 class="proj-closing-headline">Designing Rivian Assistant was mostly an exercise in restraint.</h2>
+            <p class="proj-body"><!-- PLACEHOLDER: closing body copy --></p>
+          </div>
+        </section>
+
+        <div class="proj-divider proj-reveal"></div>
+
+        <!-- 9. In the wild — repurposed from the "Built for real moments" scenario
+             carousel (scroll-jack carousel, 6 clips, growing-pill progress meter). -->
+        <section class="proj-section proj-reveal">
+          <span class="proj-section-label">In the wild</span>
+
+          <div class="proj-scenario-scrollzone" id="scenarioScrollzone">
+            <div class="proj-scenario-sticky">
+              <div class="proj-scenario-layout">
+                <div class="proj-scenario-carousel-wrap">
+                  <div class="proj-scenario-carousel" id="scenarioCarousel">
+                    <div class="proj-scenario-track" id="scenarioTrack">
+                      <div class="proj-scenario-slide is-active" data-index="0">
+                        <video loop muted playsinline>
+                          <source src="assets/videos/rivian-assistant/04.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                      <div class="proj-scenario-slide" data-index="1">
+                        <video loop muted playsinline>
+                          <source src="assets/videos/rivian-assistant/01.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                      <div class="proj-scenario-slide" data-index="2">
+                        <video loop muted playsinline>
+                          <source src="assets/videos/rivian-assistant/02.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                      <div class="proj-scenario-slide" data-index="3">
+                        <video loop muted playsinline>
+                          <source src="assets/videos/rivian-assistant/03.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                      <div class="proj-scenario-slide" data-index="4">
+                        <video loop muted playsinline>
+                          <source src="assets/videos/rivian-assistant/05.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                      <div class="proj-scenario-slide" data-index="5">
+                        <video loop muted playsinline>
+                          <source src="assets/videos/rivian-assistant/06.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="button" class="proj-scenario-unmute" id="scenarioUnmute">Unmute</button>
+                </div>
+
+                <div class="proj-scenario-copy">
+                  <h3 class="proj-scenario-headline">Stay in touch, hands-free</h3>
+                  <p class="proj-scenario-desc proj-body">Send a message and share your ETA without ever reaching for your phone.</p>
+                  <div class="proj-scenario-icons">
+                    <span class="proj-scenario-icon is-active" data-index="0" role="button" tabindex="0" aria-label="Stay in touch, hands-free">
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 4.5C3 3.67 3.67 3 4.5 3H13.5C14.33 3 15 3.67 15 4.5V10.5C15 11.33 14.33 12 13.5 12H7L4 14.5V12H4.5C3.67 12 3 11.33 3 10.5V4.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                    </span>
+                    <span class="proj-scenario-icon" data-index="1" role="button" tabindex="0" aria-label="Ask about your surroundings">
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M9 8V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="5.5" r="0.9" fill="currentColor"/></svg>
+                    </span>
+                    <span class="proj-scenario-icon" data-index="2" role="button" tabindex="0" aria-label="Discover the detour">
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L10.5 7.5L16 9L10.5 10.5L9 16L7.5 10.5L2 9L7.5 7.5L9 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                    </span>
+                    <span class="proj-scenario-icon" data-index="3" role="button" tabindex="0" aria-label="Handles it before you ask">
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 16C9 16 14 11.5 14 7.5C14 4.46 11.76 2 9 2C6.24 2 4 4.46 4 7.5C4 11.5 9 16 9 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="9" cy="7.5" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </span>
+                    <span class="proj-scenario-icon" data-index="4" role="button" tabindex="0" aria-label="An extra set of eyes">
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="5.5" width="14" height="9.5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M6 5.5L7.2 3.5H10.8L12 5.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="9" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </span>
+                    <span class="proj-scenario-icon" data-index="5" role="button" tabindex="0" aria-label="Knows the vehicle inside and out">
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 13C2 8 5 3 9 3C13 3 16 8 15 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 9L11.5 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="1" fill="currentColor"/></svg>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div>
-            <div class="proj-media-card">
-              <video autoplay loop muted playsinline>
-                <source src="assets/videos/rivian-assistant/autonomy-&-ai-day-highlights.mp4" type="video/mp4">
-              </video>
-            </div>
-            <a href="https://stories.rivian.com/rivian-autonomy-ai-day" class="proj-ai-day-cta" target="_blank" rel="noopener">
-              <span>See the highlights from Rivian Autonomy &amp; AI day</span>
-              <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
           </div>
         </section>
 
@@ -584,10 +687,22 @@
       </div><!-- /proj-archive -->
 
       <div class="scroll-meter" aria-hidden="true" hidden>
-        <span class="scroll-meter-label">Keep scrolling for the next project</span>
-        <div class="scroll-meter-track">
-          <div class="scroll-meter-fill"></div>
-        </div>
+        <button type="button" class="scroll-meter-group" aria-label="Go to next project">
+          <span class="scroll-meter-line scroll-meter-line1">
+            <span class="scroll-meter-seg" data-seg="next">Next</span>
+            <span class="scroll-meter-mouse" aria-hidden="true">
+              <svg viewBox="0 0 14 22" fill="none" preserveAspectRatio="xMidYMid meet">
+                <rect x="1" y="1" width="12" height="20" rx="6" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <span class="scroll-meter-mouse-ball"></span>
+            </span>
+          </span>
+          <span class="scroll-meter-line scroll-meter-line2">
+            <span class="scroll-meter-seg" data-seg="pr">Pr</span><svg class="scroll-meter-o-svg" aria-hidden="true">
+              <rect class="scroll-meter-o-rect" fill="none" stroke="currentColor"></rect>
+            </svg><span class="scroll-meter-seg" data-seg="ject">ject</span>
+          </span>
+        </button>
       </div>
 
     </div><!-- /project-scroll -->
@@ -646,57 +761,50 @@
       });
     });
 
-    // Camera emoji easter egg — flashes a photo that follows the cursor while fading out
+    // Camera emoji easter egg — each click stacks a photo at a random spot over the photo column
     (function () {
       const trigger = document.querySelector('.proj-about-camera-trigger');
-      if (!trigger) return;
+      const stackTarget = document.querySelector('.proj-about-photos-col');
+      const staticPhoto = document.querySelector('.proj-about-photo--1');
+      if (!trigger || !stackTarget || !staticPhoto) return;
       const photos = [
         'assets/images/about/portrait-3.jpg',
         'assets/images/about/dsc2900.jpg'
       ];
       let photoIndex = 0;
-      let floatEl = null;
-      let moveHandler = null;
-      let removeTimer = null;
       let emojiRevertTimer = null;
-      const FOLLOW_OFFSET_Y = -160; // keeps the photo clear of the emoji/text it's triggered from
 
-      function cleanup() {
-        if (moveHandler) document.removeEventListener('mousemove', moveHandler);
-        if (removeTimer) clearTimeout(removeTimer);
+      trigger.addEventListener('click', () => {
         if (emojiRevertTimer) clearTimeout(emojiRevertTimer);
-        if (floatEl) { floatEl.remove(); floatEl = null; }
-        trigger.textContent = trigger.dataset.defaultEmoji;
-      }
-
-      trigger.addEventListener('click', (e) => {
-        cleanup();
         trigger.textContent = trigger.dataset.hoverEmoji;
+        emojiRevertTimer = setTimeout(() => {
+          trigger.textContent = trigger.dataset.defaultEmoji;
+        }, 300);
 
-        floatEl = document.createElement('img');
+        // Match the static photos' rendered size exactly, so the flashed photo reads as the same card.
+        const photoSize = staticPhoto.getBoundingClientRect();
+        const rect = stackTarget.getBoundingClientRect();
+        const randX = rect.left + Math.random() * Math.max(rect.width - photoSize.width, 0) + photoSize.width / 2;
+        const randY = rect.top + Math.random() * Math.max(rect.height - photoSize.height, 0) + photoSize.height / 2;
+        const randRotate = (Math.random() * 20 - 10).toFixed(1) + 'deg';
+
+        const floatEl = document.createElement('img');
         floatEl.src = photos[photoIndex];
         photoIndex = (photoIndex + 1) % photos.length;
         floatEl.className = 'proj-about-camera-float';
-        floatEl.style.left = e.clientX + 'px';
-        floatEl.style.top = (e.clientY + FOLLOW_OFFSET_Y) + 'px';
+        floatEl.style.width = photoSize.width + 'px';
+        floatEl.style.height = photoSize.height + 'px';
+        floatEl.style.left = randX + 'px';
+        floatEl.style.top = randY + 'px';
+        floatEl.style.setProperty('--rot', randRotate);
         document.body.appendChild(floatEl);
-
-        moveHandler = (ev) => {
-          floatEl.style.left = ev.clientX + 'px';
-          floatEl.style.top = (ev.clientY + FOLLOW_OFFSET_Y) + 'px';
-        };
-        document.addEventListener('mousemove', moveHandler);
 
         requestAnimationFrame(() => {
           floatEl.classList.add('is-visible');
           requestAnimationFrame(() => floatEl.classList.add('is-fading'));
         });
 
-        emojiRevertTimer = setTimeout(() => {
-          trigger.textContent = trigger.dataset.defaultEmoji;
-        }, 300);
-
-        removeTimer = setTimeout(cleanup, 2500);
+        setTimeout(() => floatEl.remove(), 3200);
       });
     })();
 
@@ -716,6 +824,164 @@
 
       video.addEventListener('timeupdate', updateActiveTag);
       video.addEventListener('loadedmetadata', updateActiveTag);
+    })();
+
+    // Scenario carousel — pinned scroll-jack: the page's normal scroll
+    // drives the carousel until it's exhausted, then scroll continues
+    // normally. Copy, icon row, and video playback all track whichever
+    // slide is centered.
+    (function () {
+      const scrollzone = document.getElementById('scenarioScrollzone');
+      const carousel = document.getElementById('scenarioCarousel');
+      const track = document.getElementById('scenarioTrack');
+      const projectScroll = document.querySelector('.project-scroll');
+      if (!scrollzone || !carousel || !track || !projectScroll) return;
+      const slides = Array.from(track.querySelectorAll('.proj-scenario-slide'));
+      const headline = document.querySelector('.proj-scenario-headline');
+      const desc = document.querySelector('.proj-scenario-desc');
+      const icons = Array.from(document.querySelectorAll('.proj-scenario-icon'));
+      const unmuteBtn = document.getElementById('scenarioUnmute');
+
+      const scenarios = [
+        {
+          headline: 'Stay in touch, hands-free',
+          desc: 'Send a message and share your ETA without ever reaching for your phone.'
+        },
+        {
+          headline: 'Ask about your surroundings',
+          desc: "Rivian Assistant layers in timely local details — like tonight's sunset — right as you're planning the stop."
+        },
+        {
+          headline: 'Discover the detour',
+          desc: "Say the word and Assistant surfaces a spot worth pulling over for, matched to what's actually nearby."
+        },
+        {
+          headline: 'Handles it before you ask',
+          desc: 'After a muddy trail, Assistant finds the nearest car wash — no search required.'
+        },
+        {
+          headline: 'An extra set of eyes',
+          desc: "Rivian Assistant uses the vehicle's own cameras to help you keep track of what's around you — and what's in the bed."
+        },
+        {
+          headline: 'Knows the vehicle inside and out',
+          desc: "Ask about your Rivian's own capabilities — like wading depth — and get a straight answer."
+        }
+      ];
+
+      let activeIndex = -1;
+      let isMuted = true;
+      let sectionVisible = false;
+
+      function setActive(index) {
+        if (index === activeIndex) return;
+        activeIndex = index;
+
+        slides.forEach((s, i) => {
+          s.classList.toggle('is-active', i === index);
+          const video = s.querySelector('video');
+          if (!video) return;
+          if (i === index) {
+            video.muted = isMuted;
+            video.currentTime = 0;
+            if (sectionVisible) video.play().catch(() => {});
+          } else {
+            video.pause();
+            video.currentTime = 0;
+          }
+        });
+
+        icons.forEach((ic, i) => ic.classList.toggle('is-active', i === index));
+
+        const data = scenarios[index];
+        if (data && headline) headline.textContent = data.headline;
+        if (data && desc) desc.textContent = data.desc;
+
+        if (unmuteBtn) unmuteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
+      }
+
+      // Stop the active video the moment this section scrolls out of view —
+      // otherwise it keeps playing (and, if unmuted, audible) underneath
+      // whatever the user scrolls to next.
+      const visibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          sectionVisible = entry.isIntersecting;
+          const activeVideo = slides[activeIndex] && slides[activeIndex].querySelector('video');
+          if (!activeVideo) return;
+          if (sectionVisible) {
+            activeVideo.play().catch(() => {});
+          } else {
+            activeVideo.pause();
+          }
+        });
+      }, { root: projectScroll, threshold: 0 });
+
+      visibilityObserver.observe(scrollzone);
+
+      function slideCenterLeft(index) {
+        const s = slides[index];
+        return s.offsetLeft + s.offsetWidth / 2 - carousel.clientWidth / 2;
+      }
+
+      function setTrackOffset(x) {
+        track.style.transform = 'translateX(' + (-x) + 'px)';
+      }
+
+      function indexFromProgress(progress) {
+        return Math.round(progress * (slides.length - 1));
+      }
+
+      function updateFromPageScroll() {
+        const rect = scrollzone.getBoundingClientRect();
+        const total = rect.height - window.innerHeight;
+        if (total <= 0) return;
+        const progress = Math.max(0, Math.min(1, -rect.top / total));
+        const startOffset = slideCenterLeft(0);
+        const endOffset = slideCenterLeft(slides.length - 1);
+        setTrackOffset(startOffset + progress * (endOffset - startOffset));
+        setActive(indexFromProgress(progress));
+      }
+
+      let pageRaf = null;
+      projectScroll.addEventListener('scroll', () => {
+        if (pageRaf) cancelAnimationFrame(pageRaf);
+        pageRaf = requestAnimationFrame(updateFromPageScroll);
+      }, { passive: true });
+
+      // Tapping (or keyboard-activating) an icon jumps the page scroll to
+      // that scenario's position within the scroll-jack zone; the scroll
+      // listener above then drives the carousel there with the same eased
+      // motion as a normal scroll.
+      function goToIndex(index) {
+        const rect = scrollzone.getBoundingClientRect();
+        const total = rect.height - window.innerHeight;
+        if (total <= 0) return;
+        const progress = index / (slides.length - 1);
+        const targetTop = projectScroll.scrollTop + rect.top + progress * total;
+        projectScroll.scrollTo({ top: targetTop, behavior: 'smooth' });
+      }
+
+      icons.forEach((icon, i) => {
+        icon.addEventListener('click', () => goToIndex(i));
+        icon.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            goToIndex(i);
+          }
+        });
+      });
+
+      if (unmuteBtn) {
+        unmuteBtn.addEventListener('click', () => {
+          isMuted = !isMuted;
+          const activeVideo = slides[activeIndex] && slides[activeIndex].querySelector('video');
+          if (activeVideo) activeVideo.muted = isMuted;
+          unmuteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
+        });
+      }
+
+      setActive(0);
+      requestAnimationFrame(updateFromPageScroll);
     })();
 
     // About panel
@@ -823,16 +1089,79 @@
     }, { passive: true });
 
     // ── Scroll meter: hold at the bottom to advance to the next project ──
-    const scrollMeter     = document.querySelector('.scroll-meter');
-    const scrollMeterFill = scrollMeter.querySelector('.scroll-meter-fill');
+    const scrollMeter      = document.querySelector('.scroll-meter');
+    const scrollMeterGroup = scrollMeter.querySelector('.scroll-meter-group');
+    const segPr             = scrollMeter.querySelector('.scroll-meter-seg[data-seg="pr"]');
+    const segJect           = scrollMeter.querySelector('.scroll-meter-seg[data-seg="ject"]');
+    const oSvg               = scrollMeter.querySelector('.scroll-meter-o-svg');
+    const oRect               = scrollMeter.querySelector('.scroll-meter-o-rect');
 
     const SCROLL_METER_THRESHOLD  = 4000; // total wheel delta needed to fill the meter
     const SCROLL_METER_IDLE_RESET = 2000; // ms of no scrolling before the meter resets
+    const SCROLL_METER_EDGE_PAD   = 80;   // matches the site's standard section edge padding
+    const O_WIDTH_RATIO           = 0.98; // measured from the actual "o" glyph in Neue Haas Grotesk Text Pro — it's nearly circular, not narrow
+    const O_STROKE_RATIO          = 0.2;  // ring thickness as a fraction of its height, matching letter stroke weight
 
     let isProjectTransitioning = false;
     let suppressLabelSwap      = false;
-    let meterProgress          = 0; // 0–1
+    let meterProgress          = 0; // 0–1, the target
     let meterIdleTimer         = null;
+    let meterTweenRaf          = null;
+
+    // Geometry for the "o" ring's growth, recomputed whenever the meter
+    // becomes visible or the viewport resizes since font-size is responsive.
+    let oNaturalWidth  = 0;
+    let oNaturalHeight = 0;
+    let oStrokeWidth   = 0;
+    let oExtraWidth    = 0;
+
+    function measureScrollMeterSegments() {
+      if (scrollMeter.hidden) return;
+      const prW   = segPr.getBoundingClientRect().width;
+      const jectW = segJect.getBoundingClientRect().width;
+      oNaturalHeight = oSvg.getBoundingClientRect().height;
+      oNaturalWidth  = oNaturalHeight * O_WIDTH_RATIO;
+      oStrokeWidth   = oNaturalHeight * O_STROKE_RATIO;
+      if (oNaturalHeight <= 0) return;
+
+      const containerWidth = projectScroll.clientWidth - SCROLL_METER_EDGE_PAD * 2;
+      const line2NaturalW  = prW + oNaturalWidth + jectW;
+      oExtraWidth = Math.max(0, containerWidth - line2NaturalW);
+    }
+
+    // Single source of truth for rendering a 0–1 progress value: grows the
+    // "o" ring (resizing its SVG viewBox and rect directly, not via CSS
+    // transform, so its rounded ends stay true semicircles and its stroke
+    // stays a constant thickness at any width) so it — and the whole line —
+    // reaches the section's edges exactly as progress hits 1. That growth is
+    // the only visual feedback for progress; text color stays static.
+    function applyScrollMeterProgress(progress) {
+      if (oNaturalHeight <= 0) measureScrollMeterSegments();
+      if (oNaturalHeight <= 0) return;
+
+      const w = oNaturalWidth + oExtraWidth * progress;
+      oSvg.style.width = `${w}px`;
+      oSvg.setAttribute('viewBox', `0 0 ${w} ${oNaturalHeight}`);
+      oRect.setAttribute('x', oStrokeWidth / 2);
+      oRect.setAttribute('y', oStrokeWidth / 2);
+      oRect.setAttribute('width', w - oStrokeWidth);
+      oRect.setAttribute('height', oNaturalHeight - oStrokeWidth);
+      oRect.setAttribute('rx', (oNaturalHeight - oStrokeWidth) / 2);
+      oRect.setAttribute('stroke-width', oStrokeWidth);
+    }
+
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+    function tweenMeterProgress(from, to, duration) {
+      if (meterTweenRaf) cancelAnimationFrame(meterTweenRaf);
+      const start = performance.now();
+      function step(now) {
+        const t = Math.min(1, (now - start) / duration);
+        applyScrollMeterProgress(from + (to - from) * easeOutCubic(t));
+        meterTweenRaf = t < 1 ? requestAnimationFrame(step) : null;
+      }
+      meterTweenRaf = requestAnimationFrame(step);
+    }
 
     function nextProjectRow() {
       const active = document.querySelector('.list-row.active');
@@ -847,14 +1176,41 @@
     // participate in the project cycle.
     function updateScrollMeterVisibility() {
       scrollMeter.hidden = !nextProjectRow();
+      if (!scrollMeter.hidden) requestAnimationFrame(() => requestAnimationFrame(measureScrollMeterSegments));
     }
+
+    // The very first project open is also when .sidebar shrinks from 100%
+    // to 20vw (a 0.4s width transition), and since .project-panel shares
+    // that flex row, .project-scroll's clientWidth ramps up over the same
+    // 0.4s — a couple of rAFs after the click is nowhere near long enough
+    // for it to settle. Re-measuring once that transition actually finishes
+    // (rather than guessing a delay) keeps the "o" ring's growth target
+    // correct instead of permanently caching whatever width it caught the
+    // panel at mid-animation. Subsequent project switches don't re-trigger
+    // this (already in sidebar-mode), which is why only the first open was
+    // affected.
+    const sidebarEl = document.querySelector('.sidebar');
+    if (sidebarEl) {
+      sidebarEl.addEventListener('transitionend', (e) => {
+        if (e.target !== sidebarEl || e.propertyName !== 'width') return;
+        measureScrollMeterSegments();
+        applyScrollMeterProgress(meterProgress);
+      });
+    }
+
+    let meterResizeTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(meterResizeTimer);
+      meterResizeTimer = setTimeout(() => {
+        measureScrollMeterSegments();
+        applyScrollMeterProgress(meterProgress);
+      }, 150);
+    });
 
     function resetScrollMeter() {
       clearTimeout(meterIdleTimer);
+      tweenMeterProgress(meterProgress, 0, 450);
       meterProgress = 0;
-      scrollMeterFill.classList.add('is-resetting');
-      scrollMeterFill.style.width = '0%';
-      setTimeout(() => scrollMeterFill.classList.remove('is-resetting'), 500);
     }
 
     function armMeterIdleReset() {
@@ -876,6 +1232,12 @@
       }, 500);
     }
 
+    scrollMeterGroup.addEventListener('click', () => {
+      tweenMeterProgress(meterProgress, 1, 300);
+      meterProgress = 1;
+      goToAdjacentProject();
+    });
+
     projectScroll.addEventListener('wheel', (e) => {
       if (isProjectTransitioning) { e.preventDefault(); return; }
       if (aboutBtn.classList.contains('active')) return;
@@ -889,9 +1251,9 @@
         const target = nextProjectRow();
         if (!target) return;
 
+        if (meterTweenRaf) { cancelAnimationFrame(meterTweenRaf); meterTweenRaf = null; }
         meterProgress = Math.min(1, meterProgress + Math.abs(e.deltaY) / SCROLL_METER_THRESHOLD);
-        scrollMeterFill.classList.remove('is-resetting');
-        scrollMeterFill.style.width = `${meterProgress * 100}%`;
+        applyScrollMeterProgress(meterProgress);
 
         armMeterIdleReset();
 
