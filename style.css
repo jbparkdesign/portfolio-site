@@ -1691,8 +1691,14 @@ body.coming-soon-body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  gap: 32px;
   text-align: center;
+}
+
+.coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(24px, 4vw, 48px);
 }
 
 .coming-soon-headline {
@@ -1706,10 +1712,10 @@ body.coming-soon-body {
 .coming-soon-icons {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: clamp(20px, 2.8vw, 36px);
 }
 
 .coming-soon-icon {
-  width: 24px;
-  height: 24px;
+  width: clamp(18px, 2.8vw, 36px);
+  height: clamp(18px, 2.8vw, 36px);
 }
