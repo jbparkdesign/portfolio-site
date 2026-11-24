@@ -3,33 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jeffrey Park — Product Designer</title>
+  <title>Jeffrey Park, Product Designer</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="stylesheet" href="style.css?v=150">
+  <link rel="stylesheet" href="style.css?v=393">
+  <script>
+    // Applied here (before body renders) rather than in the main script
+    // block so a saved light-mode preference doesn't flash dark first.
+    // Toggle is hidden for now (see .theme-toggle[hidden] in style.css),
+    // so this is disabled to avoid stranding anyone with a stale saved
+    // preference in light mode with no visible way back.
+    (function () {
+      try {
+        if (false && localStorage.getItem('theme') === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
   <div class="sidebar">
 
     <header>
-      <a href="/" class="logo" aria-label="Jeffrey Park">
-        <span class="j-group">
-          <span class="initial">J</span>
-          <span class="firstname-clip"><span class="firstname-text">effrey</span></span>
-        </span>
-        <span class="name-space"></span>
-        <span class="p-group">
-          <span class="initial">P</span>
-          <span class="lastname-clip"><span class="lastname-text">ark</span></span>
-        </span>
-      </a>
+      <div class="header-branding">
+        <a href="/" class="logo" aria-label="Jeffrey Park">
+          <span class="j-group">
+            <svg class="initial initial--j" width="5.76" height="13.19" viewBox="0 0 5.76031 13.1937" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M1.98701 13.1937L0.975792 11.0192C2.60374 10.2614 3.36145 9.20231 3.36145 7.68549V2.39955H0V0H5.76031V7.68549C5.76031 9.39816 5.10538 11.7435 1.98701 13.1937Z" fill="currentColor"/>
+            </svg>
+            <span class="firstname-clip"><span class="firstname-text">effrey</span></span>
+          </span>
+          <span class="name-space"></span>
+          <span class="p-group">
+            <svg class="initial initial--p" width="8.51" height="12.05" viewBox="0 0 8.50751 12.052" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M4.85052 5.11853H2.39818V2.39888H4.11107H4.85052C5.54484 2.39888 6.10932 3.00849 6.10932 3.75905C6.10932 4.50892 5.54484 5.11853 4.85052 5.11853ZM4.85052 0H4.11107H0.913725H0V12.052H2.39818V7.51671H4.85052C6.86683 7.51671 8.50751 5.8309 8.50751 3.75905C8.50751 1.6865 6.86683 0 4.85052 0Z" fill="currentColor"/>
+            </svg>
+            <span class="lastname-clip"><span class="lastname-text">ark</span></span>
+          </span>
+        </a>
+
+        <p class="header-positioning">
+          <span>focused on</span>
+          <span class="header-positioning-rotator" aria-live="off">
+            <span class="header-positioning-phrase">making tech useful</span>
+          </span>
+        </p>
+      </div>
 
       <nav>
-        <a href="#" class="nav-link about-btn" data-project="about">About</a>
-        <a href="https://www.linkedin.com/in/jeffreybpark/" target="_blank" rel="noopener" class="nav-link">
-          LinkedIn
-          <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <button type="button" class="theme-toggle" aria-label="Switch to light mode" aria-pressed="false" hidden>
+          <span class="theme-toggle-icons">
+            <svg class="icon-sun" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <circle cx="9" cy="9" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M9 1.5V3.25M9 14.75V16.5M16.5 9H14.75M3.25 9H1.5M14.13 3.87L12.9 5.1M5.1 12.9L3.87 14.13M14.13 14.13L12.9 12.9M5.1 5.1L3.87 3.87" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <svg class="icon-moon" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 2A7 7 0 1 0 9 16A5.5 5.5 0 1 1 9 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+        <a href="#" class="nav-link about-btn" data-project="about" aria-label="Info">
+          <span class="nav-label">Info</span>
+          <svg class="nav-icon nav-icon-about" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="8" r="1" fill="currentColor"/>
+            <path d="M12 11V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/jeffreybpark/" target="_blank" rel="noopener" class="nav-link" aria-label="LinkedIn">
+          <span class="nav-label">LinkedIn</span>
+          <svg class="nav-icon nav-icon-linkedin" width="18" height="18" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true">
+            <path d="M3.3 6.1h2.35v8.1H3.3V6.1Zm1.18-3.2a1.37 1.37 0 1 1-.02 2.74 1.37 1.37 0 0 1 .02-2.74ZM7.15 6.1H9.4v1.1h.03c.31-.59 1.08-1.21 2.22-1.21 2.38 0 2.82 1.57 2.82 3.62v4.59h-2.35v-4.07c0-.97-.02-2.22-1.35-2.22-1.35 0-1.56 1.05-1.56 2.15v4.14H6.86V6.1h.29Z"/>
+          </svg>
+          <svg class="nav-external" width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
@@ -125,17 +173,21 @@
       </div>
 
       <footer>
-        <span class="copyright"><span class="copyright-glyph">✌︎</span> ©2025</span>
+        <span class="copyright"><span class="copyright-glyph">✌︎</span> ©2026</span>
         <button class="nav-link email-btn" onclick="copyEmail()" aria-label="Copy email address">
           <span class="email-label-wrap"><span class="email-label">jbpark.design@gmail.com</span></span>
           <span class="email-icons">
+            <svg class="icon-email" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <rect x="1.8" y="3.4" width="14.4" height="11.2" rx="1.4" stroke="currentColor" stroke-width="1.5"/>
+              <path d="m2.5 4.5 6.5 5.1 6.5-5.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
             <svg class="icon-copy" width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
               <rect x="1" y="1" width="10.8" height="10.8" rx="1.6" stroke="currentColor" stroke-width="1.67"/>
               <path d="M5.60059 14.3006V14.8006C5.60059 15.6842 6.31693 16.4006 7.20059 16.4006H14.8006C15.6842 16.4006 16.4006 15.6842 16.4006 14.8006V7.20059C16.4006 6.31693 15.6842 5.60059 14.8006 5.60059H14.3006" stroke="currentColor" stroke-width="1.67"/>
             </svg>
-            <svg class="icon-thumb" width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <path d="M6.5 8.5L9 3.5C9.8 3.5 10.5 4.2 10.5 5V7.5H14C14.8 7.5 15.3 8.3 15.1 9.1L13.9 13.6C13.7 14.2 13.2 14.5 12.6 14.5H6.5V8.5Z" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M6.5 8.5H4C3.4 8.5 3 8.9 3 9.5V13.5C3 14.1 3.4 14.5 4 14.5H6.5V8.5Z" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg class="icon-thumb" width="15.5" height="15.5" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <circle class="icon-thumb-circle" cx="9" cy="9" r="8"/>
+              <path class="icon-thumb-check" d="M5 9.3L7.7 12L13 6.3" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
         </button>
@@ -146,8 +198,8 @@
 
   <div class="project-panel">
     <button class="close-btn" onclick="exitProject()" aria-label="Close project">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-        <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.67" stroke-linecap="round"/>
+      <svg width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
     </button>
 
@@ -166,10 +218,9 @@
       <!-- ── About ──────────────────────────────────────────── -->
       <div id="proj-about" class="proj-content" hidden>
         <section class="proj-hero proj-about-hero">
+          <h1 class="proj-headline proj-reveal proj-about-headline">I like simple interfaces, a bit of playfulness, and making complex technology useful.</h1>
           <div class="proj-about-columns">
             <div class="proj-about-content-col">
-              <h1 class="proj-section-sub proj-reveal">Product Designer at <a href="https://www.rivian.com" target="_blank" rel="noopener" class="proj-inline-link">Rivian</a>, drawn to simple interfaces, intelligent systems, and turning ambiguity into a clear direction.</h1>
-              <p class="proj-subtext proj-reveal">I joined Rivian before a single vehicle had shipped. Since then, I've led design across vehicle features, mobile app, charging network, and most recently <a href="#" data-project-link="rivian-assistant" class="proj-inline-link">Rivian Assistant (AI)</a>.</p>
               <div class="proj-about-divider proj-reveal"></div>
               <div class="proj-about-facts proj-reveal">
                 <div class="proj-about-fact">
@@ -177,22 +228,32 @@
                   <span class="proj-about-fact-value">San Francisco</span>
                 </div>
                 <div class="proj-about-fact">
+                  <span class="proj-about-fact-label">Currently</span>
+                  <div class="proj-about-fact-value proj-about-current">
+                    <span>@Rivian</span>
+                    <p class="proj-body">I joined before a single vehicle had shipped. Since then, I’ve built interaction models and design foundations across the vehicle, app, charging network, and in-house AI agent.</p>
+                  </div>
+                </div>
+                <div class="proj-about-fact">
                   <span class="proj-about-fact-label">Past life</span>
                   <span class="proj-about-fact-value">Wearable tech, eyewear design, and agency work</span>
                 </div>
                 <div class="proj-about-fact">
-                  <span class="proj-about-fact-label">Currently</span>
-                  <span class="proj-about-fact-value">Getting better with a camera &nbsp;<span class="proj-about-camera-trigger" data-default-emoji="📷" data-hover-emoji="📸">📷</span></span>
-                </div>
-                <div class="proj-about-fact">
                   <span class="proj-about-fact-label">Outside of work</span>
-                  <span class="proj-about-fact-value">Chasing down good coffee and pastries</span>
+                  <div class="proj-about-fact-value proj-about-outside">
+                    <span>Chasing down good coffee and pastries and getting better with a camera</span>
+                    <span class="proj-about-camera-trigger" data-default-emoji="📷" data-hover-emoji="📸">📷</span>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="proj-about-photos-col proj-reveal">
-              <img class="proj-about-photo proj-about-photo--1" src="assets/images/about/portrait-main.jpg" alt="Jeffrey Park">
-              <img class="proj-about-photo proj-about-photo--2" src="assets/images/about/portrait-5.jpg" alt="Jeffrey Park outdoors with a dog">
+              <div class="proj-about-photo-group">
+                <img class="proj-about-photo proj-about-photo--1" src="assets/images/about/portrait-main.jpg" alt="Jeffrey Park">
+                <div class="proj-about-photo proj-about-photo--2">
+                  <img class="proj-about-photo-crop-image" src="assets/images/about/portrait-5.jpg" alt="Jeffrey Park outdoors with a dog">
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -201,264 +262,94 @@
       <!-- ── Joyful Utilities ─────────────────────────────── -->
       <div id="proj-joyful-utilities" class="proj-content" hidden>
 
-        <!-- Hero -->
-        <section class="proj-hero">
-          <h1 class="proj-headline proj-reveal">Vehicle features designed for daily life inside a Rivian.</h1>
-          <p class="proj-subtext proj-reveal">Products shipped between 2022–2026 reflecting end-to-end design ownership across vehicle systems and apps.</p>
-        </section>
+        <!-- Hero — media + headline/meta together, sized to fit one
+             viewport so both stay above the fold. -->
+        <div class="proj-hero-block">
+          <div class="proj-hero-media-bleed proj-reveal">
+            <video autoplay loop muted playsinline>
+              <source src="assets/videos/joyful-utilities/hero.mp4" type="video/mp4">
+            </video>
+          </div>
 
-        <!-- Hero video -->
-        <div class="proj-hero-media proj-reveal">
-          <video autoplay loop muted playsinline>
-            <source src="assets/videos/joyful-utilities/hero.mp4" type="video/mp4">
-          </video>
+          <!-- Meta column (subtext + Role/Released) and the large headline,
+               top-aligned to the headline's capline in a split row. -->
+          <section class="proj-hero-split">
+            <div class="proj-hero-split-meta">
+          <p class="proj-subtext proj-reveal">I led end-to-end design for shipped features across Rivian vehicles and the app, expanding everyday utility, passenger comfort, and outdoor use.</p>
+              <div class="proj-hero-facts proj-hero-facts--stagger proj-reveal">
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Role</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                  <span class="proj-hero-fact-value"><span>Lead IC</span></span>
+                </div>
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Scope</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                    <span class="proj-hero-fact-value"><span>Vehicle / Mobile App</span></span>
+                </div>
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Released</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                  <span class="proj-hero-fact-value"><span>2022–2026</span></span>
+                </div>
+              </div>
+            </div>
+            <h1 class="proj-headline proj-reveal proj-hero-split-headline">Vehicle features designed for daily life with a Rivian.</h1>
+          </section>
         </div>
-
-        <div class="proj-divider proj-reveal"></div>
+        <div class="proj-section-spacer proj-section-spacer--hero"></div>
 
         <!-- Rear Display -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-section-header">
+        <section class="proj-section proj-section--col-inset proj-reveal">
+          <div class="proj-feature-media proj-feature-media--screen-bg proj-feature-media--rear-display">
+            <div class="proj-feature-media-bg proj-feature-media-bg--rear-display"></div>
+            <div class="proj-media-card">
+              <video class="proj-rear-display-video" autoplay loop muted playsinline>
+                <source src="assets/videos/joyful-utilities/rear-display.mp4" type="video/mp4">
+              </video>
+              <img class="proj-rear-display-placeholder" src="assets/images/joyful-utilities/rear-seat_before.png" alt="Rear seat controls before the redesign, limited to seat warmers and static climate indicators" hidden>
+            </div>
+            <div class="proj-compare-toggle proj-reveal" role="tablist" aria-label="Before and after comparison">
+              <div class="proj-compare-toggle-thumb" aria-hidden="true"></div>
+              <button type="button" class="proj-compare-toggle-btn" data-state="before" role="tab" aria-selected="false">Before</button>
+              <button type="button" class="proj-compare-toggle-btn is-active" data-state="after" role="tab" aria-selected="true">After</button>
+            </div>
+          </div>
+          <div class="proj-section-header proj-section-header--feature">
             <div class="proj-section-left">
-              <h2 class="proj-section-title">Rear Display</h2>
+              <h3 class="proj-section-sub">Rear Display</h3>
             </div>
             <div class="proj-section-right">
-              <h3 class="proj-section-sub">Meaningful control for rear-seat passengers.</h3>
-              <p class="proj-body">Passengers can control media, view trip details, and manage climate from the rear display.</p>
-              <p class="proj-body">The rear display was largely underutilized, limited to seat warmers and basic view-only climate indicators. Expanding its role added value for passengers while preserving the driver's sense of control.</p>
-              <div class="proj-meta">
-                <div class="proj-meta-val">
-                  <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle OS</span><span class="proj-dot">•</span><span>Shipped 2023</span>
-                </div>
-              </div>
+              <p class="proj-body">The rear display offered little beyond seat heat and static climate status. I shaped its screen composition, proportions, and interaction model to give passengers a clear way to move between media, trip details, and climate.</p>
             </div>
           </div>
-          <div class="proj-media-card">
-            <video autoplay loop muted playsinline>
-              <source src="assets/videos/joyful-utilities/rear-display.mp4" type="video/mp4">
-            </video>
-          </div>
         </section>
-
-        <div class="proj-divider proj-reveal"></div>
+        <div class="proj-section-spacer"></div>
 
         <!-- 01 Camping App -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-section-header">
-            <div class="proj-section-left">
-              <h2 class="proj-section-title">Camping App</h2>
-            </div>
-            <div class="proj-section-right">
-              <h3 class="proj-section-sub">Transform your vehicle into a campsite.</h3>
-              <p class="proj-body">An in-vehicle app that manages climate, lighting, battery usage, and power access for multi-day outdoor stays or something as simple as a backyard movie night.</p>
-              <p class="proj-body">Camping is one of the clearest expressions of what makes Rivian different. Elevating it from a hidden toggle to a dedicated experience strengthened brand recognition and helped owners trust the vehicle in non-traditional use cases.</p>
-              <div class="proj-meta">
-                <div class="proj-meta-val">
-                  <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle App</span><span class="proj-dot">•</span><span>Shipped 2023</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proj-media-card">
-            <video autoplay loop muted playsinline>
-              <source src="assets/videos/joyful-utilities/placeholder_camping-app.mp4" type="video/mp4">
-            </video>
-          </div>
-        </section>
-
-        <div class="proj-divider proj-reveal"></div>
-
-        <!-- 02 Climate Schedule -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-section-header">
-            <div class="proj-section-left">
-              <h2 class="proj-section-title">Climate Schedule</h2>
-            </div>
-            <div class="proj-section-right">
-              <h3 class="proj-section-sub">A vehicle that adapts to your schedule.</h3>
-              <p class="proj-body">Drivers can schedule cabin climate ahead of commutes or trips so the vehicle is ready before they get in.</p>
-              <p class="proj-body">Preconditioning improves comfort, efficiency, and battery health, but those benefits aren't obvious to most drivers. Designing around routine made the feature feel useful without requiring technical understanding.</p>
-              <div class="proj-meta">
-                <div class="proj-meta-val">
-                  <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle App</span><span class="proj-dot">•</span><span>Shipped 2023</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proj-media-card">
-            <img src="assets/images/joyful-utilities/placeholder_climate-schedule.png" alt="Climate Schedule interface">
-          </div>
-        </section>
-
-        <div class="proj-divider proj-reveal"></div>
-
-        <!-- 03 Biome Lighting -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-section-header">
-            <div class="proj-section-left">
-              <h2 class="proj-section-title">Biome Lighting</h2>
-            </div>
-            <div class="proj-section-right">
-              <h3 class="proj-section-sub">Personalize the cabin with ambient lighting.</h3>
-              <p class="proj-body">Drivers can choose from a set of interior lighting presets to match their mood or personal taste.</p>
-              <p class="proj-body">Ambient lighting can easily feel decorative or distracting. A restrained system keeps the interior cohesive and reinforces Rivian's design language.</p>
-              <div class="proj-meta">
-                <div class="proj-meta-val">
-                  <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle Feature</span><span class="proj-dot">•</span><span>Shipped 2024</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proj-media-card">
-            <video autoplay loop muted playsinline>
-              <source src="assets/videos/joyful-utilities/biome-lighting.mp4" type="video/mp4">
-            </video>
-          </div>
-        </section>
-
-        <div class="proj-divider proj-reveal"></div>
-
-        <!-- 04 Pet Comfort -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-section-header">
-            <div class="proj-section-left">
-              <h2 class="proj-section-title">Pet Comfort</h2>
-            </div>
-            <div class="proj-section-right">
-              <h3 class="proj-section-sub">Peace of mind for pets and people.</h3>
-              <p class="proj-body">A safety feature that maintains safe cabin conditions when the owner steps away.</p>
-              <p class="proj-body">The challenge was communicating safety and trust to owners while also reassuring passersby. A small moment of delight helps prevent confusion or concern when someone looks inside.</p>
-              <div class="proj-meta">
-                <div class="proj-meta-val">
-                  <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle Feature</span><span class="proj-dot">•</span><span>Shipped 2023</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proj-media-card">
-            <video autoplay loop muted playsinline>
-              <source src="assets/videos/joyful-utilities/pet-comfort.mp4" type="video/mp4">
-            </video>
-          </div>
-        </section>
-
-        <!-- Closing (white bg) -->
-        <div class="proj-divider proj-reveal" hidden></div>
-        <section class="proj-closing proj-reveal" hidden>
-          <div class="proj-closing-statement">
-            <h2 class="proj-closing-headline">Small design decisions in each of these features shape how customers experience Rivian.</h2>
-            <p class="proj-body">Rivian leads the industry in customer satisfaction according to Consumer Reports, reflecting how these features connect with real drivers.</p>
-          </div>
-        </section>
-
-        <footer class="proj-footer proj-reveal">
-          <p class="proj-thanks">Special thanks to the teams who made it possible<br>Vehicle SW (XMM, BCG, Lighting) · Vehicle Studio (3D, Content, Illustration) · Mobile SW</p>
-          <p class="proj-cta">Want to see more? Reach out via <a href="mailto:jbpark.design@gmail.com">email</a> or <a href="https://www.linkedin.com/in/jeffreybpark/" target="_blank" rel="noopener">linkedin</a></p>
-        </footer>
-
-      </div><!-- /proj-joyful-utilities -->
-
-      <!-- ── Rivian Assistant ────────────────────────────────── -->
-      <div id="proj-rivian-assistant" class="proj-content" hidden>
-
-        <!-- 1. Hero -->
-        <section class="proj-hero">
-          <h1 class="proj-headline proj-reveal">An assistant designed to stay out of the way.</h1>
-          <p class="proj-subtext proj-reveal">Rivian Assistant brings together your vehicle, the world around you, and your own apps and habits, combining all of it to understand your intent, and to do things that simply weren't possible while driving.</p>
-        </section>
-
-        <!-- 2. Hero image: activation screen + map UI -->
-        <div class="proj-hero-media proj-reveal">
-          <video autoplay loop muted playsinline>
-            <source src="assets/videos/rivian-assistant/RA-Sidekick_R1-DD.mp4" type="video/mp4">
-          </video>
-        </div>
-        <!-- Not placed: assets/videos/rivian-assistant/VA_DD_L_diagram.mp4 (press-to-talk
-             steering wheel diagram, previously captioned "Press and start speaking. / Ask
-             naturally, Hands free.") — didn't map to a section in the new structure. Left
-             here in case it belongs somewhere. -->
-
-        <div class="proj-divider proj-reveal"></div>
-
-        <!-- 3. The starting point -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-section-block">
-            <span class="proj-section-label">The starting point</span>
-            <div class="proj-section-copy">
-              <p class="proj-body"><!-- PLACEHOLDER: paragraph 1 — the starting point --></p>
-              <p class="proj-body"><!-- PLACEHOLDER: paragraph 2 --></p>
-            </div>
-          </div>
-        </section>
-
-        <div class="proj-divider proj-reveal"></div>
-
-        <!-- 4. The principle -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-section-block">
-            <span class="proj-section-label">The principle</span>
-            <div class="proj-section-copy">
-              <div class="proj-callout">
-                <p class="proj-callout-headline">Show UI only when there's an action item.</p>
-              </div>
-              <p class="proj-body">An address the driver can navigate to. A contact they can call or message. An owner's guide entry they can open. These warrant a screen. A list of nearby cafes doesn't — Maps handles that without adding another layer.</p>
-              <p class="proj-body">Transcripts, muting controls, audio chimes on every state: all removed. The result is an assistant that feels confident rather than anxious. Less on screen, more trust in the system.</p>
-            </div>
-          </div>
-        </section>
-
-        <div class="proj-divider proj-reveal"></div>
-
-        <!-- 5. The wave -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-voice-card">
-            <div class="proj-voice-tags">
-              <span class="proj-voice-tag proj-voice-tag--listening">Listening</span><span class="proj-voice-tag-sep">/</span><span class="proj-voice-tag proj-voice-tag--thinking">Thinking</span><span class="proj-voice-tag-sep">/</span><span class="proj-voice-tag proj-voice-tag--speaking">Speaking</span><span class="proj-voice-tag-sep">/</span><span class="proj-voice-tag proj-voice-tag--error">Error</span>
-            </div>
-            <div class="proj-voice-wave">
+        <section class="proj-section proj-section--col-inset proj-reveal">
+          <div class="proj-feature-media proj-feature-media--screen-bg">
+            <div class="proj-feature-media-bg proj-feature-media-bg--camping"></div>
+            <div class="proj-media-card">
               <video autoplay loop muted playsinline>
-                <source src="assets/videos/rivian-assistant/wave_range.mp4" type="video/mp4">
+                <source src="assets/videos/joyful-utilities/placeholder_camping-app.mp4" type="video/mp4">
               </video>
             </div>
           </div>
-          <div class="proj-section-block">
-            <span class="proj-section-label">The wave</span>
-            <h2 class="proj-section-title">Feedback you can read without looking.</h2>
-            <div class="proj-section-copy">
-              <p class="proj-body">Expressive wave provides visual feedback through a uniquely Rivian personality.</p>
-              <p class="proj-body"><!-- PLACEHOLDER: second paragraph --></p>
+          <div class="proj-section-header proj-section-header--feature">
+            <div class="proj-section-left">
+              <h3 class="proj-section-sub">Camping App</h3>
             </div>
-          </div>
-        </section>
-
-        <div class="proj-divider proj-reveal"></div>
-
-        <!-- 6. Deeply integrated -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-media-card">
-            <img src="assets/images/rivian-assistant/integrated-placeholder.png" alt="Rivian Assistant suggesting nearby coffee spots on the driver display">
-          </div>
-          <div class="proj-section-block">
-            <span class="proj-section-label">Deeply integrated</span>
-            <h2 class="proj-section-title">The assistant knows when to offer, not just when to respond.</h2>
-            <div class="proj-section-copy">
-              <p class="proj-body"><!-- PLACEHOLDER: paragraph 1 --></p>
-              <p class="proj-body"><!-- PLACEHOLDER: paragraph 2 --></p>
-            </div>
-          </div>
-        </section>
-
-        <div class="proj-divider proj-reveal"></div>
-
-        <!-- 7. AI & Autonomy Day -->
-        <section class="proj-section proj-reveal">
-          <img class="proj-photo" src="assets/images/rivian-assistant/hero.png" alt="Rivian's Autonomy &amp; AI Day event on stage">
-          <div class="proj-section-block">
-            <span class="proj-section-label">AI &amp; Autonomy Day</span>
-            <div class="proj-section-copy">
-              <p class="proj-body">Passengers can control media, view trip details, and manage climate from the rear display.</p>
-              <a href="https://stories.rivian.com/rivian-autonomy-ai-day" class="proj-ai-day-cta" target="_blank" rel="noopener">
-                <span>See the highlights from Rivian Autonomy &amp; AI day</span>
+            <div class="proj-section-right">
+              <p class="proj-body">Camping controls were buried behind a settings toggle, making the vehicle's outdoor capability easy to miss. I brought climate, lighting, battery use, and power access into a dedicated in-vehicle app for everything from multi-day stays to backyard movie nights.</p>
+              <a href="https://rivian.com/stories/software-update-camping" class="proj-ai-day-cta proj-reveal" target="_blank" rel="noopener">
+                <span>Initial release</span>
                 <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
                   <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -466,243 +357,723 @@
             </div>
           </div>
         </section>
-        <!-- Not placed: assets/videos/rivian-assistant/autonomy-&-ai-day-highlights.mp4 —
-             the spec calls for a still event photo here (now assets/images/rivian-assistant/hero.png,
-             previously unused despite its filename). Highlights video left in the asset
-             folder in case it belongs elsewhere. -->
+        <div class="proj-section-spacer"></div>
 
-        <div class="proj-divider proj-reveal"></div>
+        <!-- 02 Climate Schedule -->
+        <section class="proj-section proj-section--col-inset proj-reveal">
+          <div class="proj-feature-media proj-feature-media--screen-bg">
+            <div class="proj-feature-media-bg proj-feature-media-bg--climate"></div>
+            <div class="proj-media-card">
+              <img src="assets/images/joyful-utilities/placeholder_climate-schedule.png" alt="Climate Schedule interface">
+            </div>
+          </div>
+          <div class="proj-section-header proj-section-header--feature">
+            <div class="proj-section-left">
+              <h3 class="proj-section-sub">Climate Schedule</h3>
+            </div>
+            <div class="proj-section-right">
+              <p class="proj-body">Preconditioning supports comfort and battery health, but its benefits are easy to miss. I designed the schedule around familiar routines, so drivers can set cabin climate before a trip without needing to understand the technology.</p>
+            </div>
+          </div>
+        </section>
+        <div class="proj-section-spacer"></div>
 
-        <!-- 8. Closing -->
-        <section class="proj-closing proj-reveal">
-          <div class="proj-closing-statement">
-            <h2 class="proj-closing-headline">Designing Rivian Assistant was mostly an exercise in restraint.</h2>
-            <p class="proj-body"><!-- PLACEHOLDER: closing body copy --></p>
+        <!-- 03 Biome Lighting -->
+        <section class="proj-section proj-section--col-inset proj-reveal">
+          <div class="proj-feature-media">
+            <div class="proj-media-plain">
+              <video autoplay loop muted playsinline>
+                <source src="assets/videos/joyful-utilities/Biome-cards_loop.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="proj-section-header proj-section-header--feature">
+            <div class="proj-section-left">
+              <h3 class="proj-section-sub">Biome Lighting</h3>
+            </div>
+            <div class="proj-section-right">
+              <p class="proj-body">Ambient lighting can feel decorative or distracting in a carefully designed cabin. I created restrained presets that let owners personalize their space while keeping the interior cohesive with Rivian's design language.</p>
+            </div>
+          </div>
+        </section>
+        <div class="proj-section-spacer"></div>
+
+        <!-- 04 Pet Comfort -->
+        <section class="proj-section proj-section--col-inset proj-reveal">
+          <div class="proj-feature-media proj-feature-media--screen-bg">
+            <div class="proj-feature-media-bg proj-feature-media-bg--pet-comfort"></div>
+            <div class="proj-media-card">
+              <video autoplay loop muted playsinline>
+                <source src="assets/videos/joyful-utilities/pet-comfort.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="proj-section-header proj-section-header--feature">
+            <div class="proj-section-left">
+              <h3 class="proj-section-sub">Pet Comfort</h3>
+            </div>
+            <div class="proj-section-right">
+              <p class="proj-body">Leaving a pet in a vehicle can raise safety concerns for owners and passersby. I paired cabin temperature control with a clear, reassuring display to help others see the pet is safe.</p>
+              <a href="https://rivian.com/stories/software-update-pet-comfort" class="proj-ai-day-cta proj-reveal" target="_blank" rel="noopener">
+                <span>Initial release</span>
+                <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
           </div>
         </section>
 
+        <div class="proj-section-spacer proj-section-spacer--wide"></div>
         <div class="proj-divider proj-reveal"></div>
 
-        <!-- 9. In the wild — repurposed from the "Built for real moments" scenario
-             carousel (scroll-jack carousel, 6 clips, growing-pill progress meter). -->
-        <section class="proj-section proj-reveal">
-          <span class="proj-section-label">In the wild</span>
+        <!-- 05 Out in the world — traditional arrow-paged video carousel. -->
+        <section class="proj-section proj-scenario-section proj-scenario-section--after-divider proj-reveal">
+          <div class="proj-scenario-header">
+            <h2 class="proj-scenario-section-title">Out in the world</h2>
+            <div class="proj-scenario-arrows">
+              <button type="button" class="proj-scenario-arrow proj-scenario-arrow--prev" aria-label="Previous">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 3L5 9L11 15" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button type="button" class="proj-scenario-arrow proj-scenario-arrow--next" aria-label="Next">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 3L13 9L7 15" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
 
-          <div class="proj-scenario-scrollzone" id="scenarioScrollzone">
-            <div class="proj-scenario-sticky">
-              <div class="proj-scenario-layout">
-                <div class="proj-scenario-carousel-wrap">
-                  <div class="proj-scenario-carousel" id="scenarioCarousel">
-                    <div class="proj-scenario-track" id="scenarioTrack">
-                      <div class="proj-scenario-slide is-active" data-index="0">
-                        <video loop muted playsinline>
-                          <source src="assets/videos/rivian-assistant/04.mp4" type="video/mp4">
-                        </video>
-                      </div>
-                      <div class="proj-scenario-slide" data-index="1">
-                        <video loop muted playsinline>
-                          <source src="assets/videos/rivian-assistant/01.mp4" type="video/mp4">
-                        </video>
-                      </div>
-                      <div class="proj-scenario-slide" data-index="2">
-                        <video loop muted playsinline>
-                          <source src="assets/videos/rivian-assistant/02.mp4" type="video/mp4">
-                        </video>
-                      </div>
-                      <div class="proj-scenario-slide" data-index="3">
-                        <video loop muted playsinline>
-                          <source src="assets/videos/rivian-assistant/03.mp4" type="video/mp4">
-                        </video>
-                      </div>
-                      <div class="proj-scenario-slide" data-index="4">
-                        <video loop muted playsinline>
-                          <source src="assets/videos/rivian-assistant/05.mp4" type="video/mp4">
-                        </video>
-                      </div>
-                      <div class="proj-scenario-slide" data-index="5">
-                        <video loop muted playsinline>
-                          <source src="assets/videos/rivian-assistant/06.mp4" type="video/mp4">
-                        </video>
-                      </div>
+          <div class="proj-scenario-carousel">
+            <div class="proj-scenario-track">
+
+                <div class="proj-scenario-card" data-index="0">
+                  <div class="proj-scenario-media">
+                    <video loop muted playsinline autoplay>
+                      <source src="assets/videos/joyful-utilities/camping.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="proj-scenario-caption">
+                    <p class="proj-scenario-card-desc proj-body">Camping App</p>
+                    <div class="proj-scenario-controls">
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-rewind" aria-label="Restart">
+                        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M14.5 9A5.5 5.5 0 1 1 12.9 5.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 3.5V6.5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-mute" aria-label="Unmute">
+                        <span class="proj-scenario-mute-icons">
+                          <svg class="icon-muted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5L15.5 11.5M15.5 6.5L12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                          <svg class="icon-unmuted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5C13 7.5 13 10.5 12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </span>
+                      </button>
                     </div>
                   </div>
-
-                  <button type="button" class="proj-scenario-unmute" id="scenarioUnmute">Unmute</button>
                 </div>
 
-                <div class="proj-scenario-copy">
-                  <h3 class="proj-scenario-headline">Stay in touch, hands-free</h3>
-                  <p class="proj-scenario-desc proj-body">Send a message and share your ETA without ever reaching for your phone.</p>
-                  <div class="proj-scenario-icons">
-                    <span class="proj-scenario-icon is-active" data-index="0" role="button" tabindex="0" aria-label="Stay in touch, hands-free">
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 4.5C3 3.67 3.67 3 4.5 3H13.5C14.33 3 15 3.67 15 4.5V10.5C15 11.33 14.33 12 13.5 12H7L4 14.5V12H4.5C3.67 12 3 11.33 3 10.5V4.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                    </span>
-                    <span class="proj-scenario-icon" data-index="1" role="button" tabindex="0" aria-label="Ask about your surroundings">
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M9 8V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="5.5" r="0.9" fill="currentColor"/></svg>
-                    </span>
-                    <span class="proj-scenario-icon" data-index="2" role="button" tabindex="0" aria-label="Discover the detour">
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L10.5 7.5L16 9L10.5 10.5L9 16L7.5 10.5L2 9L7.5 7.5L9 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-                    </span>
-                    <span class="proj-scenario-icon" data-index="3" role="button" tabindex="0" aria-label="Handles it before you ask">
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 16C9 16 14 11.5 14 7.5C14 4.46 11.76 2 9 2C6.24 2 4 4.46 4 7.5C4 11.5 9 16 9 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="9" cy="7.5" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
-                    </span>
-                    <span class="proj-scenario-icon" data-index="4" role="button" tabindex="0" aria-label="An extra set of eyes">
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="5.5" width="14" height="9.5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M6 5.5L7.2 3.5H10.8L12 5.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="9" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
-                    </span>
-                    <span class="proj-scenario-icon" data-index="5" role="button" tabindex="0" aria-label="Knows the vehicle inside and out">
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 13C2 8 5 3 9 3C13 3 16 8 15 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 9L11.5 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="1" fill="currentColor"/></svg>
-                    </span>
+                <div class="proj-scenario-card" data-index="1">
+                  <div class="proj-scenario-media">
+                    <video loop muted playsinline autoplay>
+                      <source src="assets/videos/joyful-utilities/pet-mode.mp4" type="video/mp4">
+                    </video>
                   </div>
+                  <div class="proj-scenario-caption">
+                    <p class="proj-scenario-card-desc proj-body">Pet Comfort</p>
+                    <div class="proj-scenario-controls">
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-rewind" aria-label="Restart">
+                        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M14.5 9A5.5 5.5 0 1 1 12.9 5.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 3.5V6.5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-mute" aria-label="Unmute">
+                        <span class="proj-scenario-mute-icons">
+                          <svg class="icon-muted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5L15.5 11.5M15.5 6.5L12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                          <svg class="icon-unmuted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5C13 7.5 13 10.5 12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="proj-scenario-card" data-index="2">
+                  <div class="proj-scenario-media">
+                    <video loop muted playsinline autoplay>
+                      <source src="assets/videos/joyful-utilities/Climate-schedule.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="proj-scenario-caption">
+                    <p class="proj-scenario-card-desc proj-body">Climate Schedule</p>
+                    <div class="proj-scenario-controls">
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-rewind" aria-label="Restart">
+                        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M14.5 9A5.5 5.5 0 1 1 12.9 5.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 3.5V6.5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-mute" aria-label="Unmute">
+                        <span class="proj-scenario-mute-icons">
+                          <svg class="icon-muted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5L15.5 11.5M15.5 6.5L12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                          <svg class="icon-unmuted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5C13 7.5 13 10.5 12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="proj-scenario-card" data-index="3">
+                  <div class="proj-scenario-media">
+                    <video loop muted playsinline autoplay>
+                      <source src="assets/videos/joyful-utilities/Camp-mode_intro.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="proj-scenario-caption">
+                    <p class="proj-scenario-card-desc proj-body">Camping App</p>
+                    <div class="proj-scenario-controls">
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-rewind" aria-label="Restart">
+                        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M14.5 9A5.5 5.5 0 1 1 12.9 5.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 3.5V6.5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-mute" aria-label="Unmute">
+                        <span class="proj-scenario-mute-icons">
+                          <svg class="icon-muted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5L15.5 11.5M15.5 6.5L12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                          <svg class="icon-unmuted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5C13 7.5 13 10.5 12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="proj-scenario-card" data-index="4">
+                  <div class="proj-scenario-media">
+                    <video loop muted playsinline autoplay>
+                      <source src="assets/videos/joyful-utilities/accent-lighting-post.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="proj-scenario-caption">
+                    <p class="proj-scenario-card-desc proj-body">Biome Lighting</p>
+                    <div class="proj-scenario-controls">
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-rewind" aria-label="Restart">
+                        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M14.5 9A5.5 5.5 0 1 1 12.9 5.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 3.5V6.5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-mute" aria-label="Unmute">
+                        <span class="proj-scenario-mute-icons">
+                          <svg class="icon-muted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5L15.5 11.5M15.5 6.5L12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                          <svg class="icon-unmuted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5C13 7.5 13 10.5 12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="proj-scenario-card" data-index="5">
+                  <div class="proj-scenario-media">
+                    <video loop muted playsinline autoplay>
+                      <source src="assets/videos/joyful-utilities/rear-display-post.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="proj-scenario-caption">
+                    <p class="proj-scenario-card-desc proj-body">Rear Display</p>
+                    <div class="proj-scenario-controls">
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-rewind" aria-label="Restart">
+                        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M14.5 9A5.5 5.5 0 1 1 12.9 5.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 3.5V6.5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-mute" aria-label="Unmute">
+                        <span class="proj-scenario-mute-icons">
+                          <svg class="icon-muted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5L15.5 11.5M15.5 6.5L12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                          <svg class="icon-unmuted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5C13 7.5 13 10.5 12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </section>
+        <div class="proj-section-spacer proj-section-spacer--end"></div>
+
+      </div><!-- /proj-joyful-utilities -->
+
+      <!-- ── Rivian Assistant ────────────────────────────────── -->
+      <div id="proj-rivian-assistant" class="proj-content" hidden>
+
+        <!-- 1. Hero — media + headline/meta together, full-bleed video up
+             top with a split headline row below (same pattern as Joyful
+             Utilities' hero). -->
+        <div class="proj-hero-block">
+          <div class="proj-hero-media-bleed proj-reveal">
+            <video autoplay loop muted playsinline>
+              <source src="assets/videos/rivian-assistant/Rivian-Assistant_hero_AI-Day.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <section class="proj-hero-split">
+            <h1 class="proj-headline proj-reveal proj-hero-split-headline">Conversational AI built for the road.</h1>
+            <div class="proj-hero-split-meta">
+              <div class="proj-hero-split-intro">
+                <p class="proj-subtext proj-reveal">The Rivian Assistant debuted at Rivian's first Autonomy and AI Day.</p>
+                <p class="proj-subtext proj-reveal">I delivered the foundational design system that orchestrates UI, audio, and visual identity.</p>
+                <a href="https://stories.rivian.com/rivian-autonomy-ai-day" class="proj-ai-day-cta proj-reveal" target="_blank" rel="noopener">
+                  <span>AI Day Highlights</span>
+                  <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="proj-hero-facts proj-hero-facts--stagger proj-reveal">
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Role</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                  <span class="proj-hero-fact-value"><span>Lead IC</span></span>
+                </div>
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Scope</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                    <span class="proj-hero-fact-value"><span>Vehicle / Mobile App / Audio</span></span>
+                </div>
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Released</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                  <span class="proj-hero-fact-value"><span>2026</span></span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- Not placed: assets/videos/rivian-assistant/VA_DD_L_diagram.mp4 (press-to-talk
+             steering wheel diagram, previously captioned "Press and start speaking. / Ask
+             naturally, Hands free.") — didn't map to a section in the new structure. Left
+             here in case it belongs somewhere. -->
+        <div class="proj-section-spacer proj-section-spacer--hero"></div>
+
+        <!-- Deeply integrated — media and foundational design system copy. -->
+        <section class="proj-section proj-section--col-inset proj-reveal">
+          <div class="proj-feature-media">
+            <div class="proj-media-plain">
+              <video autoplay loop muted playsinline>
+                <source src="assets/videos/rivian-assistant/Deeply-integrated_video.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="proj-section-header proj-section-header--feature">
+            <div class="proj-section-left">
+              <h3 class="proj-section-sub">Deeply integrated</h3>
+            </div>
+            <div class="proj-section-right">
+              <p class="proj-body">Rivian Assistant brings together your vehicle, your apps and habits, and the world around you, allowing you to do things that simply weren't possible while driving.</p>
+            </div>
+          </div>
+        </section>
+        <div class="proj-section-spacer"></div>
+
+        <!-- Connected apps paired with an in-vehicle messaging example. -->
+        <section class="proj-section proj-section--col-inset proj-scenario-section proj-assistant-connected proj-reveal">
+          <div class="proj-scenario-track">
+                <div class="proj-scenario-card" data-index="1">
+                  <div class="proj-scenario-media">
+                    <video loop muted playsinline autoplay>
+                      <source src="assets/videos/rivian-assistant/04.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="proj-assistant-caption-row">
+                    <p class="proj-body">Out in the world · <span class="proj-assistant-duration">24s</span></p>
+                    <button type="button" class="proj-assistant-play" aria-label="Play video with sound, 24 seconds">
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><path d="M5 3L15 9L5 15V3Z"/></svg>
+                    </button>
+                  </div>
+                  <div class="proj-scenario-caption" hidden>
+                    <div class="proj-scenario-controls">
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-rewind" aria-label="Restart">
+                        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M14.5 9A5.5 5.5 0 1 1 12.9 5.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 3.5V6.5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <button type="button" class="proj-scenario-ctrl proj-scenario-mute" aria-label="Unmute">
+                        <span class="proj-scenario-mute-icons">
+                          <svg class="icon-muted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5L15.5 11.5M15.5 6.5L12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                          <svg class="icon-unmuted" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6.5H5.5L9 3.5V14.5L5.5 11.5H3V6.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 6.5C13 7.5 13 10.5 12 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+            <div class="proj-assistant-calendar">
+              <div class="proj-feature-media proj-feature-media--screen-bg">
+                <div class="proj-feature-media-bg proj-feature-media-bg--calendar"></div>
+                <div class="proj-media-card">
+                  <video autoplay loop muted playsinline aria-label="Rivian Assistant calendar integration">
+                    <source src="assets/videos/rivian-assistant/Google-Calendar_Animation.mp4" type="video/mp4">
+                  </video>
                 </div>
               </div>
             </div>
           </div>
         </section>
+        <div class="proj-section-spacer proj-section-spacer--end"></div>
 
       </div><!-- /proj-rivian-assistant -->
 
       <!-- ── Security & Access ───────────────────────────────── -->
       <div id="proj-security-access" class="proj-content" hidden>
-        <section class="proj-hero">
-          <h1 class="proj-headline proj-reveal">Add a layer of security to protect personal information and prevent vehicle theft.</h1>
-          <p class="proj-subtext proj-reveal">A release that pushes the approach to vehicle security.</p>
-          <div class="proj-meta proj-reveal">
-            <div class="proj-meta-val">
-              <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle Feature + Mobile</span><span class="proj-dot">•</span><span>Shipped 2025–2026</span>
+        <!-- Hero — media + headline/meta together, same pattern as Rivian
+             Assistant / Joyful Utilities. -->
+        <div class="proj-hero-block">
+          <div class="proj-hero-media-bleed proj-reveal">
+            <img src="assets/images/security-access/MFD_Still.png?v=1794179301" alt="Multi-Factor Drive interface on vehicle display">
+          </div>
+
+          <section class="proj-hero-split">
+            <h1 class="proj-headline proj-reveal proj-hero-split-headline">Protect personal info and prevent vehicle theft.</h1>
+            <div class="proj-hero-split-meta">
+              <div class="proj-hero-split-intro">
+                <p class="proj-subtext proj-reveal">Relay theft exposed a gap that vehicle PINs alone could not close. I led security features across the vehicle and mobile app, establishing an authentication foundation for later releases.</p>
+              </div>
+              <div class="proj-hero-facts proj-hero-facts--stagger proj-reveal">
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Role</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                  <span class="proj-hero-fact-value"><span>Lead IC</span></span>
+                </div>
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Scope</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                    <span class="proj-hero-fact-value"><span>Vehicle / Mobile App</span></span>
+                </div>
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Released</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                  <span class="proj-hero-fact-value"><span>2024–2026</span></span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="proj-section-spacer proj-section-spacer--hero"></div>
+
+        <!-- Multi-Factor Drive -->
+        <section class="proj-section proj-section--col-inset proj-reveal">
+          <div class="proj-feature-media">
+            <div class="proj-media-plain">
+              <video autoplay loop muted playsinline>
+                <source src="assets/videos/security-access/MFD_Motion.mp4?v=1794178983" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="proj-section-header proj-section-header--feature">
+            <div class="proj-section-left">
+              <h3 class="proj-section-sub">Multi-Factor Drive</h3>
+            </div>
+            <div class="proj-section-right">
+              <p class="proj-body">A vehicle PIN alone can't stop relay theft. I designed mobile app authentication as an added check for vehicle access, helping protect against this vulnerability.</p>
             </div>
           </div>
         </section>
+        <div class="proj-section-spacer"></div>
 
-        <!-- Hero image -->
-        <div class="proj-hero-media proj-reveal">
-          <img src="assets/images/security-access/hero.png" alt="Security &amp; Access">
-        </div>
+        <!-- Profile Lock -->
+        <section class="proj-section proj-section--col-inset proj-reveal">
+          <div class="proj-feature-media proj-feature-media--screen-bg">
+            <div class="proj-feature-media-bg proj-feature-media-bg--profile-lock"></div>
+            <div class="proj-media-card">
+              <video autoplay loop muted playsinline>
+                <source src="assets/videos/security-access/Profile-Lock_Motion.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="proj-section-header proj-section-header--feature">
+            <div class="proj-section-left">
+              <h3 class="proj-section-sub">Profile Lock</h3>
+            </div>
+            <div class="proj-section-right">
+              <p class="proj-body">Personal profiles hold settings owners may want to keep private. I extended authentication to profile access, giving owners control over who can use their settings.</p>
+            </div>
+          </div>
+        </section>
+        <div class="proj-section-spacer proj-section-spacer--end"></div>
 
       </div><!-- /proj-security-access -->
 
       <!-- ── Energy & Charging ───────────────────────────────── -->
       <div id="proj-energy-charging" class="proj-content" hidden>
-        <section class="proj-hero">
-          <h1 class="proj-headline proj-reveal">End to end experiences from chargers to scheduling to help save on utility bills</h1>
-          <p class="proj-subtext proj-reveal">Spanning DC fast charging, home energy management, and smart scheduling across vehicle and mobile.</p>
-          <div class="proj-meta proj-reveal">
-            <div class="proj-meta-val">
-              <span>Lead Product Designer</span><span class="proj-dot">•</span><span>Vehicle Feature + Mobile</span><span class="proj-dot">•</span><span>Shipped 2021–2026</span>
+        <!-- Hero — media + headline/meta together, same pattern as Rivian
+             Assistant / Joyful Utilities. -->
+        <div class="proj-hero-block">
+          <div class="proj-hero-media-bleed proj-reveal">
+            <video autoplay loop muted playsinline>
+              <source src="assets/videos/energy/energy-loop.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <section class="proj-hero-split">
+            <h1 class="proj-headline proj-reveal proj-hero-split-headline">A charging ecosystem, on the road and at home.</h1>
+            <div class="proj-hero-split-meta">
+              <div class="proj-hero-split-intro">
+                <p class="proj-subtext proj-reveal">I designed and delivered Rivian Adventure Network's end-to-end charging experience from its first sites.</p>
+                <p class="proj-subtext proj-reveal">The network has since passed one million charging sessions, and that count continues to grow. I also led design for shipped charging experiences across the vehicle and home.</p>
+                <a href="https://stories.rivian.com/ran-charging-infastructure-scaling-r2-rivian" class="proj-ai-day-cta proj-reveal" target="_blank" rel="noopener">
+                  <span>Rivian Adventure Network</span>
+                  <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="proj-hero-facts proj-hero-facts--stagger proj-reveal">
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Role</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                  <span class="proj-hero-fact-value"><span>Lead IC</span></span>
+                </div>
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Scope</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                    <span class="proj-hero-fact-value"><span>Charging Network / Vehicle / Mobile App</span></span>
+                </div>
+                <div class="proj-hero-fact">
+                  <span class="proj-hero-fact-label-wrap">
+                    <span class="proj-hero-fact-label">Released</span>
+                    <span class="proj-hero-fact-divider"></span>
+                  </span>
+                  <span class="proj-hero-fact-value"><span>2024–2025</span></span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="proj-section-spacer proj-section-spacer--hero"></div>
+
+        <!-- The charging experience -->
+        <section class="proj-section proj-section--col-inset proj-reveal">
+          <div class="proj-feature-media">
+            <div class="proj-media-plain">
+              <video autoplay loop muted playsinline>
+                <source src="assets/videos/energy/Splash-Composite.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="proj-section-header proj-section-header--feature">
+            <div class="proj-section-left">
+              <h3 class="proj-section-sub">The charging experience</h3>
+            </div>
+            <div class="proj-section-right">
+              <p class="proj-body">For many drivers, a Rivian Adventure Network charger is their first interaction with the brand. I adapted the vehicle's design language into a kiosk interface that reads clearly in daylight, at a glance.</p>
             </div>
           </div>
         </section>
+        <div class="proj-section-spacer"></div>
 
-        <!-- Hero video -->
-        <div class="proj-hero-media proj-reveal">
-          <video autoplay loop muted playsinline>
-            <source src="assets/videos/energy/energy-loop.mp4" type="video/mp4">
-          </video>
-          <a href="https://stories.rivian.com/ran-charging-infastructure-scaling-r2-rivian" class="proj-ai-day-cta" target="_blank" rel="noopener">
-            <span>Read about scaling Rivian's charging infrastructure</span>
-            <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
+        <!-- Controls and content: photo and copy left, charger screen right. -->
+        <section class="proj-section proj-reveal">
+          <div class="proj-energy-controls-layout">
+            <div class="proj-energy-controls-content">
+              <div class="proj-energy-controls-photo">
+                <img src="assets/images/energy-charging/RAN_bg.jpg" alt="Rivian Adventure Network charger at a charging site">
+              </div>
+              <div class="proj-mobile-static-copy">
+                <p class="proj-body">I carried Rivian's visual identity into a more utilitarian charging interface, designing task-focused screens around two physical buttons for clear decisions and fewer accidental touches.</p>
+              </div>
+            </div>
+            <div class="proj-energy-controls-stage">
+              <div class="proj-energy-controls-screen">
+                <video autoplay loop muted playsinline>
+                  <source src="assets/videos/energy/RAN_Controls.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="proj-section-spacer"></div>
+
+        <!-- Off-peak charging at home: phone beside the charging photo and copy. -->
+        <section class="proj-section proj-reveal">
+          <div class="proj-energy-home-layout">
+            <div class="proj-energy-phone-stage">
+              <div class="proj-device-frame">
+                <video autoplay loop muted playsinline>
+                  <source src="assets/videos/energy/Home-Energy_Motion.mp4" type="video/mp4">
+                </video>
+                <svg class="proj-device-frame-overlay" viewBox="0 0 418 851" overflow="visible" aria-hidden="true">
+                  <g fill="#000000">
+                    <path fill-rule="evenodd" d="
+                      M69,2 H349 A67,67 0 0 1 416,69 V268 A2,2 0 0 1 418,270 L420,270 A2,2 0 0 1 422,272 V368 A2,2 0 0 1 420,370 L418,370 A2,2 0 0 1 416,372 V782 A67,67 0 0 1 349,849 H69 A67,67 0 0 1 2,782 V373 A2,2 0 0 1 0,371 L-2,371 A2,2 0 0 1 -4,369 V309 A2,2 0 0 1 -2,307 L0,307 A2,2 0 0 1 2,305 V291 A2,2 0 0 1 0,289 L-2,289 A2,2 0 0 1 -4,287 V227 A2,2 0 0 1 -2,225 L0,225 A2,2 0 0 1 2,223 V197 A2,2 0 0 1 0,195 L-2,195 A2,2 0 0 1 -4,193 V165 A2,2 0 0 1 -2,163 L0,163 A2,2 0 0 1 2,161 V69 A67,67 0 0 1 69,2 Z
+                      M72,19 H344 A52,52 0 0 1 396,71 V780 A52,52 0 0 1 344,832 H72 A52,52 0 0 1 20,780 V71 A52,52 0 0 1 72,19 Z
+                    "/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="proj-energy-home-content">
+              <div class="proj-energy-home-photo">
+                <img src="assets/images/energy-charging/Home-charging_bg.jpg" alt="Rivian parked and charging in a home garage">
+              </div>
+              <div class="proj-mobile-static-copy">
+                <p class="proj-body">Few drivers know their utility's off-peak schedule, even though charging at the right time can lower cost and emissions. I made that lookup a one-time setup so home charging shifts to the cheapest, cleanest hours automatically.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="proj-section-spacer proj-section-spacer--end"></div>
 
       </div><!-- /proj-energy-charging -->
 
       <!-- ── Archive ─────────────────────────────────────────── -->
       <div id="proj-archive" class="proj-content" hidden>
         <section class="proj-hero">
-          <h1 class="proj-headline proj-reveal">Work from before Rivian — eyewear, apps, and everything in between.</h1>
-          <p class="proj-subtext proj-reveal">A collection of earlier work spanning product, industrial, and interaction design.</p>
+          <h1 class="proj-headline proj-reveal">A career across digital products, eyewear, and wearable tech.</h1>
         </section>
+        <div class="proj-section-spacer proj-section-spacer--hero proj-section-spacer--archive-hero"></div>
 
-        <div class="proj-divider proj-reveal"></div>
-
-        <!-- Eyewear Design -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-section-header">
-            <div class="proj-section-left">
-              <h2 class="proj-section-title">Eyewear Design</h2>
+        <p class="proj-trusted-label">Selected teams &amp; brands</p>
+        <div class="proj-divider proj-trusted-divider" aria-hidden="true"></div>
+        <section class="proj-trusted proj-reveal">
+          <div class="proj-trusted-logos">
+            <div class="proj-trusted-track">
+              <img class="proj-trusted-logo proj-trusted-logo--dragon" src="assets/images/archive/logos/dragon-alliance.png" alt="Dragon Alliance">
+              <img class="proj-trusted-logo proj-trusted-logo--kohler" src="assets/images/archive/logos/kohler.png" alt="Kohler">
+              <img class="proj-trusted-logo proj-trusted-logo--indeed" src="assets/images/archive/logos/indeed.png" alt="Indeed">
+              <span class="proj-trusted-mark proj-trusted-mark--audible" role="img" aria-label="Audible"><span class="proj-trusted-mark-symbol"></span><span class="proj-trusted-mark-word"></span></span>
+              <img class="proj-trusted-logo proj-trusted-logo--calvin-klein" src="assets/images/archive/logos/calvin-klein.png" alt="Calvin Klein">
+              <span class="proj-trusted-mark proj-trusted-mark--optum" role="img" aria-label="Optum"><span class="proj-trusted-mark-symbol"></span><span class="proj-trusted-mark-word"></span></span>
+              <img class="proj-trusted-logo proj-trusted-logo--michael-kors" src="assets/images/archive/logos/michael-kors.png" alt="Michael Kors">
+              <img class="proj-trusted-logo proj-trusted-logo--rivian" src="assets/images/archive/logos/rivian-wordmark.svg" alt="Rivian">
+              <img class="proj-trusted-logo proj-trusted-logo--google" src="assets/images/archive/logos/google.png" alt="Google">
+              <img class="proj-trusted-logo proj-trusted-logo--citi" src="assets/images/archive/logos/citi.png" alt="Citi">
+              <img class="proj-trusted-logo proj-trusted-logo--dvf" src="assets/images/archive/logos/diane-von-furstenberg.png" alt="Diane von Furstenberg">
+              <img class="proj-trusted-logo proj-trusted-logo--bmw" src="assets/images/archive/logos/bmw-group.svg" alt="BMW Group">
+              <img class="proj-trusted-logo proj-trusted-logo--dragon" src="assets/images/archive/logos/dragon-alliance.png" alt="Dragon Alliance">
+              <img class="proj-trusted-logo proj-trusted-logo--kohler" src="assets/images/archive/logos/kohler.png" alt="Kohler">
+              <img class="proj-trusted-logo proj-trusted-logo--indeed" src="assets/images/archive/logos/indeed.png" alt="Indeed">
+              <span class="proj-trusted-mark proj-trusted-mark--audible" role="img" aria-label="Audible"><span class="proj-trusted-mark-symbol"></span><span class="proj-trusted-mark-word"></span></span>
+              <img class="proj-trusted-logo proj-trusted-logo--calvin-klein" src="assets/images/archive/logos/calvin-klein.png" alt="Calvin Klein">
+              <span class="proj-trusted-mark proj-trusted-mark--optum" role="img" aria-label="Optum"><span class="proj-trusted-mark-symbol"></span><span class="proj-trusted-mark-word"></span></span>
+              <img class="proj-trusted-logo proj-trusted-logo--michael-kors" src="assets/images/archive/logos/michael-kors.png" alt="Michael Kors">
+              <img class="proj-trusted-logo proj-trusted-logo--rivian" src="assets/images/archive/logos/rivian-wordmark.svg" alt="Rivian">
+              <img class="proj-trusted-logo proj-trusted-logo--google" src="assets/images/archive/logos/google.png" alt="Google">
+              <img class="proj-trusted-logo proj-trusted-logo--citi" src="assets/images/archive/logos/citi.png" alt="Citi">
+              <img class="proj-trusted-logo proj-trusted-logo--dvf" src="assets/images/archive/logos/diane-von-furstenberg.png" alt="Diane von Furstenberg">
+              <img class="proj-trusted-logo proj-trusted-logo--bmw" src="assets/images/archive/logos/bmw-group.svg" alt="BMW Group">
             </div>
+            <div class="proj-trusted-track" aria-hidden="true">
+              <img class="proj-trusted-logo proj-trusted-logo--dragon" src="assets/images/archive/logos/dragon-alliance.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--kohler" src="assets/images/archive/logos/kohler.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--indeed" src="assets/images/archive/logos/indeed.png" alt="">
+              <span class="proj-trusted-mark proj-trusted-mark--audible" aria-hidden="true"><span class="proj-trusted-mark-symbol"></span><span class="proj-trusted-mark-word"></span></span>
+              <img class="proj-trusted-logo proj-trusted-logo--calvin-klein" src="assets/images/archive/logos/calvin-klein.png" alt="">
+              <span class="proj-trusted-mark proj-trusted-mark--optum" aria-hidden="true"><span class="proj-trusted-mark-symbol"></span><span class="proj-trusted-mark-word"></span></span>
+              <img class="proj-trusted-logo proj-trusted-logo--michael-kors" src="assets/images/archive/logos/michael-kors.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--rivian" src="assets/images/archive/logos/rivian-wordmark.svg" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--google" src="assets/images/archive/logos/google.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--citi" src="assets/images/archive/logos/citi.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--dvf" src="assets/images/archive/logos/diane-von-furstenberg.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--bmw" src="assets/images/archive/logos/bmw-group.svg" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--dragon" src="assets/images/archive/logos/dragon-alliance.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--kohler" src="assets/images/archive/logos/kohler.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--indeed" src="assets/images/archive/logos/indeed.png" alt="">
+              <span class="proj-trusted-mark proj-trusted-mark--audible" aria-hidden="true"><span class="proj-trusted-mark-symbol"></span><span class="proj-trusted-mark-word"></span></span>
+              <img class="proj-trusted-logo proj-trusted-logo--calvin-klein" src="assets/images/archive/logos/calvin-klein.png" alt="">
+              <span class="proj-trusted-mark proj-trusted-mark--optum" aria-hidden="true"><span class="proj-trusted-mark-symbol"></span><span class="proj-trusted-mark-word"></span></span>
+              <img class="proj-trusted-logo proj-trusted-logo--michael-kors" src="assets/images/archive/logos/michael-kors.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--rivian" src="assets/images/archive/logos/rivian-wordmark.svg" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--google" src="assets/images/archive/logos/google.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--citi" src="assets/images/archive/logos/citi.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--dvf" src="assets/images/archive/logos/diane-von-furstenberg.png" alt="">
+              <img class="proj-trusted-logo proj-trusted-logo--bmw" src="assets/images/archive/logos/bmw-group.svg" alt="">
+            </div>
+          </div>
+        </section>
+        <div class="proj-divider proj-trusted-divider" aria-hidden="true"></div>
+        <div class="proj-section-spacer proj-section-spacer--hero"></div>
+
+        <!-- Earlier digital product work -->
+        <section class="proj-section proj-section--col-inset proj-section--archive-feature proj-reveal">
+          <div class="proj-feature-media">
+            <div class="proj-media-plain">
+              <video autoplay loop muted playsinline>
+                <source src="assets/videos/archive/Digital_Montage.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="proj-section-header proj-section-header--feature">
             <div class="proj-section-right">
-              <h3 class="proj-section-sub">Frames designed for Nike, Google, and VSP.</h3>
-              <p class="proj-body">Optical and sun frames spanning sport performance, fashion, and prescription — designed for major brands and developed through the full product lifecycle from concept to tooling.</p>
-              <p class="proj-body">Industrial design training shaped an instinct for physical constraints: how something fits, how it fails, and what it means to design for mass production.</p>
-              <div class="proj-meta">
-                <div class="proj-meta-val">
-                  <span>Industrial Designer</span><span class="proj-dot">•</span><span>Eyewear</span><span class="proj-dot">•</span><span>2016–2020</span>
+              <p class="proj-body">A selection of early digital work spanning consumer and enterprise products for early-stage startups and established product teams. Mostly under NDA.</p>
+            </div>
+          </div>
+        </section>
+        <div class="proj-section-spacer"></div>
+
+        <!-- Eyewear + Wearable Tech — landscape video carousel. -->
+        <section class="proj-section proj-section--col-inset proj-section--archive-feature proj-scenario-section proj-archive-carousel proj-reveal">
+          <div class="proj-scenario-carousel" aria-label="Eyewear and wearable design videos">
+            <div class="proj-scenario-track">
+              <div class="proj-scenario-card" data-index="0" data-caption="the Nike Wing, a high concept performance eyewear">
+                <div class="proj-scenario-media">
+                  <video muted playsinline aria-label="Sports Eyewear">
+                    <source src="assets/videos/archive/01 Sports Eyewear - Silent.mp4.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="proj-scenario-card" data-index="1" data-caption="DVF + Google Glass">
+                <div class="proj-scenario-media">
+                  <video muted playsinline aria-label="DVF Google Glass">
+                    <source src="assets/videos/archive/02 DVF Google Glass - Silent.mp4.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="proj-scenario-card" data-index="2" data-caption="VSP Global&#x27;s smart eyewear">
+                <div class="proj-scenario-media">
+                  <video muted playsinline aria-label="Smart Eyewear">
+                    <source src="assets/videos/archive/03 Smart Eyewear - Silent.mp4.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="proj-scenario-card" data-index="3" data-caption="Nike&#x27;s inaugural snow goggles">
+                <div class="proj-scenario-media">
+                  <video muted playsinline aria-label="Snow Eyewear">
+                    <source src="assets/videos/archive/04 Snow Eyewear - Silent.mp4.mp4" type="video/mp4">
+                  </video>
                 </div>
               </div>
             </div>
           </div>
-          <div class="proj-media-card">
-            <img src="assets/images/archive/placeholder-eyewear.png" alt="Eyewear Design">
-          </div>
-        </section>
-
-        <div class="proj-divider proj-reveal"></div>
-
-        <!-- App & Web -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-section-header">
-            <div class="proj-section-left">
-              <h2 class="proj-section-title">App &amp; Web</h2>
-            </div>
+          <div class="proj-section-header proj-section-header--feature">
             <div class="proj-section-right">
-              <h3 class="proj-section-sub">Earlier digital product work.</h3>
-              <p class="proj-body">Consumer and enterprise apps across mobile and web — ranging from early-stage startups to larger product teams.</p>
-              <p class="proj-body">These projects built the foundation for systems thinking and end-to-end ownership that carries into the work at Rivian.</p>
-              <div class="proj-meta">
-                <div class="proj-meta-val">
-                  <span>Product Designer</span><span class="proj-dot">•</span><span>Mobile + Web</span><span class="proj-dot">•</span><span>2018–2021</span>
-                </div>
-              </div>
+              <p class="proj-body">Before digital product design, I designed optical frames and early wearable concepts for global brands, like <span class="proj-archive-active-caption">the Nike Wing, a high concept performance eyewear</span>.</p>
+            </div>
+          <div class="proj-scenario-header proj-archive-carousel-nav">
+            <div class="proj-scenario-arrows">
+              <button type="button" class="proj-scenario-arrow proj-scenario-arrow--prev" aria-label="Previous">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 3L5 9L11 15" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button type="button" class="proj-scenario-arrow proj-scenario-arrow--next" aria-label="Next">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 3L13 9L7 15" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
             </div>
           </div>
-          <div class="proj-media-card">
-            <img src="assets/images/archive/placeholder-app-web.png" alt="App and Web Design">
           </div>
         </section>
 
-        <div class="proj-divider proj-reveal"></div>
+        <div class="proj-section-spacer"></div>
 
-        <!-- Identity & Visual -->
-        <section class="proj-section proj-reveal">
-          <div class="proj-section-header">
-            <div class="proj-section-left">
-              <h2 class="proj-section-title">Identity &amp; Visual</h2>
-            </div>
-            <div class="proj-section-right">
-              <h3 class="proj-section-sub">Brand and visual systems work.</h3>
-              <p class="proj-body">Logos, type systems, and brand guidelines for small businesses and independent projects.</p>
-              <p class="proj-body">A visual sensibility developed here continues to inform how the digital products look and feel today.</p>
-              <div class="proj-meta">
-                <div class="proj-meta-val">
-                  <span>Visual Designer</span><span class="proj-dot">•</span><span>Branding</span><span class="proj-dot">•</span><span>2016–2019</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proj-media-card">
-            <img src="assets/images/archive/placeholder-identity.png" alt="Identity and Visual Design">
-          </div>
-        </section>
 
       </div><!-- /proj-archive -->
 
       <div class="scroll-meter" aria-hidden="true" hidden>
+        <div class="proj-divider scroll-meter-divider"></div>
         <button type="button" class="scroll-meter-group" aria-label="Go to next project">
-          <span class="scroll-meter-line scroll-meter-line1">
+          <span class="scroll-meter-text">
             <span class="scroll-meter-seg" data-seg="next">Next</span>
-            <span class="scroll-meter-mouse" aria-hidden="true">
-              <svg viewBox="0 0 14 22" fill="none" preserveAspectRatio="xMidYMid meet">
-                <rect x="1" y="1" width="12" height="20" rx="6" stroke="currentColor" stroke-width="1.5"/>
-              </svg>
-              <span class="scroll-meter-mouse-ball"></span>
+            <span class="scroll-meter-word">
+              <span class="scroll-meter-seg" data-seg="pr">Pr</span><svg class="scroll-meter-o-svg" aria-hidden="true">
+                <rect class="scroll-meter-o-rect" fill="none" stroke="currentColor"></rect>
+              </svg><span class="scroll-meter-seg" data-seg="ject">ject</span>
             </span>
           </span>
-          <span class="scroll-meter-line scroll-meter-line2">
-            <span class="scroll-meter-seg" data-seg="pr">Pr</span><svg class="scroll-meter-o-svg" aria-hidden="true">
-              <rect class="scroll-meter-o-rect" fill="none" stroke="currentColor"></rect>
-            </svg><span class="scroll-meter-seg" data-seg="ject">ject</span>
+          <span class="scroll-meter-arrow" aria-hidden="true">
+            <svg viewBox="0 0 18 18" fill="none" preserveAspectRatio="xMidYMid meet">
+              <path d="M9 3V15M4 10L9 15L14 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </span>
         </button>
       </div>
@@ -712,6 +1083,103 @@
 
   <script src="assets/js/lottie.min.js"></script>
   <script>
+    // Rotate the landing-page positioning line with the same vertical scroll
+    // used by the copied-email label.
+    (function () {
+      const rotator = document.querySelector('.header-positioning-rotator');
+      if (!rotator || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const phrase = rotator.querySelector('.header-positioning-phrase');
+      const phrases = [
+        'making tech useful',
+        'zero to one',
+        'AI experiences'
+      ];
+      let activeIndex = 0;
+      window.setInterval(() => {
+        activeIndex = (activeIndex + 1) % phrases.length;
+        phrase.classList.add('positioning-exit');
+        window.setTimeout(() => {
+          phrase.textContent = phrases[activeIndex];
+          phrase.classList.remove('positioning-exit');
+          void phrase.offsetWidth;
+          phrase.classList.add('positioning-enter');
+          window.setTimeout(() => phrase.classList.remove('positioning-enter'), 100);
+        }, 100);
+      }, 3200);
+    })();
+
+    // Theme toggle — the initial data-theme attribute (if any) was already
+    // set by the inline script in <head> to avoid a flash of the wrong
+    // theme; this just wires up the click behavior and keeps it in sync.
+    (function () {
+      const btn = document.querySelector('.theme-toggle');
+      if (!btn) return;
+
+      function isLight() {
+        return document.documentElement.getAttribute('data-theme') === 'light';
+      }
+
+      function updateLabel() {
+        const light = isLight();
+        btn.setAttribute('aria-pressed', String(light));
+        btn.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+      }
+
+      btn.addEventListener('click', () => {
+        const next = isLight() ? 'dark' : 'light';
+        if (next === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        updateLabel();
+      });
+
+      updateLabel();
+    })();
+
+    // Rear Display Before/After tabs — swaps the video (the real,
+    // current feature) for a placeholder standing in for the earlier,
+    // more limited version.
+    (function () {
+      const group = document.querySelector('.proj-compare-toggle');
+      if (!group) return;
+      const thumb       = group.querySelector('.proj-compare-toggle-thumb');
+      const buttons     = Array.from(group.querySelectorAll('.proj-compare-toggle-btn'));
+      const video       = document.querySelector('.proj-rear-display-video');
+      const placeholder = document.querySelector('.proj-rear-display-placeholder');
+
+      function moveThumb(btn) {
+        const groupRect = group.getBoundingClientRect();
+        const btnRect   = btn.getBoundingClientRect();
+        thumb.style.width     = `${btnRect.width}px`;
+        thumb.style.transform = `translateX(${btnRect.left - groupRect.left - 4}px)`;
+      }
+
+      function setState(state) {
+        const showingAfter = state === 'after';
+        video.hidden       = !showingAfter;
+        placeholder.hidden = showingAfter;
+        if (showingAfter) video.play(); else video.pause();
+        buttons.forEach(btn => {
+          const active = btn.dataset.state === state;
+          btn.classList.toggle('is-active', active);
+          btn.setAttribute('aria-selected', String(active));
+          if (active) moveThumb(btn);
+        });
+      }
+
+      // Measure when the hidden section becomes visible or its size changes.
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => setState(btn.dataset.state));
+      });
+      new ResizeObserver(() => {
+        const active = buttons.find(btn => btn.classList.contains('is-active'));
+        if (active && group.getBoundingClientRect().width > 0) moveThumb(active);
+      }).observe(group);
+    })();
+
     document.querySelectorAll('.lottie-canvas').forEach(container => {
       const shouldLoop = container.dataset.loop !== 'false';
       const anim = lottie.loadAnimation({
@@ -751,6 +1219,7 @@
         // Clear about active state
         document.querySelector('.about-btn').classList.remove('active');
         enterProject();
+        if (projectId === 'about' && window.centerAboutPhotoGroup) window.centerAboutPhotoGroup();
       });
     });
 
@@ -763,6 +1232,69 @@
       });
     });
 
+    // Centers the two-photo cluster vertically within .proj-about-photos-col —
+    // the photos' differing intrinsic aspect ratios make this awkward to hit
+    // with a fixed CSS percentage, so measure the rendered union and nudge it.
+    // Exposed on window so the about-panel open handlers can re-run it once
+    // the panel (and its previously `hidden`, zero-size column) is visible.
+    (function () {
+      const hero = document.querySelector('.proj-about-hero');
+      const columns = document.querySelector('.proj-about-columns');
+      const col = document.querySelector('.proj-about-photos-col');
+      const group = document.querySelector('.proj-about-photo-group');
+      const photo1 = document.querySelector('.proj-about-photo--1');
+      const photo2 = document.querySelector('.proj-about-photo--2');
+      if (!hero || !columns || !col || !group || !photo1 || !photo2) return;
+
+      function center() {
+        // .proj-about-photos-col's CSS max-height is bounded against the
+        // viewport (calc(100vh - 160px)), not against .proj-about-columns —
+        // the box it's actually meant to sit inside. At some widths, engines
+        // resolve its `aspect-ratio` against the absolute top:0/bottom:0
+        // stretch such that it renders taller than .proj-about-columns's own
+        // (content-driven) height while staying under that viewport cap, so
+        // the CSS max-height never engages. .proj-about-columns's own height
+        // is reliable to measure here regardless — the col is absolutely
+        // positioned and out of flow, so its overflow can't inflate that
+        // measurement. Pin the real cap in JS so the col can never render
+        // taller than the space next to it, no matter how a given engine
+        // resolves the CSS.
+        col.style.maxHeight = columns.getBoundingClientRect().height + 'px';
+
+        group.style.transform = 'none';
+        const heroRect = hero.getBoundingClientRect();
+        const colRect = col.getBoundingClientRect();
+        const r1 = photo1.getBoundingClientRect();
+        const r2 = photo2.getBoundingClientRect();
+        const unionTop = Math.min(r1.top, r2.top);
+        const unionBottom = Math.max(r1.bottom, r2.bottom);
+        const unionHeight = unionBottom - unionTop;
+        const targetTop = colRect.top + (colRect.height - unionHeight) / 2;
+        let delta = targetTop - unionTop;
+        // Belt-and-suspenders: also clamp so the transform can never push
+        // the cluster past the hero's own edges, whatever the cause.
+        const minDelta = heroRect.top - unionTop;
+        const maxDelta = heroRect.bottom - unionBottom;
+        if (minDelta <= maxDelta) delta = Math.min(Math.max(delta, minDelta), maxDelta);
+        group.style.transform = `translateY(${delta}px)`;
+      }
+
+      if (photo1.complete) center();
+      else photo1.addEventListener('load', center, { once: true });
+
+      // Covers window resizes AND every frame of the sidebar's 0.4s width
+      // transition on first open — .proj-about-hero's box keeps changing
+      // width (and thus height, as text reflows) throughout that animation,
+      // so a one-off measurement right after the click can catch a mid-
+      // transition layout and cache a wrong transform. Re-centering on
+      // every resize entry keeps it converging on the true final layout
+      // instead of relying on a single snapshot or a transitionend callback.
+      const roCenter = new ResizeObserver(() => center());
+      roCenter.observe(hero);
+
+      window.centerAboutPhotoGroup = center;
+    })();
+
     // Camera emoji easter egg — each click stacks a photo at a random spot over the photo column
     (function () {
       const trigger = document.querySelector('.proj-about-camera-trigger');
@@ -771,7 +1303,13 @@
       if (!trigger || !stackTarget || !staticPhoto) return;
       const photos = [
         'assets/images/about/portrait-3.jpg',
-        'assets/images/about/dsc2900.jpg'
+        'assets/images/about/dsc2900.jpg',
+        'assets/images/about/IMG_0002.JPG',
+        'assets/images/about/IMG_0031.JPG',
+        'assets/images/about/IMG_0036.JPG',
+        'assets/images/about/IMG_0054.JPG',
+        'assets/images/about/IMG_0056.JPG',
+        'assets/images/about/IMG_0061.JPG'
       ];
       let photoIndex = 0;
       let emojiRevertTimer = null;
@@ -788,7 +1326,7 @@
         const rect = stackTarget.getBoundingClientRect();
         const randX = rect.left + Math.random() * Math.max(rect.width - photoSize.width, 0) + photoSize.width / 2;
         const randY = rect.top + Math.random() * Math.max(rect.height - photoSize.height, 0) + photoSize.height / 2;
-        const randRotate = (Math.random() * 20 - 10).toFixed(1) + 'deg';
+        const randRotate = (Math.random() * 10 - 5).toFixed(1) + 'deg';
 
         const floatEl = document.createElement('img');
         floatEl.src = photos[photoIndex];
@@ -812,7 +1350,7 @@
 
     // Voice-in-context wave — cycles the active state label in sync with the wave video
     (function () {
-      const video = document.querySelector('.proj-voice-wave video');
+      const video = document.querySelector('.proj-section--voice-in-context video');
       const tags = document.querySelectorAll('.proj-voice-tag');
       if (!video || !tags.length) return;
 
@@ -828,163 +1366,253 @@
       video.addEventListener('loadedmetadata', updateActiveTag);
     })();
 
-    // Scenario carousel — pinned scroll-jack: the page's normal scroll
-    // drives the carousel until it's exhausted, then scroll continues
-    // normally. Copy, icon row, and video playback all track whichever
-    // slide is centered.
-    (function () {
-      const scrollzone = document.getElementById('scenarioScrollzone');
-      const carousel = document.getElementById('scenarioCarousel');
-      const track = document.getElementById('scenarioTrack');
-      const projectScroll = document.querySelector('.project-scroll');
-      if (!scrollzone || !carousel || !track || !projectScroll) return;
-      const slides = Array.from(track.querySelectorAll('.proj-scenario-slide'));
-      const headline = document.querySelector('.proj-scenario-headline');
-      const desc = document.querySelector('.proj-scenario-desc');
-      const icons = Array.from(document.querySelectorAll('.proj-scenario-icon'));
-      const unmuteBtn = document.getElementById('scenarioUnmute');
+    // Scenario carousel — traditional arrow-paged filmstrip. Every card
+    // autoplays silently; clicking a card is the only way to hear it, only
+    // one card is ever audible, and it goes quiet again once you select a
+    // different card or scroll the section out of view. One of these
+    // sections lives in Rivian Assistant and another in Joyful Utilities,
+    // so this sets up every .proj-scenario-section on the page independently
+    // rather than assuming a single instance.
+    document.querySelectorAll('.proj-scenario-section').forEach((section) => {
+      const carousel = section.querySelector('.proj-scenario-carousel');
+      const track = section.querySelector('.proj-scenario-track');
+      const prevBtn = section.querySelector('.proj-scenario-arrow--prev');
+      const nextBtn = section.querySelector('.proj-scenario-arrow--next');
+      if (!track) return;
 
-      const scenarios = [
-        {
-          headline: 'Stay in touch, hands-free',
-          desc: 'Send a message and share your ETA without ever reaching for your phone.'
-        },
-        {
-          headline: 'Ask about your surroundings',
-          desc: "Rivian Assistant layers in timely local details — like tonight's sunset — right as you're planning the stop."
-        },
-        {
-          headline: 'Discover the detour',
-          desc: "Say the word and Assistant surfaces a spot worth pulling over for, matched to what's actually nearby."
-        },
-        {
-          headline: 'Handles it before you ask',
-          desc: 'After a muddy trail, Assistant finds the nearest car wash — no search required.'
-        },
-        {
-          headline: 'An extra set of eyes',
-          desc: "Rivian Assistant uses the vehicle's own cameras to help you keep track of what's around you — and what's in the bed."
-        },
-        {
-          headline: 'Knows the vehicle inside and out',
-          desc: "Ask about your Rivian's own capabilities — like wading depth — and get a straight answer."
+      const cards = Array.from(track.querySelectorAll('.proj-scenario-card'));
+
+      function setCardMuted(card, muted) {
+        const video = card.querySelector('video');
+        const btn = card.querySelector('.proj-scenario-mute');
+        if (video) video.muted = muted;
+        if (btn) {
+          btn.classList.toggle('is-unmuted', !muted);
+          btn.setAttribute('aria-label', muted ? 'Unmute' : 'Mute');
         }
-      ];
+      }
 
-      let activeIndex = -1;
-      let isMuted = true;
-      let sectionVisible = false;
-
-      function setActive(index) {
-        if (index === activeIndex) return;
-        activeIndex = index;
-
-        slides.forEach((s, i) => {
-          s.classList.toggle('is-active', i === index);
-          const video = s.querySelector('video');
-          if (!video) return;
-          if (i === index) {
-            video.muted = isMuted;
+      cards.forEach((card) => {
+        const video = card.querySelector('video');
+        if (!video) return;
+        const playButton = card.querySelector('.proj-assistant-play');
+        if (playButton) {
+          const durationLabel = card.querySelector('.proj-assistant-duration');
+          const iconPath = playButton.querySelector('svg path');
+          function updatePlayButton() {
+            const playingWithSound = !video.loop;
+            iconPath.setAttribute('d', playingWithSound ? 'M4 4H14V14H4Z' : 'M5 3L15 9L5 15V3Z');
+            playButton.setAttribute('aria-label', playingWithSound
+              ? 'Stop video and return to silent loop'
+              : `Play video with sound, ${durationLabel.textContent.replace('s', '')} seconds`);
+          }
+          function updateDuration() {
+            if (!Number.isFinite(video.duration)) return;
+            const seconds = Math.max(0, Math.ceil(video.duration - (video.loop ? 0 : video.currentTime)));
+            durationLabel.textContent = `${seconds}s`;
+            updatePlayButton();
+          }
+          function resumeSilentLoop() {
+            video.muted = true;
+            video.loop = true;
             video.currentTime = 0;
-            if (sectionVisible) video.play().catch(() => {});
-          } else {
-            video.pause();
+            updateDuration();
+            video.play().catch(() => {});
+          }
+          updateDuration();
+          video.addEventListener('loadedmetadata', updateDuration);
+          video.addEventListener('timeupdate', updateDuration);
+          playButton.addEventListener('click', () => {
+            if (!video.loop) {
+              resumeSilentLoop();
+              return;
+            }
             video.currentTime = 0;
+            video.loop = false;
+            video.muted = false;
+            updateDuration();
+            video.play().catch(resumeSilentLoop);
+          });
+          video.addEventListener('ended', resumeSilentLoop);
+          if (window.IntersectionObserver) {
+            new IntersectionObserver((entries) => {
+              if (!entries[0].isIntersecting && !video.loop) resumeSilentLoop();
+            }).observe(card);
           }
+          return;
+        }
+        if (section.closest('#proj-joyful-utilities') || section.classList.contains('proj-archive-carousel')) {
+          video.muted = true;
+          return;
+        }
+
+        // Clicking anywhere on the card toggles its audio; only one card
+        // is ever audible, so selecting a new card silences the last one.
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('a, .proj-scenario-rewind')) return; // let links and the rewind button behave on their own
+          const nextMuted = !video.muted; // currently muted -> unmute, and vice versa
+          cards.forEach((c) => setCardMuted(c, true));
+          setCardMuted(card, nextMuted);
         });
 
-        icons.forEach((ic, i) => ic.classList.toggle('is-active', i === index));
-
-        const data = scenarios[index];
-        if (data && headline) headline.textContent = data.headline;
-        if (data && desc) desc.textContent = data.desc;
-
-        if (unmuteBtn) unmuteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
-      }
-
-      // Stop the active video the moment this section scrolls out of view —
-      // otherwise it keeps playing (and, if unmuted, audible) underneath
-      // whatever the user scrolls to next.
-      const visibilityObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          sectionVisible = entry.isIntersecting;
-          const activeVideo = slides[activeIndex] && slides[activeIndex].querySelector('video');
-          if (!activeVideo) return;
-          if (sectionVisible) {
-            activeVideo.play().catch(() => {});
-          } else {
-            activeVideo.pause();
-          }
-        });
-      }, { root: projectScroll, threshold: 0 });
-
-      visibilityObserver.observe(scrollzone);
-
-      function slideCenterLeft(index) {
-        const s = slides[index];
-        return s.offsetLeft + s.offsetWidth / 2 - carousel.clientWidth / 2;
-      }
-
-      function setTrackOffset(x) {
-        track.style.transform = 'translateX(' + (-x) + 'px)';
-      }
-
-      function indexFromProgress(progress) {
-        return Math.round(progress * (slides.length - 1));
-      }
-
-      function updateFromPageScroll() {
-        const rect = scrollzone.getBoundingClientRect();
-        const total = rect.height - window.innerHeight;
-        if (total <= 0) return;
-        const progress = Math.max(0, Math.min(1, -rect.top / total));
-        const startOffset = slideCenterLeft(0);
-        const endOffset = slideCenterLeft(slides.length - 1);
-        setTrackOffset(startOffset + progress * (endOffset - startOffset));
-        setActive(indexFromProgress(progress));
-      }
-
-      let pageRaf = null;
-      projectScroll.addEventListener('scroll', () => {
-        if (pageRaf) cancelAnimationFrame(pageRaf);
-        pageRaf = requestAnimationFrame(updateFromPageScroll);
-      }, { passive: true });
-
-      // Tapping (or keyboard-activating) an icon jumps the page scroll to
-      // that scenario's position within the scroll-jack zone; the scroll
-      // listener above then drives the carousel there with the same eased
-      // motion as a normal scroll.
-      function goToIndex(index) {
-        const rect = scrollzone.getBoundingClientRect();
-        const total = rect.height - window.innerHeight;
-        if (total <= 0) return;
-        const progress = index / (slides.length - 1);
-        const targetTop = projectScroll.scrollTop + rect.top + progress * total;
-        projectScroll.scrollTo({ top: targetTop, behavior: 'smooth' });
-      }
-
-      icons.forEach((icon, i) => {
-        icon.addEventListener('click', () => goToIndex(i));
-        icon.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            goToIndex(i);
-          }
-        });
+        const rewindBtn = card.querySelector('.proj-scenario-rewind');
+        if (rewindBtn) {
+          rewindBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            video.currentTime = 0;
+          });
+        }
       });
 
-      if (unmuteBtn) {
-        unmuteBtn.addEventListener('click', () => {
-          isMuted = !isMuted;
-          const activeVideo = slides[activeIndex] && slides[activeIndex].querySelector('video');
-          if (activeVideo) activeVideo.muted = isMuted;
-          unmuteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
+      // Scrolling the section out of view is the other way a card goes
+      // quiet — no reason for it to keep playing audio once it's offscreen.
+      if (window.IntersectionObserver) {
+        new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) cards.forEach((c) => setCardMuted(c, true));
+          });
+        }, { threshold: 0 }).observe(section);
+      }
+
+      if (!carousel || !prevBtn || !nextBtn) return;
+
+      const infinite = section.classList.contains('proj-archive-carousel');
+      let infiniteReady = false;
+      if (infinite && cards.length > 1) {
+        const before = cards[cards.length - 1].cloneNode(true);
+        const after = cards[0].cloneNode(true);
+        before.setAttribute('aria-hidden', 'true');
+        after.setAttribute('aria-hidden', 'true');
+        track.prepend(before);
+        track.append(after);
+        cards.unshift(before);
+        cards.push(after);
+      }
+
+      let archiveVisible = false;
+      function updateArchivePlayback() {
+        if (!section.classList.contains('proj-archive-carousel')) return;
+        const viewport = carousel.getBoundingClientRect();
+        let active = null;
+        let largestOverlap = 0;
+        if (archiveVisible && viewport.width > 0) {
+          cards.forEach(card => {
+            const bounds = card.getBoundingClientRect();
+            const overlap = Math.max(0, Math.min(bounds.right, viewport.right) - Math.max(bounds.left, viewport.left));
+            if (overlap > largestOverlap) {
+              largestOverlap = overlap;
+              active = card;
+            }
+          });
+        }
+        const caption = section.querySelector('.proj-archive-active-caption');
+        if (active && caption && caption.textContent !== active.dataset.caption) {
+          caption.textContent = active.dataset.caption;
+        }
+        cards.forEach(card => {
+          const video = card.querySelector('video');
+          const playing = card === active;
+          video.loop = playing;
+          card.classList.toggle('is-active', playing);
+          if (playing) {
+            if (video.paused) video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      }
+      if (section.classList.contains('proj-archive-carousel')) {
+        new IntersectionObserver(entries => {
+          archiveVisible = entries[0].isIntersecting;
+          updateArchivePlayback();
+        }).observe(carousel);
+        updateArchivePlayback();
+      }
+
+      function cardStep() {
+        if (cards.length < 2) return cards[0] ? cards[0].offsetWidth : 0;
+        return cards[1].offsetLeft - cards[0].offsetLeft;
+      }
+
+      function maxScrollLeft() {
+        return Math.max(0, carousel.scrollWidth - carousel.clientWidth);
+      }
+
+      function updateArrows() {
+        if (infinite && !infiniteReady && carousel.clientWidth > 0) {
+          infiniteReady = true;
+          carousel.scrollTo({ left: cardStep(), behavior: 'instant' });
+        }
+        const max = maxScrollLeft();
+        prevBtn.disabled = !infinite && carousel.scrollLeft <= 0;
+        nextBtn.disabled = !infinite && carousel.scrollLeft >= max - 1;
+        updateArchivePlayback();
+      }
+
+      function settleInfiniteCarousel() {
+        if (!infinite || !infiniteReady) return;
+        const step = cardStep();
+        if (!step) return;
+        const index = Math.round(carousel.scrollLeft / step);
+        if (index === 0) {
+          carousel.scrollTo({ left: step * (cards.length - 2), behavior: 'instant' });
+        } else if (index === cards.length - 1) {
+          carousel.scrollTo({ left: step, behavior: 'instant' });
+        }
+      }
+
+      prevBtn.addEventListener('click', () => {
+        const step = cardStep();
+        if (infinite) {
+          carousel.scrollTo({ left: (Math.round(carousel.scrollLeft / step) - 1) * step, behavior: 'smooth' });
+        } else {
+          carousel.scrollBy({ left: -step, behavior: 'smooth' });
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        const step = cardStep();
+        if (infinite) {
+          carousel.scrollTo({ left: (Math.round(carousel.scrollLeft / step) + 1) * step, behavior: 'smooth' });
+        } else {
+          carousel.scrollBy({ left: step, behavior: 'smooth' });
+        }
+      });
+
+      carousel.addEventListener('scroll', updateArrows, { passive: true });
+      if (infinite) {
+        let settleTimer;
+        carousel.addEventListener('scroll', () => {
+          clearTimeout(settleTimer);
+          settleTimer = setTimeout(settleInfiniteCarousel, 180);
+        }, { passive: true });
+        carousel.addEventListener('scrollend', settleInfiniteCarousel);
+      }
+      window.addEventListener('resize', updateArrows);
+
+      // The section starts inside a hidden .proj-content, so the carousel
+      // has zero clientWidth the first time updateArrows() runs — a
+      // ResizeObserver catches the real layout once the project becomes
+      // visible. It's the carousel (not just the track) being observed
+      // because on a project's first open, .sidebar is also mid-transition
+      // from 100% to 20vw width, which changes the carousel's clientWidth
+      // continuously over that 0.4s without ever changing the track's own
+      // (card-driven, viewport-independent) width — a track-only observer
+      // never refires during that ramp, so arrows could get stuck reflecting
+      // a stale, too-narrow mid-transition width. Re-checking once that
+      // specific transition ends is a second, explicit safety net for it.
+      if (window.ResizeObserver) {
+        new ResizeObserver(updateArrows).observe(carousel);
+      }
+      const sidebarEl = document.querySelector('.sidebar');
+      if (sidebarEl) {
+        sidebarEl.addEventListener('transitionend', (e) => {
+          if (e.target === sidebarEl && e.propertyName === 'width') updateArrows();
         });
       }
 
-      setActive(0);
-      requestAnimationFrame(updateFromPageScroll);
-    })();
+      updateArrows();
+    });
 
     // About panel
     const aboutBtn = document.querySelector('.about-btn');
@@ -996,6 +1624,7 @@
       const content = document.getElementById('proj-about');
       if (content) { content.hidden = false; setupReveal(content); }
       enterProject();
+      if (content && window.centerAboutPhotoGroup) window.centerAboutPhotoGroup();
     });
 
     const emailBtn = document.querySelector('.email-btn');
@@ -1046,8 +1675,18 @@
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
+          const el = entry.target;
+          el.classList.add('is-visible');
+          revealObserver.unobserve(el);
+          // The stagger delay above only exists to space out the initial
+          // load-in — left in place afterward, it also delays this same
+          // element's other transitions (e.g. .proj-ai-day-cta's hover
+          // color change), making later interactions feel laggy. Clear it
+          // once the reveal transition finishes so hover/etc. run at their
+          // own natural speed again.
+          el.addEventListener('transitionend', () => {
+            el.style.transitionDelay = '';
+          }, { once: true });
         }
       });
     }, { root: projectScroll, threshold: 0.08 });
@@ -1060,11 +1699,11 @@
         el.style.transitionDelay = '0ms';
       });
       // Stagger the above-fold hero elements relative to panel slide
-      const heroReveals = content.querySelectorAll('.proj-hero .proj-reveal');
+      const heroReveals = content.querySelectorAll('.proj-hero .proj-reveal, .proj-hero-block .proj-reveal');
       heroReveals.forEach((el, i) => {
         el.style.transitionDelay = `${220 + i * 80}ms`;
       });
-      const heroMedia = content.querySelector('.proj-hero-media.proj-reveal');
+      const heroMedia = content.querySelector('.proj-hero-media.proj-reveal, .proj-hero-media-bleed.proj-reveal');
       if (heroMedia) heroMedia.style.transitionDelay = `${220 + heroReveals.length * 80}ms`;
       // Wait for panel to be painted before observing
       requestAnimationFrame(() => {
@@ -1093,8 +1732,11 @@
     // ── Scroll meter: hold at the bottom to advance to the next project ──
     const scrollMeter      = document.querySelector('.scroll-meter');
     const scrollMeterGroup = scrollMeter.querySelector('.scroll-meter-group');
-    const segPr             = scrollMeter.querySelector('.scroll-meter-seg[data-seg="pr"]');
-    const segJect           = scrollMeter.querySelector('.scroll-meter-seg[data-seg="ject"]');
+    const scrollMeterText  = scrollMeter.querySelector('.scroll-meter-text');
+    const scrollMeterArrow = scrollMeter.querySelector('.scroll-meter-arrow');
+    const segNext            = scrollMeter.querySelector('.scroll-meter-seg[data-seg="next"]');
+    const segPr              = scrollMeter.querySelector('.scroll-meter-seg[data-seg="pr"]');
+    const segJect            = scrollMeter.querySelector('.scroll-meter-seg[data-seg="ject"]');
     const oSvg               = scrollMeter.querySelector('.scroll-meter-o-svg');
     const oRect               = scrollMeter.querySelector('.scroll-meter-o-rect');
 
@@ -1102,7 +1744,12 @@
     const SCROLL_METER_IDLE_RESET = 2000; // ms of no scrolling before the meter resets
     const SCROLL_METER_EDGE_PAD   = 80;   // matches the site's standard section edge padding
     const O_WIDTH_RATIO           = 0.98; // measured from the actual "o" glyph in Neue Haas Grotesk Text Pro — it's nearly circular, not narrow
-    const O_STROKE_RATIO          = 0.2;  // ring thickness as a fraction of its height, matching letter stroke weight
+    // Ring thickness as a fraction of its height. The real "o" at 55 Roman has
+    // ~0.17 side stems but ~0.134 top/bottom strokes (canvas pixel-scan), and a
+    // uniform ring can't match both, so this splits the difference: 0.143 is
+    // ~3px at the current size. Was 0.2 for the old 75 Bold weight.
+    const O_STROKE_RATIO          = 0.143;
+    const ICON_GAP_RATIO          = 0.35; // reserved breathing room before the mouse icon, as a fraction of font-size — keeps "ject" from ever touching it at full progress
 
     let isProjectTransitioning = false;
     let suppressLabelSwap      = false;
@@ -1119,16 +1766,21 @@
 
     function measureScrollMeterSegments() {
       if (scrollMeter.hidden) return;
-      const prW   = segPr.getBoundingClientRect().width;
-      const jectW = segJect.getBoundingClientRect().width;
+      const arrowW = scrollMeterArrow.getBoundingClientRect().width;
+      const nextW  = segNext.getBoundingClientRect().width;
+      const prW    = segPr.getBoundingClientRect().width;
+      const jectW  = segJect.getBoundingClientRect().width;
       oNaturalHeight = oSvg.getBoundingClientRect().height;
       oNaturalWidth  = oNaturalHeight * O_WIDTH_RATIO;
       oStrokeWidth   = oNaturalHeight * O_STROKE_RATIO;
       if (oNaturalHeight <= 0) return;
 
       const containerWidth = projectScroll.clientWidth - SCROLL_METER_EDGE_PAD * 2;
-      const line2NaturalW  = prW + oNaturalWidth + jectW;
-      oExtraWidth = Math.max(0, containerWidth - line2NaturalW);
+      const textGap  = parseFloat(getComputedStyle(scrollMeterText).columnGap) || 0;
+      const fontSize = parseFloat(getComputedStyle(scrollMeterGroup).fontSize) || 0;
+      const iconGap  = fontSize * ICON_GAP_RATIO;
+      const textNaturalW = nextW + prW + oNaturalWidth + jectW + textGap;
+      oExtraWidth = Math.max(0, containerWidth - arrowW - iconGap - textNaturalW);
     }
 
     // Single source of truth for rendering a 0–1 progress value: grows the
@@ -1234,7 +1886,10 @@
       }, 500);
     }
 
-    scrollMeterGroup.addEventListener('click', () => {
+    // Listens on the whole section (not just the button) so the entire
+    // "Next Project" row is tappable — a click on the button still fires
+    // this via bubbling, so there's only one handler either way.
+    scrollMeter.addEventListener('click', () => {
       tweenMeterProgress(meterProgress, 1, 300);
       meterProgress = 1;
       goToAdjacentProject();
@@ -1266,6 +1921,17 @@
         resetScrollMeter();
       }
     }, { passive: false });
+
+    // A finished CSS animation left attached via fill-mode: forwards still
+    // counts as "active" for Chrome's compositing-layer promotion, which
+    // isolates the button into its own layer and silently breaks its
+    // ::before's backdrop-filter (tint shows, but nothing behind it blurs).
+    // Dropping the class once the animation ends returns the button to a
+    // plain static element so the glass blur actually renders.
+    closeBtn.addEventListener('animationend', (e) => {
+      if (e.animationName === 'close-btn-in') closeBtn.classList.remove('is-entering');
+      if (e.animationName === 'close-btn-out-opacity') closeBtn.classList.remove('is-exiting');
+    });
 
     function enterProject() {
       const alreadyOpen = document.body.classList.contains('sidebar-mode');
@@ -1299,7 +1965,8 @@
       const email = 'jbpark.design@gmail.com';
       const onSuccess = () => {
         emailBtn.classList.add('copied');
-        swapLabel('Copied to clipboard');
+        const inLeftRail = document.body.classList.contains('sidebar-mode');
+        swapLabel(inLeftRail ? 'Copied' : 'Copied to clipboard');
         setTimeout(() => {
           emailBtn.classList.add('reverting');
           swapLabel(getDefaultLabel());

@@ -1,4 +1,8 @@
 /* ─── Fonts ─────────────────────────────────────────────── */
+/* 55 Roman carries the whole site's hierarchy via size/tracking/color —
+   the one exception is the "effrey"/"ark" logo reveal, which stays 75
+   Bold to match the weight of the "J"/"P" initial glyphs (drawn shapes,
+   not affected by font-weight) they expand out from. */
 @font-face {
   font-family: "Neue Haas Grotesk Text Pro";
   src: url("fonts/NHaasGroteskTXPro-55Rg.otf") format("opentype");
@@ -15,14 +19,40 @@
   font-display: swap;
 }
 
+/* ─── Primitives ─────────────────────────────────────────── */
+:root {
+  --black-pure:      #000000;
+  --black-pure-rgb:  0, 0, 0;
+  --black-brand:     #0d0e10;
+  --white-brand:     #ececf6;
+  --gray-muted:      #9b9ba6;
+  --gray-muted-rgb:  155, 155, 166;
+
+  /* Light theme — #F8F8F8 background is new; the "content color" is just
+     the dark theme's own --black-brand, worn as text/ink instead of bg.
+     --gray-muted is darkened rather than reused as-is: at the same
+     lightness it read at ~2.5:1 against #F8F8F8 (vs. ~7:1 against
+     --black-brand), well under body-text contrast minimums. */
+  --white-brand-light:    #f8f8f8;
+  --gray-muted-light:     #6e6e78;
+  --gray-muted-light-rgb: 110, 110, 120;
+}
+
 /* ─── Tokens ─────────────────────────────────────────────── */
 :root {
-  --color-bg:         #131415;
-  --color-text:       #ffffff;
-  --color-muted:      #9b9b9b;
-  --color-hover-bg:   #ececec;
-  --color-hover-text: #131415;
-  --color-divider:    rgba(90, 90, 90, 0.20);
+  --color-bg:         var(--black-brand);
+  --color-text:       var(--white-brand);
+  --color-muted:      var(--gray-muted);
+  --color-hover-bg:   var(--white-brand);
+  --color-hover-text: var(--black-brand);
+  --color-divider:    rgba(var(--gray-muted-rgb), 0.20);
+  --shadow-drop-light: 0 16px 40px rgba(var(--black-pure-rgb), 0.45);
+  --shadow-screen: 0 14px 28px rgba(var(--black-pure-rgb), 0.32);
+
+  /* Light screen backplates, chosen to complement each feature's content. */
+  --color-slate-panel: #191d22;
+  --color-energy-controls-panel: var(--color-slate-panel);
+  --color-home-charging-panel: var(--color-slate-panel);
 
   --font: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Arial, sans-serif;
 
@@ -31,9 +61,41 @@
   --size-copy:    14px;
   --size-icon:    clamp(28px, 3.89vw, 112px); /* scales with display text */
 
+  /* Project content headings — shared by every project page. */
+  --size-h1: clamp(36px, 4.6vw, 120px);
+  --size-h2: clamp(28px, 3.4vw, 96px);
+  --size-h3: clamp(24px, 1.5vw, 40px);
+
   --leading-display: 1.1;
   --tracking-display: 0.02em;
   --tracking-ui:      0.02em;
+
+  /* 12-column grid: project page section content aligns to this. */
+  --grid-columns: 12;
+  --grid-margin:  40px;
+  --grid-gutter:  24px;
+
+  /* Vertical spacing scale for project pages. */
+  --space-1: 40px;
+  --space-2: 80px;
+  --space-3: 120px;
+  --space-4: 160px;
+  --space-5: 200px;
+}
+
+/* ─── Light theme ────────────────────────────────────────── */
+/* Toggled via [data-theme="light"] on <html> (see the theme-toggle button
+   and its script). --black-pure and the voice-state accent colors are
+   deliberately left untouched: device bezels stay black like real
+   hardware, and the accent colors are brand/semantic, not neutral chrome —
+   neither should flip with the page's light/dark reading. */
+:root[data-theme="light"] {
+  --color-bg:         var(--white-brand-light);
+  --color-text:       var(--black-brand);
+  --color-muted:      var(--gray-muted-light);
+  --color-hover-bg:   var(--black-brand);
+  --color-hover-text: var(--white-brand-light);
+  --color-divider:    rgba(var(--gray-muted-light-rgb), 0.20);
 }
 
 /* ─── Reset ──────────────────────────────────────────────── */
@@ -149,14 +211,18 @@ body.sidebar-mode {
 .lastname-clip  { animation: logo-lastname  2.4s cubic-bezier(0, 0.3, 0.24, 1); }
 .name-space     { animation: logo-space     2.4s cubic-bezier(0, 0.3, 0.24, 1); }
 
-/* Nav */
-header nav .nav-link:nth-child(1) {
+/* Nav — theme-toggle now leads, so About/LinkedIn shift one slot later. */
+header nav .theme-toggle {
   animation: rise-in 0.8s cubic-bezier(0, 0.3, 0.24, 1) both;
   animation-delay: 420ms;
 }
 header nav .nav-link:nth-child(2) {
   animation: rise-in 0.8s cubic-bezier(0, 0.3, 0.24, 1) both;
   animation-delay: 460ms;
+}
+header nav .nav-link:nth-child(3) {
+  animation: rise-in 0.8s cubic-bezier(0, 0.3, 0.24, 1) both;
+  animation-delay: 500ms;
 }
 
 /* Dividers */
@@ -214,7 +280,7 @@ footer .email-btn {
   overflow-x: hidden;
   overflow-y: auto;
   scroll-behavior: smooth;
-  background: #131415;
+  background: var(--color-bg);
 }
 
 body.sidebar-mode .project-panel {
@@ -242,6 +308,17 @@ body.sidebar-mode .project-panel {
   transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
+/* Resting visible state once the panel is open — the is-entering/is-exiting
+   animation classes only own the transient fade in/out; JS drops them once
+   each animation ends (see the animationend listener) so the button isn't
+   left with a permanently-attached CSS animation, which breaks its
+   ::before's backdrop-filter (Chrome isolates animated elements into their
+   own compositing layer, walling the blur off from the page behind it). */
+body.sidebar-mode .close-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .close-btn.is-entering {
   animation: close-btn-in 0.4s cubic-bezier(0, 0.3, 0.24, 1) 0.2s forwards;
   pointer-events: auto;
@@ -249,18 +326,41 @@ body.sidebar-mode .project-panel {
 
 .close-btn.is-exiting {
   position: fixed;
-  animation: close-btn-out 0.4s cubic-bezier(0, 0.3, 0.24, 1) forwards;
+  animation: close-btn-out-opacity 0.4s cubic-bezier(0, 0.3, 0.24, 1) forwards;
   pointer-events: none;
 }
 
-@keyframes close-btn-in {
-  from { opacity: 0; transform: rotate(90deg); }
-  to   { opacity: 1; transform: rotate(0deg); }
+/* The rotate lives on the icon, not the button — a `transform` on
+   .close-btn itself (even the identity matrix a completed forwards-fill
+   animation leaves behind) creates a new compositing boundary that would
+   wall off ::before's backdrop-filter from the page behind it, leaving
+   the glass tinted but unblurred. */
+.close-btn.is-entering svg {
+  animation: close-btn-icon-in 0.4s cubic-bezier(0, 0.3, 0.24, 1) 0.2s forwards;
 }
 
-@keyframes close-btn-out {
-  from { opacity: 1; transform: rotate(0deg); }
-  to   { opacity: 0; transform: rotate(90deg); }
+.close-btn.is-exiting svg {
+  animation: close-btn-icon-out 0.4s cubic-bezier(0, 0.3, 0.24, 1) forwards;
+}
+
+@keyframes close-btn-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes close-btn-out-opacity {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes close-btn-icon-in {
+  from { transform: rotate(90deg); }
+  to   { transform: rotate(0deg); }
+}
+
+@keyframes close-btn-icon-out {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(90deg); }
 }
 
 .close-btn::before {
@@ -269,7 +369,7 @@ body.sidebar-mode .project-panel {
   inset: 0;
   border-radius: 9999px;
   border: 1px solid var(--color-divider);
-  background: none;
+  background: transparent;
   z-index: -1;
   transition: background-color 0.2s cubic-bezier(0, 0.3, 0.24, 1), border-color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
 }
@@ -283,13 +383,109 @@ body.sidebar-mode .project-panel {
   border-color: var(--color-hover-bg);
 }
 
+/* A consistent keyboard focus cue for links and controls. Hover styles
+   remain component-specific; focus uses the current text color in either theme. */
+:where(a, button, [role="button"], [role="tab"]):focus-visible {
+  outline: 1px solid var(--color-text);
+  outline-offset: 3px;
+}
+
 /* ─── Header ─────────────────────────────────────────────── */
 header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: 40px auto;
   align-items: center;
   padding: 0 16px 0 24px;
-  height: 40px;
+  row-gap: 0;
+}
+
+header > .header-branding { grid-column: 1; grid-row: 1; justify-self: start; }
+.header-branding {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.6vw, 24px);
+  width: 100%;
+  min-width: 0;
+}
+header > nav { grid-column: 2; grid-row: 1; justify-self: end; }
+
+.header-positioning {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 0.3em;
+  margin: 0;
+  color: var(--color-muted);
+  font-family: var(--font);
+  font-size: var(--size-copy);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: var(--tracking-ui);
+  white-space: nowrap;
+  text-align: left;
+}
+
+.header-positioning-rotator {
+  display: inline-flex;
+  overflow: hidden;
+  align-items: baseline;
+  padding-right: 0.18em;
+  margin-right: -0.18em;
+}
+
+.header-positioning-phrase {
+  display: inline-block;
+  white-space: nowrap;
+  color: var(--color-text);
+}
+
+.header-positioning-phrase.positioning-exit {
+  animation: label-exit 0.1s cubic-bezier(0, 0.3, 0.24, 1) forwards;
+}
+
+.header-positioning-phrase.positioning-enter {
+  animation: label-enter 0.1s cubic-bezier(0, 0.3, 0.24, 1) forwards;
+}
+
+body.sidebar-mode .header-positioning { display: none; }
+
+body.sidebar-mode header {
+  grid-template-rows: 40px;
+}
+
+body.sidebar-mode header nav {
+  gap: 0;
+}
+
+@media (max-width: 768px) {
+  header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 40px auto;
+    row-gap: 8px;
+    padding: 0 16px;
+  }
+
+  header > .header-branding { display: contents; }
+  header > .header-branding > .logo { grid-column: 1; grid-row: 1; }
+  header > .nav { grid-column: 2; grid-row: 1; }
+  header > nav { grid-column: 2; grid-row: 1; }
+
+  .header-positioning {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: 100%;
+    min-width: 0;
+    font-size: var(--size-copy);
+    flex-wrap: nowrap;
+    white-space: normal;
+  }
+
+  .header-positioning-rotator { min-width: 0; }
+  .header-positioning-phrase { white-space: nowrap; }
+
+  .sidebar { --size-display: clamp(24px, 7.3vw, 40px); --size-icon: clamp(20px, 5.2vw, 32px); }
+  .list-row { padding-right: 16px; padding-left: 16px; }
 }
 
 /* ─── Logo ───────────────────────────────────────────────── */
@@ -297,21 +493,30 @@ header {
   display: flex;
   align-items: center;
   font-size: var(--size-ui);
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1;
-  color: #ececec;
+  color: var(--color-text);
   cursor: pointer;
 }
 
 .j-group,
 .p-group {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .initial {
   flex-shrink: 0;
+}
+
+.initial--j,
+.initial--p {
+  margin-top: 1.95px;
+}
+
+.initial--j {
+  margin-right: 2px;
 }
 
 .firstname-clip,
@@ -322,6 +527,13 @@ header {
   white-space: nowrap;
   padding-bottom: 0.2em;
   margin-bottom: -0.2em;
+}
+
+/* Stays bold against the rest of the (now all-Roman) site so it matches
+   the weight of the drawn "J"/"P" initial glyphs it reveals out from. */
+.firstname-text,
+.lastname-text {
+  font-weight: 700;
 }
 
 .name-space {
@@ -408,6 +620,39 @@ nav {
   top: 1px;
 }
 
+.nav-icon { display: none; }
+.nav-icon-linkedin { color: currentColor; }
+.nav-icon-about {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-muted);
+}
+
+.about-btn:hover .nav-icon-about {
+  color: var(--black-brand);
+}
+
+:root[data-theme="light"] .about-btn:hover .nav-icon-about {
+  color: var(--color-hover-text);
+}
+
+body.sidebar-mode .nav-link {
+  justify-content: center;
+  width: 40px;
+  padding: 0;
+}
+
+body.sidebar-mode .nav-link .nav-label,
+body.sidebar-mode .nav-link .nav-external { display: none; }
+body.sidebar-mode .nav-link .nav-icon {
+  display: inline-block;
+  top: 0;
+}
+body.sidebar-mode .nav-link .nav-icon-linkedin { display: block; }
+body.sidebar-mode .nav-link .nav-icon-about { display: block; }
+
+
 .nav-link:hover {
   color: var(--color-hover-text);
 }
@@ -425,9 +670,75 @@ nav {
 }
 
 .nav-link:active::before,
-.close-btn:active::before {
+.close-btn:active::before,
+.theme-toggle:active::before,
+.proj-ai-day-cta:active::before {
   animation: btn-press 0.15s cubic-bezier(0, 0.3, 0.24, 1);
 }
+
+/* ─── Theme toggle ───────────────────────────────────────── */
+/* Hidden for now (light mode is built but not yet exposed) — the
+   explicit `display: flex` below otherwise beats the UA [hidden] rule,
+   same reason .proj-section[hidden] needs its own override. */
+.theme-toggle[hidden] {
+  display: none;
+}
+
+/* Same ring-then-fill treatment as .close-btn — a circular icon button
+   rather than a .nav-link pill, since its content is icon-only. */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  border: none;
+  background: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid var(--color-divider);
+  background: none;
+  z-index: -1;
+  transition: background-color 0.2s cubic-bezier(0, 0.3, 0.24, 1), border-color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.theme-toggle:hover {
+  color: var(--color-hover-text);
+}
+
+.theme-toggle:hover::before {
+  background-color: var(--color-hover-bg);
+  border-color: var(--color-hover-bg);
+}
+
+/* Stacked crossfade, same mechanic as .proj-scenario-mute-icons: both
+   icons occupy the same grid cell and opacity swaps which one shows. */
+.theme-toggle-icons {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+}
+
+.theme-toggle-icons svg {
+  grid-area: 1 / 1;
+  transition: opacity 0.15s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.theme-toggle .icon-moon { opacity: 0; }
+
+[data-theme="light"] .theme-toggle .icon-sun  { opacity: 0; }
+[data-theme="light"] .theme-toggle .icon-moon { opacity: 1; }
 
 /* ─── Content section (list + footer) ───────────────────── */
 .content-section {
@@ -465,7 +776,7 @@ nav {
 /* ─── Project title words ────────────────────────────────── */
 .word {
   font-size: var(--size-display);
-  font-weight: 700;
+  font-weight: 400;
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
   color: var(--color-text);
@@ -527,7 +838,7 @@ nav {
 /* Amp text */
 .amp {
   font-size: var(--size-display);
-  font-weight: 700;
+  font-weight: 400;
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
   color: var(--color-text);
@@ -554,11 +865,29 @@ nav {
   transition: width 0.4s cubic-bezier(0, 0.3, 0.24, 1), height 0.4s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
+/* Each animation's shapes are baked with fixed near-white (and, in a
+   couple, pure-black) fill colors meant to read against the dark theme —
+   there's no currentColor hook into Lottie's own color keyframes, so
+   re-authoring the source files isn't an option here. Since every one of
+   them is effectively grayscale, inverting the whole canvas flips
+   near-white to near-black (legible on the light bg) and leaves any
+   black shapes near-white — the same "invisible against its own
+   background" relationship they had in dark mode, preserved. */
+[data-theme="light"] .lottie-canvas {
+  filter: invert(1);
+}
+
 .list-row:hover .amp  { opacity: 0; }
 .list-row:hover .icon { opacity: 1; }
 
 /* ─── Footer ─────────────────────────────────────────────── */
-footer {
+/* :not(.proj-footer) — this is the site-wide copyright/email bar at the
+   bottom of the homepage list, not a project's own closing footer, but
+   both are literally <footer> elements. Without the exclusion this
+   height:40px was silently overriding .proj-footer's own auto-height
+   sizing (no competing height property there to beat it), compressing
+   its padding instead of centering its content as intended. */
+footer:not(.proj-footer) {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -567,7 +896,7 @@ footer {
 }
 
 .copyright-glyph {
-  font-size: 16px;
+  font-size: var(--size-ui);
 }
 
 .copyright {
@@ -617,21 +946,81 @@ footer {
   height: 14px;
   flex-shrink: 0;
   display: grid;
+  /* Fixed track: otherwise the row auto-sizes to the 15.5px check icon and
+     hangs 1.5px past the 14px box, shifting both icons off-center. */
+  grid-template: 14px / 14px;
   place-items: center;
 }
+.icon-email,
 .icon-copy,
 .icon-thumb {
   grid-area: 1 / 1;
   transform-origin: center;
 }
+/* Cancels .nav-link svg's 1px optical nudge (tuned for the arrow glyph in
+   out-links), which pushed these two below the button's true center.
+   Two-class selector so it outranks `.nav-link svg`. */
+.email-icons .icon-copy,
+.email-icons .icon-thumb {
+  top: 0;
+}
+.icon-email { display: none; }
 .icon-thumb { opacity: 0; }
 
-/* Copied: icon animations */
+/* In the compact project sidebar the email action becomes a single
+   recognizable icon, then the existing checkmark confirms a copy. */
+body.sidebar-mode .email-label-wrap { display: none; }
+body.sidebar-mode .email-btn {
+  width: 40px;
+  padding: 0;
+  justify-content: center;
+}
+body.sidebar-mode .email-icons {
+  width: 16px;
+  height: 16px;
+  grid-template: 16px / 16px;
+}
+body.sidebar-mode .email-icons .icon-email { display: block; }
+body.sidebar-mode .email-icons .icon-copy { display: none; }
+body.sidebar-mode .email-btn.copied .icon-email {
+  animation: icon-out-ccw 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
+}
+body.sidebar-mode .email-btn.copied.reverting .icon-email {
+  animation: icon-in-ccw 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
+}
+
+/* Rest: a solid white circle (always white, not theme-tokened, so it
+   reads as a fixed "success" badge) with a dark check matching the
+   page's own background. Hovering .email-btn inverts both — the circle
+   drops to --color-bg (site bg, theme-aware) and the check picks up
+   the white that the circle just gave up — so the pair stays legible
+   in both the button's resting and filled hover states. */
+.icon-thumb-circle {
+  fill: var(--white-brand);
+  transition: fill 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.icon-thumb-check {
+  stroke: var(--color-bg);
+  transition: stroke 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.email-btn:hover .icon-thumb-circle {
+  fill: var(--color-bg);
+}
+
+.email-btn:hover .icon-thumb-check {
+  stroke: var(--white-brand);
+}
+
+/* Copied: icon animations — counter-clockwise both in and out, matching
+   the revert direction below, so the two icons always rotate the same
+   way rather than alternating CW/CCW depending on which transition. */
 .email-btn.copied .icon-copy {
-  animation: icon-out 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
+  animation: icon-out-ccw 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
 }
 .email-btn.copied .icon-thumb {
-  animation: icon-in 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
+  animation: icon-in-ccw 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
 }
 .email-btn.copied .email-icons {
   animation: icon-bounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -649,22 +1038,13 @@ footer {
   100% { transform: scale(1); }
 }
 
-/* Revert: counter-clockwise (overrides copied animations) */
+/* Revert: same counter-clockwise direction, swapped back (overrides the
+   .copied rules above). */
 .email-btn.copied.reverting .icon-thumb {
   animation: icon-out-ccw 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
 }
 .email-btn.copied.reverting .icon-copy {
   animation: icon-in-ccw 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
-}
-
-@keyframes icon-out {
-  from { opacity: 1; transform: rotate(0deg); }
-  to   { opacity: 0; transform: rotate(90deg); }
-}
-
-@keyframes icon-in {
-  from { opacity: 0; transform: rotate(-90deg); }
-  to   { opacity: 1; transform: rotate(0deg); }
 }
 
 @keyframes icon-out-ccw {
@@ -697,10 +1077,10 @@ footer {
 
 /* ─── Hero ───────────────────────────────────────────────── */
 .proj-hero {
-  padding: 80px 80px 40px;
+  padding: 80px var(--grid-margin) 40px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 .proj-eyebrow {
@@ -711,8 +1091,8 @@ footer {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--size-ui);
+  font-weight: 400;
   color: var(--color-muted);
   letter-spacing: 0.02em;
   opacity: 0;
@@ -731,15 +1111,29 @@ footer {
 
 /* ─── Scroll meter (advance to next project) ─────────────── */
 /* The elongating "o" pill alone communicates scroll progress — the text
-   stays a static muted color (no fill sweep) so it doesn't compete with
-   that motion. Hover is the only thing that brightens it, as a plain
-   affordance that the whole group is clickable. */
+   stays a static color (no fill sweep) so it doesn't compete with
+   that motion. The arrow glyph is pinned to the container's right edge
+   (space-between) while the text block grows toward it from the left. */
 .scroll-meter {
-  margin: 160px 0 85px;
-  padding: 0 80px;
+  /* Vertical spacing is padding (not margin) so the whole breathing-room
+     area — not just the text row — is part of the section's own tappable
+     box, edge to edge. No top padding — the divider (this section's
+     first child) is the section's own top edge, not offset from it. */
+  padding: 0 var(--grid-margin) 85px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
+  cursor: pointer;
+  background-color: var(--color-bg);
+}
+
+.scroll-meter-divider {
+  /* Breaks out of .scroll-meter's side margin to run full width, matching
+     the .proj-divider lines used between sections above. Bottom margin
+     matches .scroll-meter's own 85px bottom padding, so the text+arrow
+     row between them sits centered in the section rather than crowded
+     toward the (now flush-to-top) divider. */
+  margin: 0 calc(-1 * var(--grid-margin)) 85px;
 }
 
 .scroll-meter[hidden] {
@@ -748,42 +1142,37 @@ footer {
 
 .scroll-meter-group {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
   background: none;
   border: none;
   padding: 0;
   margin: 0;
   cursor: pointer;
   font-family: inherit;
-  font-size: clamp(36px, 6vw, 120px);
-  font-weight: 700;
+  font-size: var(--size-h1);
+  font-weight: 400;
   line-height: 1.1;
   letter-spacing: 0.02em;
 }
 
-.scroll-meter-line {
+.scroll-meter-text {
   display: flex;
-  justify-content: flex-start;
-}
-
-.scroll-meter-line1 {
   align-items: center;
+  gap: 0.22em;
 }
 
-.scroll-meter-line2 {
+.scroll-meter-word {
+  display: flex;
   align-items: flex-end;
 }
 
 .scroll-meter-seg {
   white-space: nowrap;
-  color: var(--color-muted);
-  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
-}
-
-.scroll-meter-group:hover .scroll-meter-seg {
   color: var(--color-text);
+  transition: color 0.3s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
 /* The "o" in "project": a real SVG ring instead of a stretched letterform, so
@@ -799,75 +1188,56 @@ footer {
   display: inline-block;
   height: 0.58em;
   margin: 0 0.05em 0.16em;
-  color: var(--color-muted);
-  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+  color: var(--color-text);
+  transition: color 0.3s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
 .scroll-meter-o-rect {
   fill: none;
 }
 
-.scroll-meter-group:hover .scroll-meter-o-svg {
-  color: var(--color-text);
-}
-
-/* Classic "scroll down" mouse glyph: a pill outline with a dot that eases
-   down the inside, fading in as it starts and out as it reaches the bottom
-   before resetting — reads as a continuous drip rather than a mechanical
-   tick. */
-.scroll-meter-mouse {
-  position: relative;
+/* Down arrow, replacing the old scroll-cue mouse glyph. Sized to the same
+   0.58em metric as the "o" ring above so it reads at the same scale as
+   the surrounding "Next Project" text rather than as an unrelated UI
+   icon, and baseline-aligned (via the group's `align-items: baseline`)
+   the same way the mouse glyph was. */
+.scroll-meter-arrow {
   display: inline-flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  width: 0.4em;
-  height: 0.64em;
-  margin-left: 0.3em;
-  color: var(--color-muted);
-  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+  width: 0.58em;
+  height: 0.58em;
+  flex-shrink: 0;
+  color: var(--color-text);
+  transition: color 0.3s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
-.scroll-meter-mouse svg {
+.scroll-meter-arrow svg {
   display: block;
   width: 100%;
   height: 100%;
+  /* Animates the icon itself, not its flex box, so the box's own
+     dimensions stay static for the layout-measurement JS above. */
+  animation: scroll-meter-arrow-bounce 1.8s ease-in-out infinite;
 }
 
-.scroll-meter-group:hover .scroll-meter-mouse {
-  color: var(--color-text);
-}
-
-.scroll-meter-mouse-ball {
-  position: absolute;
-  top: 15%;
-  left: 50%;
-  width: 0.075em;
-  height: 0.075em;
-  border-radius: 50%;
-  background: currentColor;
-  animation: scroll-meter-mouse-scroll 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-@keyframes scroll-meter-mouse-scroll {
-  0%   { transform: translate(-50%, 0);      opacity: 0; }
-  15%  { opacity: 1; }
-  55%  { transform: translate(-50%, 0.26em); opacity: 1; }
-  75%  { transform: translate(-50%, 0.26em); opacity: 0; }
-  76%  { transform: translate(-50%, 0); }
-  100% { transform: translate(-50%, 0);      opacity: 0; }
+@keyframes scroll-meter-arrow-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(0.15em); }
 }
 
 .proj-headline {
-  font-size: clamp(36px, 6vw, 120px);
-  font-weight: 700;
+  font-size: var(--size-h1);
+  font-weight: 400;
   line-height: 1.1;
   letter-spacing: 0.02em;
-  color: #ffffff;
+  color: var(--color-text);
   width: 100%;
+  margin-top: -0.13em;
 }
 
 .proj-subtext {
-  font-size: 14px;
+  font-size: var(--size-copy);
   line-height: 1.5;
   color: var(--color-muted);
   max-width: 540px;
@@ -877,16 +1247,37 @@ footer {
 .proj-about-hero {
   padding-bottom: 80px;
   min-height: 100vh;
-  justify-content: center;
+  /* Top-anchored (not vertically centered) so the headline sits at the
+     same 80px-from-top offset as .proj-hero's other instances (e.g.
+     Earlier Work) — min-height:100vh still keeps the section tall, the
+     extra space just falls below the content instead of splitting
+     above/below it. */
+  justify-content: flex-start;
+  /* Wider than the base .proj-hero's 24px — this headline runs longer
+     than most hero headlines, so it reads better with more separation
+     from the body copy below it. */
+  gap: 40px;
+}
+
+.proj-about-headline {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .proj-about-columns {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  align-items: center;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  align-items: start;
   max-width: 1200px;
   margin: 0 auto;
-  column-gap: 64px;
+  column-gap: var(--grid-gutter);
+}
+
+.proj-about-content-col {
+  grid-column: span 6;
 }
 
 @media (max-width: 768px) {
@@ -894,20 +1285,64 @@ footer {
     grid-template-columns: 1fr;
     row-gap: 40px;
   }
+
+  .proj-about-content-col {
+    grid-column: 1;
+  }
 }
 
+/* Positioned independently of the grid (and free to run past the row's
+   own bounds) so it centers on the content column's height rather than
+   being stretched/centered within a shared track — the grid would
+   otherwise size the row to whichever column is tallest, leaving no room
+   to center the shorter one against it. Centered via top/bottom auto-
+   margins rather than a translateY transform, since .proj-reveal.is-visible
+   sets its own transform with higher specificity and would otherwise
+   cancel it out once revealed. */
 .proj-about-photos-col {
-  position: relative;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  /* A 6-of-12-column span with a 16px gutter: half the container minus
+     half a gutter (the other half of that gutter belongs to the content
+     column's own 6-span width on the other side). */
+  width: calc(50% - var(--grid-gutter) / 2);
   aspect-ratio: 1 / 1;
   max-height: calc(100vh - 160px);
+}
+
+@media (max-width: 768px) {
+  .proj-about-photos-col {
+    /* relative, not static: .proj-about-photo-group is absolutely
+       positioned and needs this as its containing block, or it escapes
+       to .proj-about-columns and the JS centering has to fight it back
+       with a huge translateY. */
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    transform: none;
+  }
+}
+
+/* Fills .proj-about-photos-col 1:1; JS nudges it with a translateY so the
+   two-photo cluster centers vertically within that box, since the photos'
+   differing intrinsic aspect ratios make that impractical to express as a
+   fixed CSS percentage. */
+.proj-about-photo-group {
+  position: absolute;
+  inset: 0;
 }
 
 .proj-about-photo {
   position: absolute;
   display: block;
-  width: 47%;
+  width: 39.95%; /* 47% scaled down 15% — also sizes the camera-float overlays, which copy this element's rendered box */
   height: auto;
-  border-radius: clamp(8px, 1.5vw, 16px);
   pointer-events: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
@@ -915,20 +1350,31 @@ footer {
 }
 
 .proj-about-photo--1 {
-  left: 0;
+  left: 8%;
   top: 0;
   z-index: 1;
+  transform: rotate(-2deg);
 }
 
 .proj-about-photo--2 {
-  right: 0;
-  top: 32%;
+  right: 8%;
+  top: calc(32% - 80px);
   z-index: 2;
   height: auto;
   aspect-ratio: 2 / 3;
-  object-fit: cover;
-  object-position: 10% center;
+  overflow: hidden;
   filter: grayscale(100%);
+  transform: rotate(2deg);
+}
+
+/* Match the Figma crop: half the source width, offset within the image. */
+.proj-about-photo-crop-image {
+  position: absolute;
+  width: 200%;
+  max-width: none;
+  height: 100%;
+  left: -18.062873%;
+  top: -0.743513%;
 }
 
 @media (max-width: 600px) {
@@ -943,12 +1389,8 @@ footer {
   flex-direction: column;
 }
 
-.proj-about-content-col h1 {
-  margin-bottom: 16px;
-}
-
 .proj-about-content-col .proj-subtext {
-  margin-bottom: 40px;
+  margin-bottom: 80px;
 }
 
 .proj-about-divider {
@@ -970,16 +1412,27 @@ footer {
 }
 
 .proj-about-fact-label {
-  font-size: 14px;
+  font-size: var(--size-copy);
   line-height: 1.5;
   color: var(--color-muted);
 }
 
 .proj-about-fact-value {
-  font-size: 14px;
+  font-size: var(--size-copy);
   line-height: 1.5;
-  color: var(--color-hover-bg);
+  color: var(--color-text);
 }
+
+.proj-about-current,
+.proj-about-outside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.proj-about-current { gap: 4px; }
+.proj-about-current .proj-body { margin: 0; }
+.proj-about-outside { gap: 8px; }
 
 @media (max-width: 600px) {
   .proj-about-fact {
@@ -993,8 +1446,9 @@ footer {
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 26px;
-  height: 26px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
   border-radius: 9999px;
   cursor: pointer;
   animation: proj-camera-wiggle 3s ease-in-out infinite;
@@ -1031,8 +1485,7 @@ footer {
   position: fixed;
   top: 0;
   left: 0;
-  border-radius: clamp(8px, 1.5vw, 16px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: var(--shadow-drop-light);
   object-fit: cover;
   pointer-events: none;
   z-index: 9999;
@@ -1053,7 +1506,7 @@ footer {
 
 /* ─── Hero media ─────────────────────────────────────────── */
 .proj-hero-media {
-  padding: 40px 80px 80px;
+  padding: 40px var(--grid-margin) 80px;
 }
 
 .proj-hero-media video,
@@ -1063,30 +1516,194 @@ footer {
   border-radius: clamp(8px, 1.5vw, 16px);
 }
 
-/* ─── Pull quote (white card) ────────────────────────────── */
-.proj-quote-wrap {
-  background: #ffffff;
-  padding: 80px;
-}
-
-.proj-quote {
+/* ─── Hero block: a fixed-height media crop plus a content-sized headline
+   row, together short enough to stay above the fold. ─────────────────── */
+.proj-hero-block {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
-.proj-quote p {
-  font-size: clamp(36px, 5vw, 72px);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: 0.01em;
-  color: #131415;
+/* Full-bleed: no side margin or rounding, sits flush at the very top of
+   the page ("Joyful Utilities" hero pattern). Fixed height rather than
+   the media's natural aspect ratio, cropped via object-fit — pinned to
+   the bottom of the source frame so the crop favors the ground-level
+   subject instead of the sky. */
+.proj-hero-media-bleed {
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
 }
 
-.proj-quote cite {
-  font-size: 14px;
-  font-style: normal;
+.proj-hero-media-bleed video,
+.proj-hero-media-bleed img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  display: block;
+}
+
+/* Rivian Assistant's hero footage reads fine centered — no ground-level
+   subject to favor like Joyful Utilities' picnic scene. */
+#proj-rivian-assistant .proj-hero-media-bleed video {
+  object-position: center;
+}
+
+/* Energy & Charging's aerial road footage has no ground-level subject to
+   favor either — center it vertically in the crop. */
+#proj-energy-charging .proj-hero-media-bleed video {
+  object-position: center;
+}
+
+/* Security & Access's knolled still is centered in frame — no ground-level
+   subject to favor like Joyful Utilities' picnic scene. */
+#proj-security-access .proj-hero-media-bleed img {
+  object-position: center;
+}
+
+/* ─── Hero, split composition (12-col grid): a meta column (subtext +
+   Role/Scope/Released facts) and the large headline, top-aligned to the
+   headline's capline in a row rather than the standard stacked
+   H1-then-subtext hero. ──────────────────────────────────────────── */
+.proj-hero-split {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  grid-auto-flow: dense;
+  column-gap: var(--grid-gutter);
+  align-items: stretch;
+  padding: var(--grid-margin) var(--grid-margin) 80px;
+}
+
+/* Stretched to the row's full height (matching the headline) rather than
+   sized to its own content, so .proj-hero-facts (margin-top: auto) has
+   room to pin to the bottom instead of just trailing the subtext. The
+   subtext's own box still starts at the row's top edge either way, so
+   this doesn't affect the capline alignment. */
+.proj-hero-split-meta {
+  grid-column: 9 / span 4;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.proj-hero-split-headline {
+  grid-column: 1 / span 7;
+}
+
+/* Groups the subtext with an optional CTA link (e.g. Rivian Assistant's
+   "Highlights from ... AI day") at a tighter 16px, distinct from the 40px
+   gap .proj-hero-split-meta uses before the facts block below it. */
+.proj-hero-split-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.proj-hero-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+/* Reveal the metadata group as a unit; its rows then stagger from that
+   single intersection trigger instead of entering independently. */
+.proj-hero-facts--stagger.proj-reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.proj-hero-facts--stagger .proj-hero-fact {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.55s cubic-bezier(0, 0.3, 0.24, 1),
+              transform 0.55s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-hero-facts--stagger.is-visible .proj-hero-fact {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.proj-hero-facts--stagger .proj-hero-fact:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.proj-hero-facts--stagger .proj-hero-fact:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+/* Hidden for now (Role/Scope/Released credits) — explicit override since the
+   display: flex above otherwise beats the UA [hidden] rule, same reason
+   .proj-section[hidden] needs its own. */
+.proj-hero-facts[hidden] {
+  display: none;
+}
+
+/* Each fact row spans the full meta column through col12. The middle
+   rule flexes to the available width, keeping an even 8px gap from both
+   label and right-aligned value as their text lengths change. */
+.proj-hero-fact {
+  display: grid;
+  grid-template-columns: max-content minmax(8px, 1fr) minmax(0, auto);
+  column-gap: 8px;
+  align-items: baseline;
+  font-size: var(--size-copy);
+  line-height: 1.5;
   color: var(--color-muted);
+}
+
+.proj-hero-fact-label-wrap {
+  display: contents;
+}
+
+.proj-hero-fact-label {
+  grid-column: 1;
+  white-space: nowrap;
+}
+
+.proj-hero-fact-divider {
+  grid-column: 2 / 4;
+  grid-row: 1;
+  min-width: 8px;
+  border-bottom: 1px solid var(--color-divider);
+  align-self: start;
+  margin-top: calc(1.5em - 4px);
+}
+
+.proj-hero-fact-value {
+  grid-column: 3;
+  grid-row: 1;
+  position: relative;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.proj-hero-fact-value > span {
+  background: var(--color-bg);
+  padding-left: 8px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+@media (max-width: 768px) {
+  .proj-hero-split {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .proj-hero-split-headline {
+    order: -1;
+  }
+
 }
 
 /* ─── Section divider ────────────────────────────────────── */
@@ -1095,103 +1712,349 @@ footer {
   background: var(--color-divider);
 }
 
-/* ─── Content section ────────────────────────────────────── */
-.proj-section {
-  padding: 80px 80px 104px;
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
+/* Explicit gaps between project sections use the shared spacing scale. */
+.proj-section-spacer {
+  height: var(--space-4);
 }
 
-/* ─── Section header (2-col) ─────────────────────────────── */
-.proj-section-header {
+/* Hero to first section. */
+.proj-section-spacer--hero {
+  height: var(--space-2);
+}
+
+/* Keep the Earlier Work logo strip closer to its hero. */
+.proj-section-spacer--archive-hero {
+  height: var(--space-1);
+}
+
+/* Compact spacing between closely related media sections. */
+.proj-section-spacer--tight {
+  height: var(--space-1);
+}
+
+/* Last section to the project handoff. */
+.proj-section-spacer--end {
+  height: var(--space-2);
+}
+
+/* Larger break before a distinct closing section such as "Out in the world." */
+.proj-section-spacer--wide {
+  height: var(--space-5);
+}
+
+/* ─── Content section ────────────────────────────────────── */
+.proj-section {
+  padding: 0 var(--grid-margin);
   display: flex;
-  gap: clamp(16px, 2.22vw, 40px);
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* .proj-section's own `display: flex` otherwise wins over the browser's
+   default `[hidden] { display: none }` UA rule (an author rule always beats
+   a UA rule regardless of specificity), so a hidden section here would
+   still render flexed open. */
+.proj-section[hidden] {
+  display: none;
+}
+
+/* ─── Section header (2-col, 12-col grid) ────────────────── */
+.proj-section-header {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+}
+
+/* Same reason as .proj-section[hidden] above: the display: grid wins over
+   the UA [hidden] rule otherwise. */
+.proj-section-header[hidden] {
+  display: none;
 }
 
 .proj-section-left {
-  flex: 0 0 clamp(180px, 29.17vw, 420px);
+  grid-column: span 3;
   display: flex;
   flex-direction: column;
   gap: clamp(8px, 1.11vw, 20px);
 }
 
 .proj-section-right {
-  flex: 1;
+  grid-column: span 9;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.proj-num {
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.1;
+/* One-off: a wide headline column with the body copy narrowed and pinned
+   to the right, rather than filling the remaining space. */
+.proj-section-header--headline-wide .proj-section-left {
+  grid-column: span 7;
+}
+
+.proj-section-header--headline-wide .proj-section-right {
+  grid-column: 9 / span 4;
+}
+
+/* Feature titles occupy columns 1–3; adjacent copy starts at column 4. */
+.proj-section-header--feature .proj-section-left {
+  grid-column: 1 / span 3;
+}
+
+.proj-section-header--feature .proj-section-right {
+  grid-column: 4 / span 7;
+}
+
+/* One-off: col5–12 instead of the usual col5–11, for "Rivian Assistant
+   brings together..." — this is standing in for the section's title (no
+   separate .proj-section-left content), so it gets the extra column a
+   title generally doesn't need. */
+.proj-section-right.proj-section-right--wide {
+  grid-column: 5 / span 8;
+}
+
+/* Insets the media to the same col1–12 range as the feature-list header
+   above (col1–12 as of the site-wide widening from col2–11 — see
+   .proj-section--col-inset), so the two align. Targets a direct-child
+   .proj-media-card (bare media), .proj-media-group (media + caption
+   together), or .proj-media-plain (rounded, no bezel) — grid-column only
+   applies to an actual grid item, so this has to reach whichever of the
+   three sits directly inside. */
+.proj-feature-media {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  width: 100%;
+  position: relative;
+}
+
+.proj-feature-media > .proj-media-card,
+.proj-feature-media > .proj-media-group,
+.proj-feature-media > .proj-media-plain {
+  grid-column: 1 / span 12;
+}
+
+/* Bare device screens (Rear Display, Camping App, Climate Schedule, Pet
+   Comfort, Connected Apps, Profile Lock) have nothing of their own to
+   read as "sitting in" something — no bezel frame with real depth, no
+   background photo like Energy & Charging's collage sections — so they
+   just float on the page's own black. .proj-feature-media--screen-bg
+   keeps the screen itself at the old col2–11 inset instead of the new
+   col1–12 (screens can't naturally stretch to fill a wider row without
+   distortion or cropping the way a background layer can) and adds a
+   full col1–12 color panel behind it in the same grid row for the
+   screen to visually sit inside, colored per section to suit what's on
+   screen (see each .proj-feature-media-bg--* below).
+
+   All six screens are landscape and noticeably wider than 16:9 (2.0–2.4:1
+   — these are car-display/tablet recordings, not phone footage), so
+   letting the panel just stretch to match row 1's auto height (driven by
+   the screen's own aspect ratio) would make it exactly as short and
+   squat as the screen itself — not "the same aspect ratio as other media
+   asset content" the way a 16:9 photo elsewhere on the site reads.
+   Instead the *panel* gets an explicit aspect-ratio, sized off its own
+   (wider) col1–12 width — at 16:9 that comes out taller than the screen
+   at its narrower col2–11 width, so it's now the panel driving row 1's
+   height. align-self: center keeps the screen from being stretched to
+   match that taller row — it sits at its own true height, centered, with
+   the color showing above and below it, not just to the sides. */
+.proj-feature-media--screen-bg > .proj-media-card,
+.proj-feature-media--screen-bg > .proj-media-group,
+.proj-feature-media--screen-bg > .proj-media-plain {
+  grid-column: 2 / span 10;
+  grid-row: 1;
+  align-self: center;
+  position: relative;
+  z-index: 1;
+}
+
+.proj-feature-media-bg {
+  grid-column: 1 / span 12;
+  grid-row: 1;
+  aspect-ratio: 16 / 9;
+}
+
+/* Four of these are the exact color sampled from a frame of their own
+   screen recording, not a darkened/muted interpretation of it — full
+   strength, the way the reference calling for each was specified: the
+   Leisure album art's own periwinkle blue, the campsite's own ground
+   color, the character's own fur yellow, the roadside grass's own
+   green. climate and calendar have no such reference and stay as
+   near-black tints (this file's usual ~11% lightness), the treatment
+   all six originally had. */
+.proj-feature-media-bg--rear-display  { background: #9ca8c2; } /* Leisure album art background, sampled directly */
+.proj-feature-media-bg--camping       { background: #516167; } /* campsite paved ground, sampled directly */
+.proj-feature-media-bg--climate       { background: #182220; } /* climate: cool teal (no source frame specified) */
+.proj-feature-media-bg--pet-comfort   { background: #ffc000; } /* character's fur, sampled directly */
+.proj-feature-media-bg--calendar      { background: var(--color-slate-panel); } /* calendar/productivity: cool blue (no source frame specified) */
+.proj-feature-media-bg--profile-lock  { background: #6f7960; } /* roadside grass, sampled directly */
+
+@media (max-width: 768px) {
+  /* Keep the media wrapper as a real layout box on mobile so a screen and
+     its backdrop stay together as one contained asset. */
+  .proj-feature-media {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 16px;
+    width: 100%;
+    padding: 20px 12px;
+  }
+
+  .proj-feature-media > .proj-media-card,
+  .proj-feature-media > .proj-media-group,
+  .proj-feature-media > .proj-media-plain {
+    grid-column: 1;
+    width: 100%;
+  }
+
+  /* The colored backplate fills the padded stage, whose height is driven
+     by the screen plus (when present) its comparison toggle below. */
+  .proj-feature-media--screen-bg > .proj-feature-media-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: auto;
+    height: auto;
+    aspect-ratio: auto;
+  }
+
+  .proj-feature-media--screen-bg > .proj-media-card,
+  .proj-feature-media--screen-bg > .proj-media-group,
+  .proj-feature-media--screen-bg > .proj-media-plain {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  #proj-joyful-utilities .proj-feature-media--screen-bg > .proj-media-card {
+    top: 0;
+  }
+
+  .proj-feature-media--screen-bg > .proj-compare-toggle {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    translate: none;
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: center;
+    margin-top: 0;
+  }
+}
+
+/* ─── Impact (project capstone stat, no accompanying media) ──
+   Text-only, so it skips .proj-section-header's label/media-paired split
+   in favor of its own single-column grid inset — a small label above a
+   comfortably measured statement, sized like .proj-hero-split-headline's
+   7-column width rather than stretching full-bleed. */
+.proj-impact {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  row-gap: 16px;
+}
+
+.proj-impact-label {
+  grid-column: 1 / span 12;
+  font-size: var(--size-ui);
+  font-weight: 400;
+  color: var(--color-muted);
   letter-spacing: 0.02em;
-  color: var(--color-text);
+}
+
+.proj-impact-text {
+  grid-column: 1 / span 7;
+}
+
+@media (max-width: 768px) {
+  .proj-impact-text {
+    grid-column: 1 / span 12;
+  }
+}
+
+/* ─── Static mobile section (no parallax): phone inset to col2–4,
+   headline + paragraph filling the rest of the row, left-aligned in a
+   column centered within that remaining space. Sized to the 12-col grid
+   (rather than the image's own fixed pixel height) so it reads as a
+   deliberately small phone-width column, not a full-height media block —
+   the .proj-media-card bezel gives it the same screen-in-a-frame
+   treatment used elsewhere on the page. ───────────────────────────── */
+.proj-mobile-static {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  align-items: center;
+  /* Sparse (default) auto-placement won't backtrack: with --reverse, the
+     media (placed first in DOM) sits at the higher column number, so by
+     the time the copy is placed at a lower column the placement cursor
+     has already moved past it and pushes the copy onto a second row
+     instead of sharing the first with the media. Dense packing lets it
+     backfill that gap so both end up in the same row and align-items:
+     center actually centers them together. */
+  grid-auto-flow: dense;
+}
+
+.proj-mobile-static-phone {
+  grid-column: 2 / span 3;
+}
+
+.proj-mobile-static-content {
+  grid-column: 5 / span 8;
+  display: flex;
+  justify-content: center;
+}
+
+.proj-mobile-static-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+  max-width: 420px;
+}
+
+/* Wider media variant (see Security & Access's "Time-based Passcode",
+   the only remaining .proj-mobile-static usage — Rivian Assistant's
+   Connected Apps and Energy & Charging's feature sections have since
+   moved to .proj-feature-media / .proj-photo-overlap) — occupies 5
+   columns instead of the default col2–4 phone-width slot, with the copy
+   inset to 4 columns rather than filling the remaining space
+   edge-to-edge: media col2–6, copy col8–11. */
+.proj-mobile-static--col2-6 .proj-mobile-static-phone {
+  grid-column: 2 / span 5;
+}
+
+.proj-mobile-static--col2-6 .proj-mobile-static-content {
+  grid-column: 8 / span 4;
+}
+
+.proj-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 20px;
+  font-size: var(--size-copy);
+  line-height: 1.5;
+  color: var(--color-muted);
 }
 
 .proj-section-title {
-  font-size: clamp(28px, 5vw, 96px);
-  font-weight: 700;
+  font-size: var(--size-h2);
+  font-weight: 400;
   line-height: 1.1;
   letter-spacing: 0.02em;
   color: var(--color-text);
   margin-top: -0.13em;
 }
 
+/* H3: compact section subhead / small feature title (e.g. Security &
+   Access, Earlier Work subheads, and Joyful Utilities' feature list) —
+   one shared size for every h3 used inside project content. */
 .proj-section-sub {
-  font-size: clamp(18px, 1.67vw, 36px);
-  font-weight: 700;
+  font-size: var(--size-h3);
+  font-weight: 400;
   line-height: 1.1;
   letter-spacing: 0.02em;
   color: var(--color-text);
-}
-
-/* ─── Stacked section block: label + headline + copy, image-above pattern ── */
-.proj-section-block {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.proj-section-label {
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
-.proj-section-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 560px;
-}
-
-/* Left-border callout: a single emphasized statement set apart from
-   surrounding body copy, e.g. a design principle. */
-.proj-callout {
-  border-left: 3px solid var(--color-text);
-  padding-left: 20px;
-}
-
-.proj-callout-headline {
-  font-size: clamp(18px, 1.67vw, 32px);
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: 0.02em;
-  color: var(--color-text);
-}
-
-/* Plain full-bleed photo (no device bezel) — for real photography rather
-   than UI/screen mockups, which use .proj-media-card instead. */
-.proj-photo {
-  width: 100%;
-  display: block;
-  border-radius: clamp(8px, 1.5vw, 16px);
+  margin-top: -0.13em;
 }
 
 .proj-inline-link {
@@ -1234,23 +2097,35 @@ h1 .proj-inline-link svg {
 }
 
 .proj-body {
-  font-size: 14px;
+  font-size: var(--size-copy);
   line-height: 1.5;
   color: var(--color-muted);
+}
+
+.proj-body--lead {
+  color: var(--color-text);
+}
+
+/* Inline emphasis for a clause within a single .proj-body sentence,
+   rather than splitting into a separate --lead paragraph. */
+.proj-body-emphasis {
+  color: var(--color-text);
+}
+
+/* A trailing disclaimer/note within a .proj-body paragraph (e.g. an NDA
+   caveat) — block-level so it drops to its own line without needing a
+   <br>, with real spacing above it instead of just line-height. */
+.proj-body-note {
+  display: block;
+  margin-top: 16px;
 }
 
 /* ─── Role / timeline meta ───────────────────────────────── */
 .proj-meta {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 2px;
   margin-top: 8px;
-}
-
-.proj-meta-key {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--color-muted);
 }
 
 .proj-meta-val {
@@ -1261,9 +2136,9 @@ h1 .proj-inline-link svg {
 }
 
 .proj-meta-val span {
-  font-size: 14px;
+  font-size: var(--size-copy);
   line-height: 1.5;
-  color: var(--color-hover-bg);
+  color: var(--color-text);
 }
 
 .proj-dot {
@@ -1272,9 +2147,10 @@ h1 .proj-inline-link svg {
 
 /* ─── Media card (screen bezel) ─────────────────────────── */
 .proj-media-card {
-  background: #000000;
+  background: var(--black-pure);
   padding: clamp(10px, 1.5vw, 20px);
   border-radius: clamp(20px, 3.5vw, 40px);
+  box-shadow: var(--shadow-drop-light);
 }
 
 .proj-media-card video,
@@ -1284,121 +2160,313 @@ h1 .proj-inline-link svg {
   border-radius: calc(clamp(20px, 3.5vw, 40px) - clamp(10px, 1.5vw, 20px));
 }
 
-/* ─── Feature cards (3-col) ──────────────────────────────── */
-.proj-features {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+/* The explicit display:block above otherwise beats the browser's default
+   [hidden]{display:none} rule (author styles always win over the UA
+   stylesheet) — same reason .proj-section[hidden] needs its own
+   override. Without this, toggling the video's hidden attribute (see the
+   Rear Display before/after swap, which hides/shows both the video and
+   its .proj-rear-display-placeholder img counterpart) has no visual
+   effect. */
+.proj-media-card video[hidden],
+.proj-media-card img[hidden] {
+  display: none;
 }
 
-.proj-feature {
-  display: flex;
-  flex-direction: column;
-  border-radius: clamp(8px, 1.5vw, 16px);
-  overflow: hidden;
-  background: #1a1b1c;
+/* "Before" image for Rear Display's toggle — width/display/border-radius
+   already come from .proj-media-card img above; rear-seat_before.png is
+   2560×1060, close enough to rear-display.mp4's own 2608×1080 (both round
+   to the same 2.415 aspect) that swapping between the two via the toggle
+   button doesn't shift the media card's size. */
+.proj-rear-display-placeholder {
+  aspect-ratio: 2560 / 1060;
+  object-fit: cover;
 }
 
-.proj-feature-art {
-  height: 200px;
-  background: #0e0f10;
+/* Thinner bezel for phone-scale media (e.g. a screen recording standing in
+   at col-width rather than full-bleed) — the default bezel's padding reads
+   as too heavy a frame once the media itself is this small. */
+.proj-media-card--thin {
+  padding: clamp(4px, 0.6vw, 8px);
+  border-radius: clamp(14px, 2.4vw, 28px);
 }
 
-.proj-feature-copy {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.proj-media-card--thin video,
+.proj-media-card--thin img {
+  border-radius: calc(clamp(14px, 2.4vw, 28px) - clamp(4px, 0.6vw, 8px));
 }
 
-.proj-feature-label {
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.5;
-  color: var(--color-text);
-}
-
-/* ─── Panel wrapping rows ────────────────────────────────── */
-.proj-panels-wrap {
-  padding: 56px 80px 80px;
-}
-
-.proj-panels-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-/* ─── Sidekick row: diagram (fixed, centered) + display (fills + crops) ─── */
-.proj-sidekick-row {
-  display: flex;
-  align-items: stretch;
-  gap: clamp(24px, 3.5vw, 64px);
-  height: clamp(360px, 36vw, 560px);
-}
-
-.proj-sidekick-diagram {
-  flex: 0 0 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 24px;
-}
-
-.proj-sidekick-diagram video {
+/* Plain rounded media — no black bezel/padding, just the rounded corner
+   treatment (e.g. Rivian Assistant's "Deeply integrated" section). */
+.proj-media-plain {
   width: 100%;
-  height: auto;
+}
+
+.proj-media-plain video,
+.proj-media-plain img {
+  width: 100%;
   display: block;
 }
 
-.proj-sidekick-caption {
+/* .proj-media-plain covers both real-world photography (background
+   photos, product montages) and screen recordings shown without
+   .proj-media-card's bezel — only the latter keep the rounded-corner
+   treatment, since that's the language screens use everywhere else on
+   the site (see .proj-media-card). Applied per-instance in the markup. */
+.proj-media-plain--screen video,
+.proj-media-plain--screen img {
+  border-radius: clamp(8px, 1.5vw, 16px);
+}
+
+/* Blends a video's own black background into the page's black —
+   mix-blend-mode: screen drops out black pixels entirely,
+   leaving only the bright on-screen content visible. The background here
+   isn't decorative: .proj-reveal's transform on an ancestor opens a new
+   stacking context that cuts off the blend's view of the true page
+   background, so painting the same color immediately behind the video,
+   inside that same context, is what lets the drop-out still work. */
+.proj-media-blend {
+  background: var(--color-bg);
+}
+
+.proj-media-blend video {
+  mix-blend-mode: screen;
+}
+
+/* screen only drops black out against a *dark* backdrop — screen(0, b) = b
+   is exactly why it works in dark mode, but screen(a, white) trends every
+   channel toward 1 regardless of a, so against a light page everything
+   (background and content alike) washes out to white instead. There's no
+   blend mode that does the mirror trick (drop black, keep color) against
+   a light backdrop directly, so light mode composites two operations
+   instead: invert(1) swaps black↔white (the former black background is
+   now white, multiply's identity color, so it drops out against the page
+   the same way black did against screen); hue-rotate(180deg) then spins
+   the now-inverted hue wheel back another half turn, which for a
+   fully-saturated color lands back on the original hue — net effect, the
+   accent color reads close to its true color while the background still
+   disappears. */
+[data-theme="light"] .proj-media-blend video {
+  mix-blend-mode: multiply;
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Energy & Charging feature sections: split the copy and media into
+   paired columns, with the off-peak phone and charging scene sharing a row. */
+.proj-energy-controls-layout,
+.proj-energy-home-layout {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  align-items: start;
+}
+
+.proj-energy-controls-content {
+  grid-column: 1 / span 5;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-
-.proj-sidekick-display {
-  flex: 1 1 auto;
+  align-self: stretch;
+  gap: 0;
   min-width: 0;
-  position: relative;
-  border-radius: clamp(8px, 1.5vw, 16px);
-  overflow: visible;
-  background: #0e0f10;
 }
 
-.proj-sidekick-display video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: auto;
+.proj-energy-controls-photo {
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.proj-energy-controls-photo img {
+  width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: left center;
 }
 
-
-/* ─── Voice-in-context card ──────────────────────────────── */
-.proj-voice-card {
-  background: #000000;
-  border-radius: clamp(8px, 1.5vw, 16px);
-  overflow: hidden;
+.proj-energy-controls-content .proj-mobile-static-copy {
+  max-width: none;
+  flex: 1;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  padding-block: 16px;
 }
 
-.proj-voice-tags {
+.proj-energy-controls-stage {
+  grid-column: 6 / span 7;
+  aspect-ratio: 5 / 6;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  padding: 32px 32px 0;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-energy-controls-panel);
 }
 
-.proj-voice-tag-sep {
-  color: var(--color-muted);
+.proj-energy-controls-screen {
+  height: 91%;
+  aspect-ratio: 539 / 764;
+  container-type: inline-size;
+}
+
+.proj-energy-controls-screen video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  border-radius: 10.7cqw;
+  filter: drop-shadow(var(--shadow-screen));
+}
+
+.proj-energy-phone-stage {
+  grid-column: 1 / span 6;
+  aspect-ratio: 5 / 7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-home-charging-panel);
+}
+
+.proj-energy-phone-stage .proj-device-frame {
+  width: auto;
+  height: 82%;
+  max-width: none;
+}
+
+.proj-energy-home-content {
+  grid-column: 7 / span 6;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.proj-energy-home-photo {
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.proj-energy-home-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: right center;
+  transform: translateX(2px);
+  opacity: 0.9;
+}
+
+.proj-energy-home-content .proj-mobile-static-copy {
+  max-width: none;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding-block: 16px;
+}
+
+/* Home energy management — unlike every bezel above, this one is a real
+   device-frame graphic (assets/images/shared/Mobile-frame.svg, inlined in
+   the markup rather than referenced via <img> so its fill/stroke are
+   styleable) layered over the video rather than baked into the recording
+   or drawn with border-radius. It's a hand-built vector, not a traced
+   raster, so its 418×851 viewBox and screen-window path are exact —
+   nothing here is measured off pixels. aspect-ratio below matches that
+   viewBox exactly. */
+.proj-device-frame {
+  position: relative;
+  aspect-ratio: 418 / 851;
+  /* Lets the video's corner radius below be expressed in cqw, so it
+     scales exactly with the frame instead of drifting out of proportion
+     with the graphic the way a fixed clamp() would as this section's
+     column span changes. */
+  container-type: inline-size;
+}
+
+.proj-device-frame video {
+  position: absolute;
+  /* Mobile-frame.svg's screen cutout is an exact path (x20 y19 w376 h813
+     r52 in its 418×851 viewBox) rather than something measured off a
+     raster's alpha channel, so these numbers are read straight from that
+     path's own coordinates: 20/418, 22/418, 19/851, 19/851. */
+  inset: 2.233% 5.263% 2.233% 4.785%;
+  width: 89.952%;
+  height: 95.534%;
+  object-fit: cover;
+  /* 52/418 from the same path's corner radius. */
+  border-radius: 12.440cqw;
+  display: block;
+}
+
+.proj-device-frame-overlay {
+  position: absolute;
+  filter: drop-shadow(var(--shadow-screen));
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+
+/* Earlier Work's two source photos are portrait/near-square crops — left
+   at their native aspect they'd render far taller than every other
+   project's col-inset media, which is uniformly ~16:9 (see Rivian
+   Assistant's "Deeply integrated" and Security & Access's Multi-Factor
+   Drive). Cropping to the same 16:9 keeps this project's media the same
+   size as the rest of the site instead of standing out as an odd block. */
+#proj-archive .proj-section--col-inset .proj-media-plain {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+#proj-archive .proj-section--col-inset .proj-media-plain img,
+#proj-archive .proj-section--col-inset .proj-media-plain video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.proj-media-group {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ─── Voice in context ────────────────────────────────────── */
+/* Breaks the wave out of the section's own side margin so it spans the
+   full width of the project container — the inset .proj-media-plain
+   width every other media block uses reads as too narrow a frame for a
+   thin horizontal line like this one. */
+.proj-section--voice-in-context > .proj-feature-media {
+  width: calc(100% + 2 * var(--grid-margin));
+  margin-left: calc(-1 * var(--grid-margin));
+  margin-right: calc(-1 * var(--grid-margin));
+}
+
+/* Second line of the title, not a caption — same h3 scale as "Audio-
+   first" above it. Stacked crossfade, same technique as the old full-
+   size headline this started as: all four states occupy the same spot
+   and only the active one is visible, so it reads as a single word that
+   changes (and recolors) rather than a list. width: 100% (rather than a
+   fixed px/em guess) matches .proj-section-left's own column exactly, so
+   the absolutely positioned tags line up with the title above at any
+   viewport instead of risking an overflow into the copy column. */
+.proj-voice-state-label {
+  position: relative;
+  width: 100%;
+  height: 1.1em;
+  font-size: var(--size-h3);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  margin-top: -0.13em;
 }
 
 .proj-voice-tag {
-  opacity: 0.4;
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0;
   transition: opacity 0.3s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
@@ -1406,177 +2474,382 @@ h1 .proj-inline-link svg {
   opacity: 1;
 }
 
-.proj-voice-tag--listening { color: #f5a623; }
-.proj-voice-tag--thinking  { color: #5ac8fa; }
-.proj-voice-tag--speaking  { color: #34c759; }
-.proj-voice-tag--error     { color: #ff453a; }
+/* Colors sampled directly from wave_range.mp4's frames to match the wave
+   line exactly: Listening/Error are solid in the video, Thinking/Speaking
+   are a teal → orange → teal gradient along the wave's length. */
+.proj-voice-tag--listening { color: #ffa800; }
+.proj-voice-tag--error     { color: #f25643; }
 
-.proj-voice-wave {
-  padding: 24px 0 32px;
-  overflow: hidden;
-}
-
-.proj-voice-wave video {
-  width: 200%;
-  height: auto;
-  display: block;
+.proj-voice-tag--thinking,
+.proj-voice-tag--speaking {
+  background: linear-gradient(90deg, #068b88 0%, #ffa800 50%, #068b88 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 /* ─── Scenario carousel ──────────────────────────────────── */
-/* Scroll-jack: the zone is tall enough to give the page's normal scroll
-   somewhere to go while the layout stays pinned; JS maps how far the user
-   has scrolled through it directly onto the carousel's scrollLeft. Once
-   the zone is exhausted, the sticky element unpins and page scroll carries
-   on to the next section as usual. */
-.proj-scenario-scrollzone {
-  position: relative;
-  height: 320vh;
-}
-
-.proj-scenario-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-.proj-scenario-layout {
-  display: flex;
-  align-items: center;
-  gap: clamp(24px, 4vw, 64px);
-  width: 100%;
-}
-
-.proj-scenario-carousel-wrap {
-  flex: 1 1 60%;
-  min-width: 0;
-}
-
-.proj-scenario-carousel {
-  --slide-w: 220px;
-  position: relative;
-  overflow: hidden;
-  padding: 40px 0;
-  -webkit-mask-image: linear-gradient(to right, transparent 0, black 18%, black 82%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0, black 18%, black 82%, transparent 100%);
-}
-
-/* The track holds every slide and is the thing that actually moves — its
-   transform is what gets a real CSS transition, so sliding from one
-   scenario to the next always eases along the site's cubic-bezier curve
-   instead of jumping straight to the new position. */
-.proj-scenario-track {
-  position: relative;
-  display: flex;
-  gap: 16px;
-  width: max-content;
-  transition: transform 0.6s cubic-bezier(0, 0.3, 0.24, 1);
-}
-
-.proj-scenario-slide {
-  flex: 0 0 var(--slide-w);
-  border-radius: clamp(8px, 1.5vw, 16px);
-  overflow: hidden;
-  opacity: 0.2;
-  transform: scale(0.9);
-  transition: opacity 0.3s cubic-bezier(0, 0.3, 0.24, 1), transform 0.3s cubic-bezier(0, 0.3, 0.24, 1);
-}
-
-.proj-scenario-slide.is-active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.proj-scenario-slide video {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.proj-scenario-copy {
-  flex: 1 1 40%;
+/* Traditional arrow-paged filmstrip. The container is the real scroll
+   element (native overflow-x, paged via scrollBy in JS), bled past
+   .proj-section's own padding on both sides so its clip bounds reach from
+   the sidebar to the true right edge of the viewport — the padding is
+   reapplied as inner `padding` instead of the section's margin, so cards
+   still rest at the same inset as the header row above them but can
+   scroll flush to either edge. */
+.proj-scenario-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 40px;
 }
 
-.proj-scenario-headline {
-  font-size: clamp(18px, 1.67vw, 36px);
-  font-weight: 700;
+.proj-scenario-section--after-divider {
+  margin-top: 40px;
+}
+
+.proj-scenario-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Same reason as .proj-section[hidden] elsewhere: the display: flex above
+   wins over the UA [hidden] rule otherwise. */
+.proj-scenario-header[hidden] {
+  display: none;
+}
+
+/* Same treatment as every other section title on the site (.proj-section
+   -sub — "Controls and content", "Rear Display", etc.) rather than its
+   own larger h2 scale, so "Out in the world" reads as one more section
+   heading among the rest instead of a bigger, distinct one. */
+.proj-scenario-section-title {
+  font-size: var(--size-h3);
+  font-weight: 400;
   line-height: 1.1;
   letter-spacing: 0.02em;
   color: var(--color-text);
+  margin-top: -0.13em;
 }
 
-.proj-scenario-icons {
+.proj-scenario-arrows {
+  display: flex;
+  flex-shrink: 0;
+  gap: 16px;
+}
+
+/* Same ring-then-white-fill treatment as .close-btn and .proj-scenario-mute,
+   for a consistent icon-button language across the page. */
+.proj-scenario-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  border: 1px solid var(--color-divider);
+  background: none;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color 0.2s cubic-bezier(0, 0.3, 0.24, 1), border-color 0.2s cubic-bezier(0, 0.3, 0.24, 1), color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-scenario-arrow:hover {
+  background-color: var(--color-hover-bg);
+  border-color: var(--color-hover-bg);
+  color: var(--color-hover-text);
+}
+
+/* Both arrows stay put at all times; when there's nowhere left to page in
+   that direction, the icon just fades to the same color as its own ring
+   instead of disappearing, and the white-fill hover is suppressed since
+   there's nothing for it to do. */
+.proj-scenario-arrow:disabled {
+  color: var(--color-divider);
+  cursor: default;
+}
+
+.proj-scenario-arrow:disabled:hover {
+  background-color: transparent;
+  border-color: var(--color-divider);
+  color: var(--color-divider);
+}
+
+.proj-scenario-carousel {
+  --card-w: 300px;
+  margin: 0 calc(-1 * var(--grid-margin));
+  padding: 0 var(--grid-margin);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.proj-scenario-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.proj-scenario-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  width: max-content;
+}
+
+.proj-scenario-card {
+  flex: 0 0 var(--card-w);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  cursor: pointer;
+}
+
+/* Same reason as .proj-section[hidden] elsewhere: the display: flex above
+   wins over the UA [hidden] rule otherwise. */
+.proj-scenario-card[hidden] {
+  display: none;
+}
+
+#proj-joyful-utilities .proj-scenario-card {
+  cursor: default;
+}
+
+#proj-joyful-utilities .proj-scenario-controls {
+  display: none;
+}
+
+/* Rivian Assistant: last 3 cards hidden, leaving exactly 3 — flex:1 (in
+   place of the fixed --card-w every other scenario carousel uses) lets
+   those 3 stretch to fill the section's full width instead of sitting at
+   their original fixed size with empty space trailing them. The track no
+   longer needs width: max-content either, since nothing's meant to
+   overflow into a scroll anymore. */
+#proj-rivian-assistant .proj-scenario-track {
+  width: 100%;
+}
+
+#proj-rivian-assistant .proj-scenario-card {
+  flex: 1 1 0;
+}
+
+.proj-scenario-media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.proj-scenario-media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.proj-assistant-connected {
+  container-type: inline-size;
+}
+
+#proj-rivian-assistant .proj-assistant-connected .proj-scenario-track {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+}
+
+.proj-assistant-connected .proj-scenario-card {
+  grid-column: 1 / span 4;
+  width: 100%;
+  height: 56.25cqw;
+  min-width: 0;
+  gap: 24px;
+  cursor: default;
+}
+
+.proj-assistant-connected .proj-scenario-media {
+  aspect-ratio: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.proj-assistant-connected .proj-scenario-caption[hidden] {
+  display: none;
+}
+
+.proj-assistant-caption-row {
   display: flex;
   gap: 16px;
-  margin-top: 8px;
+  align-items: center;
+  flex-shrink: 0;
 }
 
-.proj-scenario-icon {
+.proj-assistant-caption-row > .proj-body {
+  margin: 0;
+}
+
+.proj-assistant-play {
+  order: -1;
+  position: relative;
   display: flex;
-  color: var(--color-muted);
-  opacity: 0.35;
-  cursor: pointer;
-  transition: opacity 0.3s cubic-bezier(0, 0.3, 0.24, 1), color 0.3s cubic-bezier(0, 0.3, 0.24, 1);
-}
-
-.proj-scenario-icon:hover {
-  opacity: 0.7;
-}
-
-.proj-scenario-icon.is-active {
-  color: var(--color-text);
-  opacity: 1;
-}
-
-@media (max-width: 768px) {
-  .proj-scenario-scrollzone {
-    height: 220vh;
-  }
-
-  .proj-scenario-sticky {
-    height: auto;
-    min-height: 100vh;
-  }
-
-  .proj-scenario-layout {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .proj-scenario-carousel {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-
-/* ─── Unmute toggle ───────────────────────────────────────── */
-.proj-scenario-unmute {
-  display: block;
-  margin: 20px auto 0;
-  padding: 10px 24px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 1px solid var(--color-divider);
   border-radius: 9999px;
-  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.proj-assistant-duration {
+  color: inherit;
+}
+
+.proj-assistant-play:hover {
   background: var(--color-hover-bg);
   color: var(--color-hover-text);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.5;
-  cursor: pointer;
-  transition: opacity 0.2s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
-.proj-scenario-unmute:hover {
-  opacity: 0.85;
+.proj-assistant-connected .proj-scenario-caption {
+  justify-content: center;
+}
+
+.proj-assistant-connected .proj-scenario-controls {
+  margin-left: 0;
+}
+
+.proj-assistant-connected .proj-scenario-ctrl {
+  width: 40px;
+  height: 40px;
+}
+
+.proj-assistant-calendar {
+  grid-column: 5 / span 8;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Render the original full-width stage, then clip only its right edge. */
+.proj-assistant-calendar > .proj-feature-media {
+  width: 100cqw;
+}
+
+@media (max-width: 700px) {
+  #proj-rivian-assistant .proj-assistant-connected .proj-scenario-track {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .proj-assistant-connected .proj-scenario-card,
+  .proj-assistant-calendar {
+    grid-column: 1;
+    width: 100%;
+  }
+  .proj-assistant-connected .proj-scenario-card {
+    height: auto;
+  }
+  .proj-assistant-connected .proj-scenario-media {
+    aspect-ratio: 9 / 16;
+    flex: none;
+  }
+}
+
+.proj-scenario-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.proj-scenario-caption .proj-scenario-card-desc {
+  margin: 0;
+}
+
+/* Keep media controls visible at the right edge of the caption row. */
+.proj-scenario-controls {
+  display: flex;
+  flex-shrink: 0;
+  margin-left: auto;
+  gap: 8px;
+}
+
+.proj-scenario-ctrl {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  border: none;
+  background: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-scenario-ctrl::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid var(--color-divider);
+  background: none;
+  z-index: -1;
+  transition: background-color 0.2s cubic-bezier(0, 0.3, 0.24, 1), border-color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-scenario-ctrl:hover {
+  color: var(--color-hover-text);
+}
+
+.proj-scenario-rewind svg {
+  transform: scaleX(-1);
+}
+
+.proj-scenario-ctrl:hover::before {
+  background-color: var(--color-hover-bg);
+  border-color: var(--color-hover-bg);
+}
+
+.proj-scenario-mute-icons {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+}
+
+.proj-scenario-mute-icons svg {
+  grid-area: 1 / 1;
+  transition: opacity 0.15s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-scenario-mute .icon-unmuted { opacity: 0; }
+
+.proj-scenario-mute.is-unmuted .icon-muted   { opacity: 0; }
+.proj-scenario-mute.is-unmuted .icon-unmuted { opacity: 1; }
+
+@media (max-width: 768px) {
+  .proj-scenario-carousel {
+    --card-w: 220px;
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
 }
 
 /* ─── Closing ────────────────────────────────────────────── */
+/* Left/right inset matches .proj-section--col-inset's own top/bottom
+   formula (margin + gutter + one column width) so the statement is
+   contained within col2–11 rather than a flat max-width. */
 .proj-closing-statement {
-  padding: 80px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  /* .proj-closing (the parent <section>) carries none of .proj-section's
+     own var(--grid-margin) padding, so col1–12 here is just that margin
+     directly rather than 0 — there's no ambient margin elsewhere to fall
+     back on. */
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1585,84 +2858,422 @@ h1 .proj-inline-link svg {
 }
 
 .proj-closing-headline {
-  font-size: clamp(28px, 5vw, 96px);
-  font-weight: 700;
+  font-size: var(--size-h2);
+  font-weight: 400;
   line-height: 1.1;
   letter-spacing: 0.02em;
-  color: #ffffff;
-  max-width: 780px;
+  color: var(--color-text);
 }
 
 /* ─── AI Day CTA ─────────────────────────────────────────── */
+
+/* Same pill-button treatment as .nav-link (see the header's LinkedIn
+   link) — filled hover background instead of just a text-color change,
+   so an external link reads consistently as a "button" everywhere it
+   appears on the site rather than as inline body text. */
 .proj-ai-day-cta {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  /* .proj-hero-split-intro is a flex column with the default
+     align-items: stretch, which would otherwise stretch this button to
+     the full width of the paragraph above it — align-self overrides
+     that so the pill hugs its own (now much shorter) text instead. */
+  align-self: flex-start;
   gap: 4px;
-  padding: 24px 0;
+  /* min-height (not a fixed height, unlike .nav-link) — this label is
+     long enough to wrap to 2-3 lines in narrower layouts, and a rigid
+     40px box would clip it. border-radius: 9999px still caps a taller,
+     wrapped box in full semicircles, so it keeps reading as one pill. */
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: var(--size-copy);
+  line-height: 1.4;
+  letter-spacing: var(--tracking-ui);
   color: var(--color-muted);
   text-decoration: none;
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+  border-radius: 9999px;
+  position: relative;
+  /* Own hover-color transition listed alongside .proj-reveal's opacity/
+     transform — a lone `transition: color …` here would win the cascade
+     over .proj-reveal's declaration outright (same specificity, later in
+     source) and silently drop the fade/slide-up entirely, so this button
+     would just pop in instead of animating in with the rest of the hero. */
+  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1),
+              opacity 0.55s cubic-bezier(0, 0.3, 0.24, 1),
+              transform 0.55s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-ai-day-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  /* Same ring as .close-btn/.theme-toggle — this one sits on the flat
+     page background rather than over media, so a plain divider-color
+     stroke (not close-btn's frosted-glass treatment) is enough to read
+     as a button outline at rest. */
+  border: 1px solid var(--color-divider);
+  background-color: transparent;
+  transition: background-color 0.2s cubic-bezier(0, 0.3, 0.24, 1), border-color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+  z-index: -1;
 }
 
 .proj-ai-day-cta:hover {
-  color: var(--color-text);
+  color: var(--color-hover-text);
+}
+
+.proj-ai-day-cta:hover::before {
+  background-color: var(--color-hover-bg);
+  border-color: var(--color-hover-bg);
 }
 
 .proj-ai-day-cta svg {
   position: relative;
   top: 1px;
   flex-shrink: 0;
+  transition: stroke 0.2s cubic-bezier(0, 0.3, 0.24, 1);
 }
 
+.proj-section-right > .proj-ai-day-cta {
+  margin-top: 20px;
+}
+
+/* ─── Before/After compare toggle (Rear Display) ────────────
+   Two-option segmented control rather than a single relabeling button —
+   both states are visible at once, so which one is active reads at a
+   glance instead of requiring the reader to parse the current label. */
+
+.proj-feature-media--screen-bg > .proj-compare-toggle {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 24px;
+  translate: -50% 0;
+}
+
+#proj-joyful-utilities .proj-feature-media--screen-bg > .proj-media-card {
+  position: relative;
+  top: 0;
+}
+
+#proj-joyful-utilities .proj-feature-media > .proj-media-plain {
+  grid-row: 1;
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+}
+
+.proj-feature-media--rear-display {
+  aspect-ratio: 16 / 9;
+  grid-template-rows: 1fr auto 1fr auto 1fr;
+  row-gap: 0;
+}
+
+.proj-feature-media--rear-display > .proj-feature-media-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+#proj-joyful-utilities .proj-feature-media--rear-display > .proj-media-card {
+  top: 0;
+  translate: 0 8px;
+  grid-row: 2;
+  width: 95%;
+  justify-self: center;
+}
+
+.proj-feature-media--rear-display > .proj-compare-toggle {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  translate: none;
+  grid-column: 1 / -1;
+  grid-row: 4;
+  justify-self: center;
+}
+
+@media (max-width: 768px) {
+  #proj-joyful-utilities .proj-feature-media--rear-display {
+    aspect-ratio: auto;
+    grid-template-rows: auto 16px auto;
+    row-gap: 0;
+    padding-bottom: 16px;
+  }
+
+  #proj-joyful-utilities .proj-feature-media--rear-display > .proj-media-card {
+    grid-row: 1;
+  }
+
+  #proj-joyful-utilities .proj-feature-media--rear-display > .proj-compare-toggle {
+    grid-row: 3;
+  }
+
+  #proj-joyful-utilities .proj-feature-media--rear-display > .proj-feature-media-bg {
+    inset: 0;
+  }
+}
+
+.proj-compare-toggle {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(76px, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  box-sizing: border-box;
+  height: 40px;
+  position: relative;
+  align-self: flex-start;
+  padding: 4px;
+  border-radius: 9999px;
+  border: none;
+  background-color: var(--color-bg);
+}
+
+/* The highlight is one shared element that slides between the two
+   button positions (JS sets its width/transform to match whichever is
+   active), rather than each button fading its own background in and
+   out — that reads as a highlight moving, not two things independently
+   changing color at once. Same easing as .close-btn/.nav-link's own
+   hover-fill transitions, so this motion feels like it belongs to the
+   same system rather than introducing a new curve. */
+.proj-compare-toggle-thumb {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  /* Equal grid columns keep the initial highlight aligned before measurement. */
+  width: calc((100% - 8px) / 2);
+  height: calc(100% - 8px);
+  background-color: var(--color-hover-bg);
+  border-radius: 9999px;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-compare-toggle-btn {
+  /* "Before" is the wider label — min-width matches it so "After" isn't
+     a visibly smaller pill next to it. */
+  min-width: 76px;
+  padding: 8px 16px;
+  font-family: var(--font);
+  font-size: var(--size-copy);
+  font-weight: 400;
+  letter-spacing: var(--tracking-ui);
+  -webkit-font-smoothing: antialiased;
+  color: var(--color-muted);
+  text-align: center;
+  position: relative;
+  background: none;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+
+.proj-compare-toggle-btn:hover:not(.is-active) {
+  color: var(--color-text);
+}
+
+.proj-compare-toggle-btn.is-active {
+  color: var(--color-hover-text);
+}
 
 /* ─── Project footer ─────────────────────────────────────── */
 .proj-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 32px 80px;
+  /* Equal top/bottom padding — was 32/80, asymmetric to leave room for
+     .proj-thanks above the CTA; with that line hidden, symmetric padding
+     centers the remaining CTA text in the section instead of reading
+     top-heavy. */
+  padding: 56px var(--grid-margin);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 24px;
   align-items: center;
   text-align: center;
 }
 
 .proj-thanks {
-  font-size: 14px;
+  font-size: var(--size-copy);
   line-height: 1.5;
-  color: #9b9b9b;
+  color: var(--color-muted);
 }
 
 .proj-cta {
-  font-size: 14px;
-  color: #ffffff;
+  font-size: var(--size-copy);
+  color: var(--color-text);
 }
 
-.proj-cta a {
-  color: #ffffff;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+/* ─── Trusted by (Archive) ───────────────────────────────── */
+.proj-trusted-divider {
+  width: 100%;
 }
 
-.proj-cta a:hover {
-  color: #9b9b9b;
+.proj-trusted {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 40px var(--grid-margin);
+  text-align: center;
 }
 
-/* Project pages carry a generous 80px side gutter on desktop; that's far
+.proj-trusted-label {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 0 16px;
+  padding-inline: var(--grid-margin);
+  font-size: var(--size-copy);
+  color: var(--color-muted);
+  text-align: left;
+}
+
+/* Full-bleed viewport for the scrolling track — breaks out of the
+   section's side margin via negative margins matching the parent's own
+   padding (rather than 100vw, so it can't overflow past a scrollbar or
+   the project sidebar), and masks the edges so logos fade in/out rather
+   than clipping abruptly. */
+.proj-trusted-logos {
+  display: flex;
+  /* .proj-trusted's align-items: center otherwise sizes this to
+     fit-content (i.e. both tracks laid end to end) instead of the
+     viewport width, defeating overflow: hidden entirely. */
+  align-self: stretch;
+  margin-left: calc(-1 * var(--grid-margin));
+  margin-right: calc(-1 * var(--grid-margin));
+  overflow: hidden;
+}
+
+/* Two identical tracks sit side by side; each scrolls left by exactly its
+   own width, so by the time the first has scrolled fully out of view the
+   second (already positioned right after it) has scrolled into the exact
+   spot the first started in — a seamless right-to-left loop with no jump. */
+.proj-trusted-track {
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+  gap: 56px;
+  padding: 4px 56px;
+  animation: proj-trusted-scroll 72s linear infinite;
+}
+
+@keyframes proj-trusted-scroll {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.proj-trusted-logo {
+  width: auto;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.proj-trusted-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 16px;
+  opacity: 0.7;
+  flex-shrink: 0;
+  background-repeat: no-repeat;
+}
+
+.proj-trusted-mark-symbol,
+.proj-trusted-mark-word {
+  display: block;
+  flex: none;
+  height: 16px;
+  background-repeat: no-repeat;
+}
+
+.proj-trusted-mark--optum .proj-trusted-mark-symbol {
+  width: 16.2px;
+  height: 18px;
+  background-image: url("assets/images/archive/logos/optum.png");
+  background-size: 62.5px 19px;
+  background-position: left top;
+}
+
+.proj-trusted-mark--optum {
+  gap: 6px;
+}
+
+.proj-trusted-mark--optum .proj-trusted-mark-word {
+  width: 73.2px;
+  height: 15px;
+  background-image: url("assets/images/archive/logos/optum.png");
+  background-size: 114.2px 34.7px;
+  background-position: -34px -19.7px;
+}
+
+.proj-trusted-mark--audible {
+  width: 86px;
+  height: 26px;
+  background-image: url("assets/images/archive/logos/audible.png");
+  background-size: 86px 37px;
+  background-position: left top;
+}
+
+.proj-trusted-mark--audible .proj-trusted-mark-symbol,
+.proj-trusted-mark--audible .proj-trusted-mark-word {
+  display: none;
+}
+
+/* Every mark here is a white/near-white monochrome cutout meant for the
+   dark theme — invisible on a light background as-is. All twelve are
+   genuinely monochrome (checked each file's pixel data rather than
+   assuming), so a straight invert reliably turns them dark without
+   introducing odd hues the way it would on a multi-color logo. */
+[data-theme="light"] .proj-trusted-logo {
+  filter: invert(1);
+}
+
+[data-theme="light"] .proj-trusted-mark {
+  filter: invert(1);
+}
+
+/* A shared height reads as wildly inconsistent scale here: the two
+   non-lettermarks (Rivian, BMW) need to run taller than the wordmarks to
+   read as the same visual weight — a symbol has to be bigger than a line
+   of text to carry equivalent presence — and wordmarks themselves carry
+   very different amounts of built-in padding (Michael Kors' source file
+   is a tight crop; Kohler's is a bold face with almost none). Each logo
+   is sized individually so their actual ink reads as roughly the same
+   visual weight side by side, rather than matching a single number that
+   only the source files' bounding boxes agree on. */
+.proj-trusted-logo--dragon        { width: 110px; height: 20px; object-fit: cover; object-position: top; clip-path: inset(0 4% 0 0); }
+.proj-trusted-logo--kohler        { height: 18px; clip-path: inset(0 4% 0 0); }
+.proj-trusted-logo--indeed        { height: 20px; clip-path: inset(0 4.5% 0 0); }
+.proj-trusted-logo--calvin-klein  { height: 16px; transform: translateY(2px); }
+.proj-trusted-logo--optum         { height: 28px; clip-path: inset(0 4.5% 0 0); }
+.proj-trusted-logo--michael-kors  { height: 16px; }
+.proj-trusted-logo--rivian        { height: 18px; filter: brightness(0) invert(1); }
+.proj-trusted-logo--google        { height: 24px; transform: translateY(4px); }
+.proj-trusted-logo--citi          { height: 24px; }
+.proj-trusted-logo--dvf           { height: 20px; }
+.proj-trusted-logo--bmw           { height: 24px; filter: brightness(0) invert(1); }
+
+[data-theme="light"] .proj-trusted-logo--rivian,
+[data-theme="light"] .proj-trusted-logo--bmw {
+  filter: brightness(0);
+}
+
+/* Project pages carry the grid's 40px side margin on desktop; that's still
    too much on mobile, so it collapses to 16px below the breakpoint. */
 @media (max-width: 768px) {
   .proj-hero,
   .proj-hero-media,
-  .proj-quote-wrap,
   .proj-section,
-  .proj-panels-wrap,
-  .proj-closing-statement,
   .proj-footer,
   .scroll-meter {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .scroll-meter-divider {
+    margin-left: -16px;
+    margin-right: -16px;
   }
 
   .proj-section-header {
@@ -1680,4 +3291,152 @@ h1 .proj-inline-link svg {
   .proj-section-right {
     order: 3;
   }
+
+  .proj-mobile-static {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .proj-mobile-static-content {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .proj-mobile-static-copy {
+    max-width: none;
+  }
+
+  .proj-mobile-static-phone {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .proj-energy-controls-layout,
+  .proj-energy-home-layout {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+
+  .proj-energy-controls-stage,
+  .proj-energy-controls-content,
+  .proj-energy-phone-stage,
+  .proj-energy-home-content {
+    grid-column: 1;
+  }
+
+  .proj-energy-controls-stage { order: 1; height: auto; aspect-ratio: 2 / 3; }
+  .proj-energy-controls-content { order: 2; }
+  .proj-energy-phone-stage {
+    order: 1;
+    aspect-ratio: 2 / 3;
+    width: 100%;
+    max-width: none;
+    justify-self: center;
+  }
+  .proj-energy-home-content { align-self: auto; }
+  .proj-energy-phone-stage .proj-device-frame {
+    width: auto;
+    height: 82%;
+    max-width: none;
+  }
+  .proj-energy-home-content { order: 2; }
+}
+
+
+/* Final mobile media overrides follow shared desktop component rules so the
+   assets, screen backplates, and controls stay in the same padded stage. */
+@media (max-width: 768px) {
+  .proj-feature-media > .proj-media-card,
+  .proj-feature-media > .proj-media-group,
+  .proj-feature-media > .proj-media-plain {
+    grid-column: 1;
+    width: 100%;
+  }
+
+  .proj-feature-media--screen-bg > .proj-media-card,
+  .proj-feature-media--screen-bg > .proj-media-group,
+  .proj-feature-media--screen-bg > .proj-media-plain {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .proj-feature-media--screen-bg > .proj-feature-media-bg {
+    grid-column: 1;
+    grid-row: 1;
+    inset: -20px 0 0 -12px;
+  }
+
+  #proj-joyful-utilities .proj-feature-media--screen-bg > .proj-media-card {
+    top: 0;
+  }
+
+  .proj-feature-media--screen-bg > .proj-compare-toggle {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    translate: none;
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: center;
+  }
+}
+
+
+/* Earlier Work sections use a centered media-then-copy pattern. */
+.proj-section--archive-feature {
+  gap: 24px;
+}
+
+.proj-archive-carousel-nav {
+  grid-column: 11 / span 2;
+  align-self: start;
+  justify-content: flex-end;
+}
+
+#proj-archive .proj-section-header--feature .proj-section-right {
+  grid-column: 1 / span 7;
+}
+
+@media (max-width: 768px) {
+  .proj-archive-carousel-nav {
+    grid-column: 1 / -1;
+  }
+  #proj-archive .proj-section-header--feature .proj-section-right {
+    grid-column: 1 / -1;
+  }
+}
+
+.proj-archive-carousel {
+  container-type: inline-size;
+}
+
+.proj-archive-carousel .proj-scenario-carousel {
+  --card-w: 100cqw;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--grid-margin);
+}
+
+.proj-archive-carousel .proj-scenario-card {
+  cursor: default;
+  scroll-snap-align: center;
+}
+
+.proj-archive-carousel .proj-scenario-media {
+  aspect-ratio: 16 / 9;
+}
+
+.proj-archive-active-caption {
+  color: var(--color-text);
+}
+
+.proj-archive-copy {
+  width: min(100%, 760px);
+  margin-inline: auto;
+  text-align: center;
 }
