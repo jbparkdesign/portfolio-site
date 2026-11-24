@@ -6,7 +6,7 @@
   <title>Jeffrey Park, Product Designer</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="stylesheet" href="style.css?v=407">
+  <link rel="stylesheet" href="style.css?v=437">
   <script>
     // Applied here (before body renders) rather than in the main script
     // block so a saved light-mode preference doesn't flash dark first.
@@ -45,8 +45,8 @@
         </a>
       </div>
       <p class="home-intro">
-        <span>Product Designer at Rivian.</span>
-        <span>Since before the first vehicle shipped, I’ve built interaction models across the vehicle, app, charging network, and AI assistant.</span>
+        <span>Product Designer at <a href="https://rivian.com/" class="proj-inline-link" target="_blank" rel="noopener"><span>Rivian</span><svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span>
+        <span>I joined before the first vehicle shipped. Since then, I’ve shaped experiences across the vehicle, app, charging network, and AI assistant.</span>
       </p>
 
       <nav>
@@ -61,12 +61,9 @@
             </svg>
           </span>
         </button>
-        <a href="#about" class="nav-link about-btn" data-project="about" aria-label="Info">
-          <span class="nav-label">Info</span>
-          <svg class="nav-icon nav-icon-about" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-            <circle cx="9" cy="3.75" r="1.1" fill="currentColor"/>
-            <path d="M9 7V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <a href="#about" class="nav-link about-btn" data-project="about" aria-label="About">
+          <span class="nav-label">About</span>
+          <span class="nav-icon nav-icon-about" aria-hidden="true">A</span>
         </a>
         <a href="https://www.linkedin.com/in/jeffreybpark/" target="_blank" rel="noopener" class="nav-link" aria-label="LinkedIn">
           <span class="nav-label">LinkedIn</span>
@@ -194,8 +191,8 @@
 
   <div class="project-panel">
     <button class="close-btn" onclick="exitProject()" aria-label="Close project">
-      <svg width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-        <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
     </button>
 
@@ -221,28 +218,27 @@
               <div class="proj-about-facts proj-reveal">
                 <div class="proj-about-fact">
                   <span class="proj-about-fact-label">Based in</span>
-                  <span class="proj-about-fact-value">San Francisco</span>
+                  <span class="proj-about-fact-value"><span>San Francisco</span></span>
                 </div>
                 <div class="proj-about-fact">
                   <span class="proj-about-fact-label">Currently</span>
                   <div class="proj-about-fact-value proj-about-current">
-                    <a href="https://rivian.com/" class="proj-inline-link" target="_blank" rel="noopener">
-                      <span>Product Design @ Rivian</span>
+                    <span>Product Design at <a href="https://rivian.com/" class="proj-inline-link" target="_blank" rel="noopener">
+                      <span>Rivian</span>
                       <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
                         <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
-                    </a>
+                    </a></span>
                   </div>
                 </div>
                 <div class="proj-about-fact">
                   <span class="proj-about-fact-label">Past life</span>
-                  <span class="proj-about-fact-value">Wearable tech, eyewear design, and agency work</span>
+                  <span class="proj-about-fact-value"><span>Wearable tech, eyewear design, and agency work</span></span>
                 </div>
                 <div class="proj-about-fact">
                   <span class="proj-about-fact-label">Outside of work</span>
                   <div class="proj-about-fact-value proj-about-outside">
                     <span>Chasing down good coffee and pastries and getting better with a camera</span>
-                    <span class="proj-about-camera-trigger" data-default-emoji="📷" data-hover-emoji="📸">📷</span>
                   </div>
                 </div>
               </div>
@@ -253,6 +249,9 @@
                 <div class="proj-about-photo proj-about-photo--2">
                   <img class="proj-about-photo-crop-image" src="assets/images/about/portrait-5.jpg" alt="Jeffrey Park outdoors with a dog">
                 </div>
+              </div>
+              <div class="proj-about-camera-dock">
+                <button type="button" class="proj-about-camera-trigger" aria-label="Show a random photo" data-default-emoji="📷" data-hover-emoji="📸"><span class="proj-about-camera-glyph" aria-hidden="true">📷</span></button>
               </div>
             </div>
           </div>
@@ -703,7 +702,7 @@
           </div>
           <div class="proj-section-header proj-section-header--feature proj-assistant-principle">
             <div class="proj-section-left">
-              <h3 class="proj-section-sub">Voice and screen,<br>in sync.</h3>
+              <h3 class="proj-section-sub">An exercise<br>in restraint.</h3>
             </div>
             <div class="proj-section-right">
               <p class="proj-body">The interaction model defines when the Assistant speaks, shows information, or yields to the driver. One shared behavior across voice and screen.</p>
@@ -897,6 +896,7 @@
                 <img src="assets/images/energy-charging/RAN_bg.jpg" alt="Rivian Adventure Network charger at a charging site">
               </div>
               <div class="proj-mobile-static-copy">
+                <h3 class="proj-section-sub">The Rivian Adventure Network</h3>
                 <p class="proj-body">I carried Rivian's visual identity into a more utilitarian charging interface, designing task-focused screens around two physical buttons for clear decisions and fewer accidental touches.</p>
               </div>
             </div>
@@ -934,6 +934,7 @@
                 <img src="assets/images/energy-charging/Home-charging_bg.jpg" alt="Rivian parked and charging in a home garage">
               </div>
               <div class="proj-mobile-static-copy">
+                <h3 class="proj-section-sub">Charging at home</h3>
                 <p class="proj-body">Few drivers know their utility's off-peak schedule, even though charging at the right time can lower cost and emissions. I made that lookup a one-time setup so home charging shifts to the cheapest, cleanest hours automatically.</p>
               </div>
             </div>
@@ -1064,7 +1065,7 @@
           </div>
           <div class="proj-section-header proj-section-header--feature">
             <div class="proj-section-right">
-              <p class="proj-body">Before digital product design, I designed optical frames and early wearable concepts for global brands, like <span class="proj-archive-active-caption">the Nike Wing, a high concept performance eyewear</span>.</p>
+              <p class="proj-body">Before digital product design, I designed optical frames and early wearable concepts for global brands,<br>like <span class="proj-archive-active-caption">the Nike Wing, a high concept performance eyewear</span>.</p>
             </div>
           <div class="proj-scenario-header proj-archive-carousel-nav">
             <div class="proj-scenario-arrows">
@@ -1245,35 +1246,42 @@
       if (!hero || !columns || !col || !group || !photo1 || !photo2) return;
 
       function center() {
-        // .proj-about-photos-col's CSS max-height is bounded against the
-        // viewport (calc(100vh - 160px)), not against .proj-about-columns —
-        // the box it's actually meant to sit inside. At some widths, engines
-        // resolve its `aspect-ratio` against the absolute top:0/bottom:0
-        // stretch such that it renders taller than .proj-about-columns's own
-        // (content-driven) height while staying under that viewport cap, so
-        // the CSS max-height never engages. .proj-about-columns's own height
-        // is reliable to measure here regardless — the col is absolutely
-        // positioned and out of flow, so its overflow can't inflate that
-        // measurement. Pin the real cap in JS so the col can never render
-        // taller than the space next to it, no matter how a given engine
-        // resolves the CSS.
-        col.style.maxHeight = columns.getBoundingClientRect().height + 'px';
+        const desktop = window.matchMedia('(min-width: 769px)').matches;
+        if (!hero.getBoundingClientRect().width) return;
+        const cameraRoom = desktop
+          ? (window.matchMedia('(min-width: 1025px)').matches ? 116 : 56)
+          : 0;
+        if (desktop) {
+          col.style.maxHeight = 'none';
+          const available = Math.max(0, col.clientHeight - cameraRoom);
+          const ratio = Math.max(1.5, photo1.naturalHeight / photo1.naturalWidth || 1.5);
+          // Scale one composition: photo size, stagger and overlap stay in
+          // proportion even when viewport height is the limiting dimension.
+          const width = Math.min(col.clientWidth * 0.5,
+            Math.max(0, (available - 24) / (ratio + 0.34 + 0.05)));
+          group.style.setProperty('--about-photo-width', width + 'px');
+          group.style.setProperty('--about-photo-offset', width * 0.34 + 'px');
+          group.style.setProperty('--about-photo-overlap', width * 0.025 + 'px');
+        } else {
+          col.style.maxHeight = columns.getBoundingClientRect().height + 'px';
+          group.style.removeProperty('--about-photo-width');
+          group.style.removeProperty('--about-photo-offset');
+          group.style.removeProperty('--about-photo-overlap');
+        }
 
         group.style.transform = 'none';
-        const heroRect = hero.getBoundingClientRect();
+        const bounds = (desktop ? col : hero).getBoundingClientRect();
         const colRect = col.getBoundingClientRect();
         const r1 = photo1.getBoundingClientRect();
         const r2 = photo2.getBoundingClientRect();
         const unionTop = Math.min(r1.top, r2.top);
         const unionBottom = Math.max(r1.bottom, r2.bottom);
-        const unionHeight = unionBottom - unionTop;
-        const targetTop = colRect.top + (colRect.height - unionHeight) / 2;
+        const targetTop = colRect.top + (colRect.height - (unionBottom - unionTop)) / 2;
         let delta = targetTop - unionTop;
-        // Belt-and-suspenders: also clamp so the transform can never push
-        // the cluster past the hero's own edges, whatever the cause.
-        const minDelta = heroRect.top - unionTop;
-        const maxDelta = heroRect.bottom - unionBottom;
+        const minDelta = bounds.top - unionTop;
+        const maxDelta = bounds.bottom - cameraRoom - unionBottom;
         if (minDelta <= maxDelta) delta = Math.min(Math.max(delta, minDelta), maxDelta);
+        if (desktop) delta = Math.max(minDelta, delta - 24);
         group.style.transform = `translateY(${delta}px)`;
       }
 
@@ -1289,6 +1297,7 @@
       // instead of relying on a single snapshot or a transitionend callback.
       const roCenter = new ResizeObserver(() => center());
       roCenter.observe(hero);
+      roCenter.observe(col);
 
       window.centerAboutPhotoGroup = center;
     })();
@@ -1296,6 +1305,7 @@
     // Camera emoji easter egg — each click stacks a photo at a random spot over the photo column
     (function () {
       const trigger = document.querySelector('.proj-about-camera-trigger');
+      const cameraGlyph = trigger?.querySelector('.proj-about-camera-glyph');
       const stackTarget = document.querySelector('.proj-about-photos-col');
       const staticPhoto = document.querySelector('.proj-about-photo--1');
       if (!trigger || !stackTarget || !staticPhoto) return;
@@ -1314,17 +1324,44 @@
 
       trigger.addEventListener('click', () => {
         if (emojiRevertTimer) clearTimeout(emojiRevertTimer);
-        trigger.textContent = trigger.dataset.hoverEmoji;
+        cameraGlyph.textContent = trigger.dataset.hoverEmoji;
         emojiRevertTimer = setTimeout(() => {
-          trigger.textContent = trigger.dataset.defaultEmoji;
+          cameraGlyph.textContent = trigger.dataset.defaultEmoji;
         }, 300);
 
         // Match the static photos' rendered size exactly, so the flashed photo reads as the same card.
         const photoSize = staticPhoto.getBoundingClientRect();
         const rect = stackTarget.getBoundingClientRect();
-        const randX = rect.left + Math.random() * Math.max(rect.width - photoSize.width, 0) + photoSize.width / 2;
-        const randY = rect.top + Math.random() * Math.max(rect.height - photoSize.height, 0) + photoSize.height / 2;
-        const randRotate = (Math.random() * 10 - 5).toFixed(1) + 'deg';
+        const desktop = window.matchMedia('(min-width: 769px)').matches;
+        const inset = 16;
+        const columnsRect = stackTarget.closest('.proj-about-columns').getBoundingClientRect();
+        const infoRect = document.querySelector('.proj-about-facts').getBoundingClientRect();
+        const buttonRect = trigger.getBoundingClientRect();
+        const headlineReach = parseFloat(getComputedStyle(stackTarget).getPropertyValue('--space-1')) || 40;
+        const top = desktop ? Math.max(rect.top - headlineReach, 80) : 80;
+        const right = desktop ? Math.min(rect.right - inset, window.innerWidth - inset) : window.innerWidth - inset;
+        const bottom = Math.min(buttonRect.top - inset, window.innerHeight - inset);
+        const angle = Math.random() * 10 - 5;
+        const radians = Math.abs(angle) * Math.PI / 180;
+        const halfWidth = (photoSize.width * Math.cos(radians) + photoSize.height * Math.sin(radians)) / 2;
+        const halfHeight = (photoSize.height * Math.cos(radians) + photoSize.width * Math.sin(radians)) / 2;
+        // Sample open regions directly, including the left space above the
+        // facts. Rotated photo bounds must clear both the facts and button.
+        const regions = desktop ? [
+          { left: columnsRect.left + inset, right: rect.left - inset,
+            top, bottom: Math.min(infoRect.top - inset, bottom) },
+          { left: Math.max(rect.left + inset, infoRect.right + inset), right, top, bottom }
+        ] : [
+          { left: inset, right, top, bottom },
+          { left: inset, right, top: Math.max(buttonRect.bottom + inset, top), bottom: window.innerHeight - inset }
+        ];
+        const fits = regions.filter(region => region.right - region.left >= halfWidth * 2
+          && region.bottom - region.top >= halfHeight * 2);
+        if (!fits.length) return;
+        const region = fits[Math.floor(Math.random() * fits.length)];
+        const randX = region.left + halfWidth + Math.random() * (region.right - region.left - halfWidth * 2);
+        const randY = region.top + halfHeight + Math.random() * (region.bottom - region.top - halfHeight * 2);
+        const randRotate = angle.toFixed(1) + 'deg';
 
         const floatEl = document.createElement('img');
         floatEl.src = photos[photoIndex];
@@ -1669,40 +1706,60 @@
     const eyebrow      = document.querySelector('.proj-eyebrow');
     const projectScroll = document.querySelector('.project-scroll');
 
+    let initialRevealBatch = true;
+    let nextRevealStart = 0;
     const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          el.classList.add('is-visible');
-          revealObserver.unobserve(el);
-          // The stagger delay above only exists to space out the initial
-          // load-in — left in place afterward, it also delays this same
-          // element's other transitions (e.g. .proj-ai-day-cta's hover
-          // color change), making later interactions feel laggy. Clear it
-          // once the reveal transition finishes so hover/etc. run at their
-          // own natural speed again.
-          el.addEventListener('transitionend', () => {
-            el.style.transitionDelay = '';
-          }, { once: true });
-        }
+      // Reveal each newly visible batch from top to bottom, then left to
+      // right. Grid placement can differ from DOM order (e.g. Utilities).
+      const visible = entries.filter(entry => entry.isIntersecting);
+      visible.sort((a, b) => {
+        const vertical = a.boundingClientRect.top - b.boundingClientRect.top;
+        return Math.abs(vertical) > 24
+          ? vertical
+          : a.boundingClientRect.left - b.boundingClientRect.left;
       });
+      const now = performance.now();
+      let start = Math.max(now + (initialRevealBatch ? 220 : 0), nextRevealStart);
+      visible.forEach(entry => {
+        const el = entry.target;
+        const delay = Math.round(start - now);
+        el.style.transitionDelay = `${delay}ms`;
+        // Metadata animates its rows, so pass the group delay down too.
+        el.style.setProperty('--reveal-delay', `${delay}ms`);
+        el.classList.add('is-visible');
+        revealObserver.unobserve(el);
+        start += el.classList.contains('proj-hero-facts--stagger') ? 240 : 80;
+      });
+      if (visible.length) nextRevealStart = start;
+      initialRevealBatch = false;
     }, { root: projectScroll, threshold: 0.08 });
 
+    // Clear entrance delays after the actual animated element finishes,
+    // so later hover transitions stay responsive. Metadata finishes when
+    // its last row does, rather than when its first row enters.
+    projectScroll.addEventListener('transitionend', event => {
+      if (event.propertyName !== 'opacity') return;
+      const el = event.target.closest('.proj-reveal');
+      if (!el) return;
+      const lastFact = el.classList.contains('proj-hero-facts--stagger')
+        ? el.lastElementChild : null;
+      if (event.target !== (lastFact || el)) return;
+      el.style.transitionDelay = '';
+      el.style.removeProperty('--reveal-delay');
+    });
+
     function setupReveal(content) {
+      revealObserver.disconnect();
+      initialRevealBatch = true;
+      nextRevealStart = 0;
       const items = content.querySelectorAll('.proj-reveal');
-      // Reset all items
       items.forEach(el => {
         el.classList.remove('is-visible');
         el.style.transitionDelay = '0ms';
+        el.style.setProperty('--reveal-delay', '0ms');
       });
-      // Stagger the above-fold hero elements relative to panel slide
-      const heroReveals = content.querySelectorAll('.proj-hero .proj-reveal, .proj-hero-block .proj-reveal');
-      heroReveals.forEach((el, i) => {
-        el.style.transitionDelay = `${220 + i * 80}ms`;
-      });
-      const heroMedia = content.querySelector('.proj-hero-media.proj-reveal, .proj-hero-media-bleed.proj-reveal');
-      if (heroMedia) heroMedia.style.transitionDelay = `${220 + heroReveals.length * 80}ms`;
-      // Wait for panel to be painted before observing
+      // Observe after the panel is painted so intersection geometry
+      // reflects the current layout and viewport.
       requestAnimationFrame(() => {
         items.forEach(el => revealObserver.observe(el));
       });
@@ -1839,9 +1896,17 @@
     // this (already in sidebar-mode), which is why only the first open was
     // affected.
     const sidebarEl = document.querySelector('.sidebar');
+    let railExpandTimer = null;
+    function finishRailExpansion() {
+      clearTimeout(railExpandTimer);
+      if (!document.body.classList.contains('rail-expanding')) return;
+      document.body.classList.remove('rail-expanding');
+      document.body.classList.add('home-nav-restored');
+    }
     if (sidebarEl) {
       sidebarEl.addEventListener('transitionend', (e) => {
         if (e.target !== sidebarEl || e.propertyName !== 'width') return;
+        finishRailExpansion();
         measureScrollMeterSegments();
         applyScrollMeterProgress(meterProgress);
       });
@@ -1929,11 +1994,16 @@
     });
 
     function enterProject() {
+      clearTimeout(railExpandTimer);
+      document.body.classList.remove('rail-expanding', 'home-nav-restored');
       const alreadyOpen = document.body.classList.contains('sidebar-mode');
       document.body.classList.add('sidebar-mode');
-      closeBtn.classList.remove('is-exiting');
-      void closeBtn.offsetWidth; // force reflow to restart animation
-      closeBtn.classList.add('is-entering');
+      // Project-to-project navigation keeps the shared close control steady.
+      if (!alreadyOpen) {
+        closeBtn.classList.remove('is-exiting', 'is-entering');
+        void closeBtn.offsetWidth;
+        closeBtn.classList.add('is-entering');
+      }
       projectScroll.scrollTo({ top: 0, behavior: 'instant' }); // bypass scroll-behavior: smooth
       lastScrollY = 0;
       resetScrollMeter();
@@ -1946,7 +2016,14 @@
         navigateProject(null, { historyMode });
         return;
       }
-      document.body.classList.remove('sidebar-mode');
+      const holdRailIcons = document.body.classList.contains('sidebar-mode')
+        && window.matchMedia('(min-width: 1025px)').matches
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.body.classList.toggle('rail-expanding', holdRailIcons);
+      document.body.classList.remove('home-nav-restored', 'sidebar-mode');
+      // Width transitionend is authoritative; the fallback also handles
+      // a resize or another interruption that cancels that transition.
+      if (holdRailIcons) railExpandTimer = setTimeout(finishRailExpansion, 450);
       closeBtn.classList.remove('is-entering');
       void closeBtn.offsetWidth;
       closeBtn.classList.add('is-exiting');

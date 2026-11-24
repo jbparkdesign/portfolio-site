@@ -25,6 +25,7 @@
   --black-pure-rgb:  0, 0, 0;
   --black-brand:     #0d0e10;
   --white-brand:     #ececf6;
+  --yellow-rivian:   #ffac00;
   --gray-muted:      #9b9ba6;
   --gray-muted-rgb:  155, 155, 166;
 
@@ -292,7 +293,7 @@ body.sidebar-mode .project-panel {
   border-radius: 9999px;
   border: none;
   background: none;
-  color: var(--color-muted);
+  color: var(--white-brand);
   cursor: pointer;
   align-items: center;
   justify-content: center;
@@ -314,7 +315,7 @@ body.sidebar-mode .close-btn {
 }
 
 .close-btn.is-entering {
-  animation: close-btn-in 0.4s cubic-bezier(0, 0.3, 0.24, 1) 0.2s forwards;
+  animation: close-btn-in 0.4s cubic-bezier(0, 0.3, 0.24, 1) 0.2s both;
   pointer-events: auto;
 }
 
@@ -330,7 +331,7 @@ body.sidebar-mode .close-btn {
    wall off ::before's backdrop-filter from the page behind it, leaving
    the glass tinted but unblurred. */
 .close-btn.is-entering svg {
-  animation: close-btn-icon-in 0.4s cubic-bezier(0, 0.3, 0.24, 1) 0.2s forwards;
+  animation: close-btn-icon-in 0.4s cubic-bezier(0, 0.3, 0.24, 1) 0.2s both;
 }
 
 .close-btn.is-exiting svg {
@@ -348,13 +349,13 @@ body.sidebar-mode .close-btn {
 }
 
 @keyframes close-btn-icon-in {
-  from { transform: rotate(90deg); }
+  from { transform: rotate(45deg); }
   to   { transform: rotate(0deg); }
 }
 
 @keyframes close-btn-icon-out {
   from { transform: rotate(0deg); }
-  to   { transform: rotate(90deg); }
+  to   { transform: rotate(45deg); }
 }
 
 .close-btn::before {
@@ -363,7 +364,9 @@ body.sidebar-mode .close-btn {
   inset: 0;
   border-radius: 9999px;
   border: 1px solid var(--color-divider);
-  background: transparent;
+  background: color-mix(in srgb, var(--black-brand) 80%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   z-index: -1;
   transition: background-color 0.2s cubic-bezier(0, 0.3, 0.24, 1), border-color 0.2s cubic-bezier(0, 0.3, 0.24, 1);
 }
@@ -374,7 +377,7 @@ body.sidebar-mode .close-btn {
 
 .close-btn:hover::before {
   background-color: var(--color-hover-bg);
-  border-color: var(--color-hover-bg);
+  border-color: var(--color-divider);
 }
 
 /* A consistent keyboard focus cue for links and controls. Hover styles
@@ -405,6 +408,7 @@ header > .header-branding { grid-column: 1; grid-row: 1; justify-self: start; }
 header > nav { grid-column: 2; grid-row: 1; justify-self: end; }
 
 .home-intro {
+  animation: rise-in 0.8s cubic-bezier(0, 0.3, 0.24, 1) 460ms both;
   grid-column: 1 / -1;
   grid-row: 2;
   /* Four of twelve columns, capped for a comfortable reading measure. */
@@ -419,6 +423,9 @@ header > nav { grid-column: 2; grid-row: 1; justify-self: end; }
 }
 
 .home-intro > span { display: block; }
+@media (prefers-reduced-motion: reduce) {
+  .home-intro { animation: none; }
+}
 @media (max-width: 1024px) {
   .home-intro { width: 100%; }
 }
@@ -542,7 +549,7 @@ body.sidebar-mode .name-space { width: 0; animation: none; }
 
 
 /* Sidebar mode: keep labels + arrow visible */
-body.sidebar-mode .nav-link { padding: 0 10px; }
+body:is(.sidebar-mode, .rail-expanding) .nav-link { padding: 0 10px; }
 
 /* ─── Nav links ──────────────────────────────────────────── */
 nav {
@@ -593,6 +600,11 @@ nav {
   height: 18px;
   flex-shrink: 0;
   color: var(--color-muted);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: center;
 }
 
 .about-btn:hover .nav-icon-about {
@@ -603,24 +615,24 @@ nav {
   color: var(--color-hover-text);
 }
 
-body.sidebar-mode .nav-link {
+body:is(.sidebar-mode, .rail-expanding) .nav-link {
   justify-content: center;
   width: 40px;
   padding: 0;
 }
 
-body.sidebar-mode .nav-link::before {
+body:is(.sidebar-mode, .rail-expanding) .nav-link::before {
   border: 1px solid var(--color-divider);
 }
 
-body.sidebar-mode .nav-link .nav-label,
-body.sidebar-mode .nav-link .nav-external { display: none; }
-body.sidebar-mode .nav-link .nav-icon {
+body:is(.sidebar-mode, .rail-expanding) .nav-link .nav-label,
+body:is(.sidebar-mode, .rail-expanding) .nav-link .nav-external { display: none; }
+body:is(.sidebar-mode, .rail-expanding) .nav-link .nav-icon {
   display: inline-block;
   top: 0;
 }
-body.sidebar-mode .nav-link .nav-icon-linkedin { display: block; }
-body.sidebar-mode .nav-link .nav-icon-about { display: block; }
+body:is(.sidebar-mode, .rail-expanding) .nav-link .nav-icon-linkedin { display: block; }
+body:is(.sidebar-mode, .rail-expanding) .nav-link .nav-icon-about { display: block; }
 
 
 .nav-link:hover {
@@ -692,7 +704,7 @@ body.sidebar-mode .nav-link .nav-icon-about { display: block; }
 
 .theme-toggle:hover::before {
   background-color: var(--color-hover-bg);
-  border-color: var(--color-hover-bg);
+  border-color: var(--color-divider);
 }
 
 /* Stacked crossfade, same mechanic as .proj-scenario-mute-icons: both
@@ -938,23 +950,23 @@ footer:not(.proj-footer):not(.proj-contact) {
 
 /* In the compact project sidebar the email action becomes a single
    recognizable icon, then the existing checkmark confirms a copy. */
-body.sidebar-mode .email-label-wrap { display: none; }
-body.sidebar-mode .email-btn {
+body:is(.sidebar-mode, .rail-expanding) .email-label-wrap { display: none; }
+body:is(.sidebar-mode, .rail-expanding) .email-btn {
   width: 40px;
   padding: 0;
   justify-content: center;
 }
-body.sidebar-mode .email-icons {
+body:is(.sidebar-mode, .rail-expanding) .email-icons {
   width: 16px;
   height: 16px;
   grid-template: 16px / 16px;
 }
-body.sidebar-mode .email-icons .icon-email { display: block; }
-body.sidebar-mode .email-icons .icon-copy { display: none; }
-body.sidebar-mode .email-btn.copied .icon-email {
+body:is(.sidebar-mode, .rail-expanding) .email-icons .icon-email { display: block; }
+body:is(.sidebar-mode, .rail-expanding) .email-icons .icon-copy { display: none; }
+body:is(.sidebar-mode, .rail-expanding) .email-btn.copied .icon-email {
   animation: icon-out-ccw 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
 }
-body.sidebar-mode .email-btn.copied.reverting .icon-email {
+body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email {
   animation: icon-in-ccw 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
 }
 
@@ -1228,15 +1240,6 @@ body.sidebar-mode .email-btn.copied.reverting .icon-email {
   gap: 40px;
 }
 
-/* Separate the headline from the photos as well as the facts, while
-   reserving enough room for the complete desktop composition. */
-@media (min-width: 769px) {
-  .proj-about-hero {
-    gap: clamp(56px, calc(20vh - 80px), var(--space-3));
-    padding-bottom: 40px;
-  }
-}
-
 .proj-about-headline {
   position: relative;
   z-index: 2;
@@ -1319,7 +1322,7 @@ body.sidebar-mode .email-btn.copied.reverting .icon-email {
 .proj-about-photo {
   position: absolute;
   display: block;
-  width: 39.95%; /* 47% scaled down 15% — also sizes the camera-float overlays, which copy this element's rendered box */
+  width: var(--about-photo-width, 39.95%);
   height: auto;
   pointer-events: none;
   -webkit-user-drag: none;
@@ -1336,13 +1339,57 @@ body.sidebar-mode .email-btn.copied.reverting .icon-email {
 
 .proj-about-photo--2 {
   right: 8%;
-  top: calc(32% - 80px);
+  top: var(--about-photo-offset, calc(32% - 80px));
   z-index: 2;
   height: auto;
   aspect-ratio: 2 / 3;
   overflow: hidden;
   filter: grayscale(100%);
   transform: rotate(2deg);
+}
+
+@media (max-width: 768px) {
+  .proj-about-photo--2 { top: 48px; }
+}
+
+/* Use the available desktop height for both the facts and photo canvas. */
+@media (min-width: 769px) {
+  .proj-about-hero { height: 100svh; min-height: 0; gap: 0; padding-bottom: 40px; }
+  .proj-about-columns {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    align-items: center;
+  }
+  .proj-about-photos-col {
+    position: relative;
+    grid-column: 7 / span 6;
+    top: auto;
+    bottom: auto;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    aspect-ratio: auto;
+    max-height: none;
+  }
+  .proj-about-photo-group { bottom: auto; height: 0; }
+  .proj-about-photo--1 {
+    left: calc(50% - 16px - var(--about-photo-width) + var(--about-photo-overlap) / 2);
+    z-index: 3;
+  }
+  .proj-about-photo--2 {
+    left: calc(50% - 16px - var(--about-photo-overlap) / 2);
+    right: auto;
+  }
+}
+
+/* Match the bottom of the rail's list: 20px outer padding, 40px footer,
+   and 40px gap. The hero already reserves 40px at its bottom. */
+@media (min-width: 1025px) {
+  .proj-about-content-col {
+    align-self: end;
+    margin-bottom: calc(var(--space-1) + 20px);
+  }
 }
 
 /* Match the Figma crop: half the source width, offset within the image. */
@@ -1358,7 +1405,7 @@ body.sidebar-mode .email-btn.copied.reverting .icon-email {
 @media (max-width: 600px) {
   .proj-about-photos-col {
     aspect-ratio: auto;
-    min-height: 320px;
+    min-height: 384px;
   }
 }
 
@@ -1371,22 +1418,55 @@ body.sidebar-mode .email-btn.copied.reverting .icon-email {
   margin-bottom: 80px;
 }
 
-.proj-about-divider {
-  height: 1px;
-  background: var(--color-divider);
-  margin: 0;
-}
+.proj-about-divider { display: none; }
 
 .proj-about-facts {
   display: flex;
   flex-direction: column;
+  gap: clamp(24px, 2.9vh, 32px);
 }
+
+.proj-about-facts { width: 100%; max-width: 520px; }
 
 .proj-about-fact {
   display: grid;
-  grid-template-columns: 180px 1fr;
-  padding: 16px 0;
+  grid-template-columns: max-content minmax(16px, 1fr) minmax(0, 60%);
+  column-gap: 8px;
+  align-items: baseline;
+}
+
+.proj-about-fact::before {
+  content: '';
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
   border-bottom: 1px solid var(--color-divider);
+  margin-top: calc(1.5em - 4px);
+  font-size: var(--size-copy);
+  line-height: 1.5;
+}
+.proj-about-fact-label { grid-column: 1; grid-row: 1; white-space: nowrap; }
+.proj-about-fact-value { grid-column: 3; grid-row: 1; min-width: 0; text-align: left; }
+.proj-about-fact-value > span:not(.proj-about-camera-trigger),
+.proj-about-fact-value > a {
+  position: relative;
+  background: var(--color-bg);
+  padding-left: 0;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.proj-about-fact .proj-about-current,
+.proj-about-fact .proj-about-outside { align-items: flex-start; }
+
+@media (max-width: 768px) {
+  .proj-about-facts { max-width: 100%; }
+  .proj-about-fact { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+  .proj-about-fact::before { display: none; }
+  .proj-about-fact-value { text-align: left; }
+  .proj-about-fact-value > span:not(.proj-about-camera-trigger),
+  .proj-about-fact-value > a { padding-left: 0; }
+  .proj-about-fact .proj-about-current,
+  .proj-about-fact .proj-about-outside { align-items: flex-start; }
 }
 
 .proj-about-fact-label {
@@ -1410,26 +1490,47 @@ body.sidebar-mode .email-btn.copied.reverting .icon-email {
 
 .proj-about-current { gap: 4px; }
 .proj-about-current .proj-body { margin: 0; }
+.home-intro .proj-inline-link,
 .proj-about-current .proj-inline-link { text-decoration: none; align-items: center; gap: 0; }
-.proj-about-outside { gap: 8px; }
+.proj-about-current .proj-inline-link svg { transform: translateY(1px); }
+.home-intro .proj-inline-link:hover,
+.home-intro .proj-inline-link:focus-visible,
+.proj-about-current .proj-inline-link:hover,
+.proj-about-current .proj-inline-link:focus-visible { color: var(--yellow-rivian); }
+.proj-about-outside { flex-direction: column; align-items: flex-start; gap: 8px; }
 
-@media (max-width: 600px) {
-  .proj-about-fact {
-    grid-template-columns: 1fr;
-    gap: 4px;
-  }
+.proj-about-camera-dock {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  justify-content: center;
+  z-index: 4;
 }
 
+@media (min-width: 1025px) {
+  .proj-about-camera-dock { bottom: calc(var(--space-1) + 20px); }
+}
 .proj-about-camera-trigger {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 40px;
+  width: 25%;
+  max-width: 100%;
   height: 40px;
   flex-shrink: 0;
   border-radius: 9999px;
   cursor: pointer;
+
+}
+
+.proj-about-camera-glyph {
+  display: inline-block;
   animation: proj-camera-wiggle 3s ease-in-out infinite;
 }
 
@@ -1446,7 +1547,7 @@ body.sidebar-mode .email-btn.copied.reverting .icon-email {
 
 .proj-about-camera-trigger:hover::before {
   background-color: var(--color-hover-bg);
-  border-color: var(--color-hover-bg);
+  border-color: var(--color-divider);
 }
 
 @keyframes proj-camera-wiggle {
@@ -1606,12 +1707,25 @@ body.sidebar-mode .email-btn.copied.reverting .icon-email {
   transform: translateY(0);
 }
 
+.proj-hero-facts--stagger .proj-hero-fact {
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
 .proj-hero-facts--stagger .proj-hero-fact:nth-child(2) {
-  transition-delay: 80ms;
+  transition-delay: calc(var(--reveal-delay, 0ms) + 80ms);
 }
 
 .proj-hero-facts--stagger .proj-hero-fact:nth-child(3) {
-  transition-delay: 160ms;
+  transition-delay: calc(var(--reveal-delay, 0ms) + 160ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proj-reveal,
+  .proj-hero-facts--stagger .proj-hero-fact {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Hidden for now (Role/Scope/Released credits) — explicit override since the
@@ -2295,9 +2409,14 @@ h1 .proj-inline-link svg {
   filter: drop-shadow(var(--shadow-screen));
 }
 
+.proj-energy-home-layout { container-type: inline-size; }
+
 .proj-energy-phone-stage {
-  grid-column: 1 / span 6;
-  aspect-ratio: 5 / 7;
+  grid-column: 1 / span 7;
+  /* Retain the old six-column stage height so widening the container
+     does not change the phone's size (82% of that height). */
+  height: calc((100cqw - var(--grid-gutter)) * 0.7);
+  aspect-ratio: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2312,7 +2431,7 @@ h1 .proj-inline-link svg {
 }
 
 .proj-energy-home-content {
-  grid-column: 7 / span 6;
+  grid-column: 8 / span 5;
   align-self: stretch;
   display: flex;
   flex-direction: column;
@@ -2536,7 +2655,7 @@ h1 .proj-inline-link svg {
 
 .proj-scenario-arrow:hover {
   background-color: var(--color-hover-bg);
-  border-color: var(--color-hover-bg);
+  border-color: var(--color-divider);
   color: var(--color-hover-text);
 }
 
@@ -2683,7 +2802,7 @@ h1 .proj-inline-link svg {
 
 .proj-assistant-caption-row .proj-assistant-play {
   color: inherit;
-  border-color: currentColor;
+  border-color: var(--color-divider);
 }
 .proj-assistant-caption-row .proj-assistant-play:hover {
   background: var(--white-brand);
@@ -2754,7 +2873,8 @@ h1 .proj-inline-link svg {
   color: var(--color-text);
 }
 
-.proj-contact > p { margin: 0; }
+.proj-contact > p { margin: 0; color: var(--color-muted); }
+.proj-contact > p a { color: var(--color-text); }
 .proj-contact > p a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .proj-contact-links { display: flex; flex-shrink: 0; gap: 8px; }
 .proj-contact-links a {
@@ -2772,9 +2892,8 @@ h1 .proj-inline-link svg {
 
 @media (max-width: 768px) {
   .proj-contact { flex-wrap: wrap; gap: 16px; text-align: center; }
-}
 
-@media (max-width: 700px) {
+  /* Stack the Assistant media with the rest of the mobile layout. */
   #proj-rivian-assistant .proj-assistant-connected .proj-scenario-track {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -2847,7 +2966,7 @@ h1 .proj-inline-link svg {
 
 .proj-scenario-ctrl:hover::before {
   background-color: var(--color-hover-bg);
-  border-color: var(--color-hover-bg);
+  border-color: var(--color-divider);
 }
 
 .proj-scenario-mute-icons {
@@ -2963,7 +3082,7 @@ h1 .proj-inline-link svg {
 
 .proj-ai-day-cta:hover::before {
   background-color: var(--color-hover-bg);
-  border-color: var(--color-hover-bg);
+  border-color: var(--color-divider);
 }
 
 .proj-ai-day-cta svg {
@@ -3371,6 +3490,7 @@ h1 .proj-inline-link svg {
   .proj-energy-controls-content { order: 2; }
   .proj-energy-phone-stage {
     order: 1;
+    height: auto;
     aspect-ratio: 2 / 3;
     width: 100%;
     max-width: none;
@@ -3477,4 +3597,18 @@ h1 .proj-inline-link svg {
   width: min(100%, 760px);
   margin-inline: auto;
   text-align: center;
+}
+
+/* Restore text only after the compact rail has finished expanding. */
+@keyframes nav-label-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body.home-nav-restored header nav .nav-label,
+body.home-nav-restored header nav .nav-external {
+  animation: nav-label-in 0.16s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.home-nav-restored header nav .nav-label,
+  body.home-nav-restored header nav .nav-external { animation: none; }
 }
