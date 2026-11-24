@@ -6,7 +6,7 @@
   <title>Jeffrey Park, Product Designer</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="stylesheet" href="style.css?v=393">
+  <link rel="stylesheet" href="style.css?v=407">
   <script>
     // Applied here (before body renders) rather than in the main script
     // block so a saved light-mode preference doesn't flash dark first.
@@ -28,7 +28,7 @@
 
     <header>
       <div class="header-branding">
-        <a href="/" class="logo" aria-label="Jeffrey Park">
+        <a href="#" class="logo" aria-label="Jeffrey Park">
           <span class="j-group">
             <svg class="initial initial--j" width="5.76" height="13.19" viewBox="0 0 5.76031 13.1937" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M1.98701 13.1937L0.975792 11.0192C2.60374 10.2614 3.36145 9.20231 3.36145 7.68549V2.39955H0V0H5.76031V7.68549C5.76031 9.39816 5.10538 11.7435 1.98701 13.1937Z" fill="currentColor"/>
@@ -43,14 +43,11 @@
             <span class="lastname-clip"><span class="lastname-text">ark</span></span>
           </span>
         </a>
-
-        <p class="header-positioning">
-          <span>focused on</span>
-          <span class="header-positioning-rotator" aria-live="off">
-            <span class="header-positioning-phrase">making tech useful</span>
-          </span>
-        </p>
       </div>
+      <p class="home-intro">
+        <span>Product Designer at Rivian.</span>
+        <span>Since before the first vehicle shipped, I’ve built interaction models across the vehicle, app, charging network, and AI assistant.</span>
+      </p>
 
       <nav>
         <button type="button" class="theme-toggle" aria-label="Switch to light mode" aria-pressed="false" hidden>
@@ -64,12 +61,11 @@
             </svg>
           </span>
         </button>
-        <a href="#" class="nav-link about-btn" data-project="about" aria-label="Info">
+        <a href="#about" class="nav-link about-btn" data-project="about" aria-label="Info">
           <span class="nav-label">Info</span>
-          <svg class="nav-icon nav-icon-about" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="12" cy="8" r="1" fill="currentColor"/>
-            <path d="M12 11V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <svg class="nav-icon nav-icon-about" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <circle cx="9" cy="3.75" r="1.1" fill="currentColor"/>
+            <path d="M9 7V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
         <a href="https://www.linkedin.com/in/jeffreybpark/" target="_blank" rel="noopener" class="nav-link" aria-label="LinkedIn">
@@ -90,7 +86,7 @@
         <div class="divider"></div>
 
         <div class="list-row-clip">
-          <a href="#" class="list-row" data-project="rivian-assistant">
+          <a href="#rivian-assistant" class="list-row" data-project="rivian-assistant">
             <div class="project-item">
               <span class="word">Rivian</span>
               <span class="sep sep--icon-only">
@@ -106,7 +102,7 @@
         <div class="divider"></div>
 
         <div class="list-row-clip">
-          <a href="#" class="list-row" data-project="joyful-utilities">
+          <a href="#joyful-utilities" class="list-row" data-project="joyful-utilities">
             <div class="project-item">
               <span class="word">Joyful</span>
               <span class="sep sep--icon-only">
@@ -122,7 +118,7 @@
         <div class="divider"></div>
 
         <div class="list-row-clip">
-          <a href="#" class="list-row" data-project="security-access">
+          <a href="#security-access" class="list-row" data-project="security-access">
             <div class="project-item">
               <span class="word">Security</span>
               <span class="sep sep--swap">
@@ -139,7 +135,7 @@
         <div class="divider"></div>
 
         <div class="list-row-clip">
-          <a href="#" class="list-row" data-project="energy-charging">
+          <a href="#energy-charging" class="list-row" data-project="energy-charging">
             <div class="project-item">
               <span class="word">Energy</span>
               <span class="sep sep--swap">
@@ -156,7 +152,7 @@
         <div class="divider"></div>
 
         <div class="list-row-clip">
-          <a href="#" class="list-row" data-project="archive">
+          <a href="#earlier-work" class="list-row" data-project="archive">
             <div class="project-item">
               <span class="word">Earlier Work</span>
               <span class="sep sep--icon-only">
@@ -230,8 +226,12 @@
                 <div class="proj-about-fact">
                   <span class="proj-about-fact-label">Currently</span>
                   <div class="proj-about-fact-value proj-about-current">
-                    <span>@Rivian</span>
-                    <p class="proj-body">I joined before a single vehicle had shipped. Since then, I’ve built interaction models and design foundations across the vehicle, app, charging network, and in-house AI agent.</p>
+                    <a href="https://rivian.com/" class="proj-inline-link" target="_blank" rel="noopener">
+                      <span>Product Design @ Rivian</span>
+                      <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                        <path d="M4 4H14M14 4V14M14 4L4 14" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
                   </div>
                 </div>
                 <div class="proj-about-fact">
@@ -664,6 +664,16 @@
         <!-- Connected apps paired with an in-vehicle messaging example. -->
         <section class="proj-section proj-section--col-inset proj-scenario-section proj-assistant-connected proj-reveal">
           <div class="proj-scenario-track">
+            <div class="proj-assistant-calendar">
+              <div class="proj-feature-media proj-feature-media--screen-bg">
+                <div class="proj-feature-media-bg proj-feature-media-bg--calendar"></div>
+                <div class="proj-media-card">
+                  <video autoplay loop muted playsinline aria-label="Rivian Assistant calendar integration">
+                    <source src="assets/videos/rivian-assistant/Google-Calendar_Animation.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
                 <div class="proj-scenario-card" data-index="1">
                   <div class="proj-scenario-media">
                     <video loop muted playsinline autoplay>
@@ -690,19 +700,34 @@
                     </div>
                   </div>
                 </div>
-            <div class="proj-assistant-calendar">
-              <div class="proj-feature-media proj-feature-media--screen-bg">
-                <div class="proj-feature-media-bg proj-feature-media-bg--calendar"></div>
-                <div class="proj-media-card">
-                  <video autoplay loop muted playsinline aria-label="Rivian Assistant calendar integration">
-                    <source src="assets/videos/rivian-assistant/Google-Calendar_Animation.mp4" type="video/mp4">
-                  </video>
-                </div>
-              </div>
+          </div>
+          <div class="proj-section-header proj-section-header--feature proj-assistant-principle">
+            <div class="proj-section-left">
+              <h3 class="proj-section-sub">Voice and screen,<br>in sync.</h3>
+            </div>
+            <div class="proj-section-right">
+              <p class="proj-body">The interaction model defines when the Assistant speaks, shows information, or yields to the driver. One shared behavior across voice and screen.</p>
             </div>
           </div>
         </section>
-        <div class="proj-section-spacer proj-section-spacer--end"></div>
+        <div class="proj-section-spacer"></div>
+
+        <footer class="proj-contact">
+          <p>Happy to walk through the decisions behind this work. <a href="mailto:jbpark.design@gmail.com">Get in touch.</a></p>
+          <div class="proj-contact-links">
+            <a href="https://www.linkedin.com/in/jeffreybpark/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg class="contact-icon" width="18" height="18" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true">
+            <path d="M3.3 6.1h2.35v8.1H3.3V6.1Zm1.18-3.2a1.37 1.37 0 1 1-.02 2.74 1.37 1.37 0 0 1 .02-2.74ZM7.15 6.1H9.4v1.1h.03c.31-.59 1.08-1.21 2.22-1.21 2.38 0 2.82 1.57 2.82 3.62v4.59h-2.35v-4.07c0-.97-.02-2.22-1.35-2.22-1.35 0-1.56 1.05-1.56 2.15v4.14H6.86V6.1h.29Z"/>
+          </svg>
+            </a>
+            <a href="mailto:jbpark.design@gmail.com" aria-label="Email Jeffrey Park">
+            <svg class="contact-icon" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <rect x="1.8" y="3.4" width="14.4" height="11.2" rx="1.4" stroke="currentColor" stroke-width="1.5"/>
+              <path d="m2.5 4.5 6.5 5.1 6.5-5.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            </a>
+          </div>
+        </footer>
 
       </div><!-- /proj-rivian-assistant -->
 
@@ -788,7 +813,7 @@
             </div>
           </div>
         </section>
-        <div class="proj-section-spacer proj-section-spacer--end"></div>
+        <div class="proj-section-spacer"></div>
 
       </div><!-- /proj-security-access -->
 
@@ -914,7 +939,7 @@
             </div>
           </div>
         </section>
-        <div class="proj-section-spacer proj-section-spacer--end"></div>
+        <div class="proj-section-spacer"></div>
 
       </div><!-- /proj-energy-charging -->
 
@@ -1083,31 +1108,6 @@
 
   <script src="assets/js/lottie.min.js"></script>
   <script>
-    // Rotate the landing-page positioning line with the same vertical scroll
-    // used by the copied-email label.
-    (function () {
-      const rotator = document.querySelector('.header-positioning-rotator');
-      if (!rotator || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const phrase = rotator.querySelector('.header-positioning-phrase');
-      const phrases = [
-        'making tech useful',
-        'zero to one',
-        'AI experiences'
-      ];
-      let activeIndex = 0;
-      window.setInterval(() => {
-        activeIndex = (activeIndex + 1) % phrases.length;
-        phrase.classList.add('positioning-exit');
-        window.setTimeout(() => {
-          phrase.textContent = phrases[activeIndex];
-          phrase.classList.remove('positioning-exit');
-          void phrase.offsetWidth;
-          phrase.classList.add('positioning-enter');
-          window.setTimeout(() => phrase.classList.remove('positioning-enter'), 100);
-        }, 100);
-      }, 3200);
-    })();
-
     // Theme toggle — the initial data-theme attribute (if any) was already
     // set by the inline script in <head> to avoid a flash of the wrong
     // theme; this just wires up the click behavior and keeps it in sync.
@@ -1202,25 +1202,23 @@
       });
     });
 
+    function isPlainNavigation(event) {
+      return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+    }
+
     document.querySelectorAll('.list-row').forEach(row => {
-      row.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.querySelectorAll('.list-row').forEach(r => r.classList.remove('active'));
-        row.classList.add('active');
-        const projectId = row.dataset.project;
-        document.querySelectorAll('.proj-content').forEach(c => { c.hidden = true; });
-        if (projectId) {
-          const content = document.getElementById('proj-' + projectId);
-          if (content) {
-            content.hidden = false;
-            setupReveal(content);
-          }
-        }
-        // Clear about active state
-        document.querySelector('.about-btn').classList.remove('active');
-        enterProject();
-        if (projectId === 'about' && window.centerAboutPhotoGroup) window.centerAboutPhotoGroup();
+      row.addEventListener('click', event => {
+        if (!isPlainNavigation(event)) return;
+        event.preventDefault();
+        navigateProject(row.dataset.project);
       });
+    });
+
+    document.querySelector('.logo').addEventListener('click', event => {
+      if (!isPlainNavigation(event)) return;
+      event.preventDefault();
+      if (document.body.classList.contains('sidebar-mode')) navigateProject(null);
+      else window.location.reload();
     });
 
     // In-copy links to a project (e.g. "Rivian Assistant (AI)" in the About text)
@@ -1433,6 +1431,10 @@
             updateDuration();
             video.play().catch(resumeSilentLoop);
           });
+          card.addEventListener('click', event => {
+            if (event.target.closest('button, a')) return;
+            playButton.click();
+          });
           video.addEventListener('ended', resumeSilentLoop);
           if (window.IntersectionObserver) {
             new IntersectionObserver((entries) => {
@@ -1616,15 +1618,10 @@
 
     // About panel
     const aboutBtn = document.querySelector('.about-btn');
-    aboutBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.querySelectorAll('.list-row').forEach(r => r.classList.remove('active'));
-      aboutBtn.classList.add('active');
-      document.querySelectorAll('.proj-content').forEach(c => { c.hidden = true; });
-      const content = document.getElementById('proj-about');
-      if (content) { content.hidden = false; setupReveal(content); }
-      enterProject();
-      if (content && window.centerAboutPhotoGroup) window.centerAboutPhotoGroup();
+    aboutBtn.addEventListener('click', event => {
+      if (!isPlainNavigation(event)) return;
+      event.preventDefault();
+      navigateProject('about');
     });
 
     const emailBtn = document.querySelector('.email-btn');
@@ -1825,9 +1822,7 @@
       return rows[(idx + 1) % rows.length];
     }
 
-    // Embedded as a permanent part of each project page (not a scroll-linked
-    // overlay), so it's only ever hidden entirely on About, which doesn't
-    // participate in the project cycle.
+    // Each project keeps its next-project ending; About does not cycle.
     function updateScrollMeterVisibility() {
       scrollMeter.hidden = !nextProjectRow();
       if (!scrollMeter.hidden) requestAnimationFrame(() => requestAnimationFrame(measureScrollMeterSegments));
@@ -1897,7 +1892,7 @@
 
     projectScroll.addEventListener('wheel', (e) => {
       if (isProjectTransitioning) { e.preventDefault(); return; }
-      if (aboutBtn.classList.contains('active')) return;
+      if (scrollMeter.hidden) return;
 
       const atBottom  = projectScroll.scrollTop + projectScroll.clientHeight >= projectScroll.scrollHeight - 2;
       const goingDown = e.deltaY > 0;
@@ -1946,7 +1941,11 @@
       if (!suppressLabelSwap && !alreadyOpen && !emailBtn.classList.contains('copied')) swapLabel('Email');
     }
 
-    function exitProject() {
+    function exitProject({ historyMode = 'push' } = {}) {
+      if (historyMode !== 'none') {
+        navigateProject(null, { historyMode });
+        return;
+      }
       document.body.classList.remove('sidebar-mode');
       closeBtn.classList.remove('is-entering');
       void closeBtn.offsetWidth;
@@ -1954,12 +1953,79 @@
       if (!suppressLabelSwap && !emailBtn.classList.contains('copied')) swapLabel('jbpark.design@gmail.com');
       document.querySelectorAll('.list-row').forEach(r => r.classList.remove('active'));
       aboutBtn.classList.remove('active');
+      aboutBtn.removeAttribute('aria-current');
       // Reset all project pages so they don't animate scrolling up on next open
       document.querySelectorAll('.proj-content').forEach(c => { c.hidden = true; });
       projectScroll.scrollTo({ top: 0, behavior: 'instant' }); // bypass scroll-behavior: smooth
       lastScrollY = 0;
       resetScrollMeter();
     }
+
+    // URL state and visual state share one entry point; pushState never reloads
+    // the document or invokes native anchor scrolling.
+    const projectRoutes = {
+      'rivian-assistant': 'rivian-assistant',
+      'joyful-utilities': 'joyful-utilities',
+      'security-access': 'security-access',
+      'energy-charging': 'energy-charging',
+      archive: 'earlier-work',
+      about: 'about',
+    };
+    const projectNames = {
+      'rivian-assistant': 'Rivian Assistant',
+      'joyful-utilities': 'Joyful Utilities',
+      'security-access': 'Security & Access',
+      'energy-charging': 'Energy & Charging',
+      archive: 'Earlier Work',
+      about: 'About',
+    };
+
+    function projectFromHash() {
+      let slug;
+      try { slug = decodeURIComponent(location.hash.slice(1)); }
+      catch { return null; }
+      return Object.keys(projectRoutes).find(id => projectRoutes[id] === slug)
+        || (slug === 'archive' ? 'archive' : null);
+    }
+
+    function navigateProject(projectId, { historyMode = 'push' } = {}) {
+      const id = Object.hasOwn(projectRoutes, projectId) ? projectId : null;
+      const current = document.body.classList.contains('sidebar-mode')
+        ? document.querySelector('.proj-content:not([hidden])')?.id.replace('proj-', '')
+        : null;
+      const url = new URL(location.href);
+      url.hash = id ? projectRoutes[id] : '';
+      if (historyMode !== 'none' && (url.href !== location.href || historyMode === 'replace')) {
+        history[historyMode === 'replace' ? 'replaceState' : 'pushState']({ project: id }, '', url);
+      }
+      document.title = id
+        ? `${projectNames[id]} — Jeffrey Park, Product Designer`
+        : 'Jeffrey Park, Product Designer';
+      if (current === id) return;
+
+      if (!id) {
+        exitProject({ historyMode: 'none' });
+        return;
+      }
+      document.querySelectorAll('.list-row').forEach(row => {
+        row.classList.toggle('active', row.dataset.project === id);
+      });
+      aboutBtn.classList.toggle('active', id === 'about');
+      if (id === 'about') aboutBtn.setAttribute('aria-current', 'page');
+      else aboutBtn.removeAttribute('aria-current');
+      document.querySelectorAll('.proj-content').forEach(content => { content.hidden = true; });
+      const content = document.getElementById('proj-' + id);
+      content.hidden = false;
+      setupReveal(content);
+      enterProject();
+      if (id === 'about' && window.centerAboutPhotoGroup) window.centerAboutPhotoGroup();
+    }
+
+    // History traversal does not add another history entry. hashchange also
+    // covers addresses typed into the bar; duplicate events are harmless.
+    window.addEventListener('popstate', () => navigateProject(projectFromHash(), { historyMode: 'none' }));
+    window.addEventListener('hashchange', () => navigateProject(projectFromHash(), { historyMode: 'none' }));
+    navigateProject(projectFromHash(), { historyMode: 'replace' });
 
     function copyEmail() {
       const email = 'jbpark.design@gmail.com';

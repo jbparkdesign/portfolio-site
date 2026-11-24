@@ -187,29 +187,23 @@ body.sidebar-mode {
   to   { transform: translateY(0); }
 }
 
-/* Logo — expand to "Jeffrey Park", hold, collapse to "JP" */
+/* Start compact on reload, then leave the full name visible on Home. */
 @keyframes logo-firstname {
-  0%   { max-width: 0; }
-  20%  { max-width: 56px; }
-  70%  { max-width: 56px; }
-  100% { max-width: 0; }
+  from { max-width: 0; }
+  to   { max-width: 56px; }
 }
 @keyframes logo-lastname {
-  0%   { max-width: 0; }
-  20%  { max-width: 40px; }
-  70%  { max-width: 40px; }
-  100% { max-width: 0; }
+  from { max-width: 0; }
+  to   { max-width: 40px; }
 }
 @keyframes logo-space {
-  0%   { width: 0; }
-  20%  { width: 5px; }
-  70%  { width: 5px; }
-  100% { width: 0; }
+  from { width: 0; }
+  to   { width: 5px; }
 }
 
-.firstname-clip { animation: logo-firstname 2.4s cubic-bezier(0, 0.3, 0.24, 1); }
-.lastname-clip  { animation: logo-lastname  2.4s cubic-bezier(0, 0.3, 0.24, 1); }
-.name-space     { animation: logo-space     2.4s cubic-bezier(0, 0.3, 0.24, 1); }
+.firstname-clip { animation: logo-firstname 0.8s cubic-bezier(0, 0.3, 0.24, 1) 0.42s both; }
+.lastname-clip  { animation: logo-lastname 0.8s cubic-bezier(0, 0.3, 0.24, 1) 0.42s both; }
+.name-space     { animation: logo-space 0.8s cubic-bezier(0, 0.3, 0.24, 1) 0.42s both; }
 
 /* Nav — theme-toggle now leads, so About/LinkedIn shift one slot later. */
 header nav .theme-toggle {
@@ -410,59 +404,39 @@ header > .header-branding { grid-column: 1; grid-row: 1; justify-self: start; }
 }
 header > nav { grid-column: 2; grid-row: 1; justify-self: end; }
 
-.header-positioning {
-  display: flex;
-  align-items: baseline;
-  justify-content: flex-start;
-  gap: 0.3em;
-  margin: 0;
+.home-intro {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  /* Four of twelve columns, capped for a comfortable reading measure. */
+  width: calc((100% - 2 * var(--grid-gutter)) / 3);
+  max-width: 60ch;
+  margin-top: 8px;
   color: var(--color-muted);
-  font-family: var(--font);
   font-size: var(--size-copy);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: var(--tracking-ui);
-  white-space: nowrap;
-  text-align: left;
 }
 
-.header-positioning-rotator {
-  display: inline-flex;
-  overflow: hidden;
-  align-items: baseline;
-  padding-right: 0.18em;
-  margin-right: -0.18em;
+.home-intro > span { display: block; }
+@media (max-width: 1024px) {
+  .home-intro { width: 100%; }
 }
-
-.header-positioning-phrase {
-  display: inline-block;
-  white-space: nowrap;
-  color: var(--color-text);
-}
-
-.header-positioning-phrase.positioning-exit {
-  animation: label-exit 0.1s cubic-bezier(0, 0.3, 0.24, 1) forwards;
-}
-
-.header-positioning-phrase.positioning-enter {
-  animation: label-enter 0.1s cubic-bezier(0, 0.3, 0.24, 1) forwards;
-}
-
-body.sidebar-mode .header-positioning { display: none; }
+body.sidebar-mode .home-intro { display: none; }
 
 body.sidebar-mode header {
   grid-template-rows: 40px;
 }
 
 body.sidebar-mode header nav {
-  gap: 0;
+  gap: 8px;
 }
 
 @media (max-width: 768px) {
   header {
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-rows: 40px auto;
-    row-gap: 8px;
+    row-gap: 0;
     padding: 0 16px;
   }
 
@@ -470,19 +444,6 @@ body.sidebar-mode header nav {
   header > .header-branding > .logo { grid-column: 1; grid-row: 1; }
   header > .nav { grid-column: 2; grid-row: 1; }
   header > nav { grid-column: 2; grid-row: 1; }
-
-  .header-positioning {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    max-width: 100%;
-    min-width: 0;
-    font-size: var(--size-copy);
-    flex-wrap: nowrap;
-    white-space: normal;
-  }
-
-  .header-positioning-rotator { min-width: 0; }
-  .header-positioning-phrase { white-space: nowrap; }
 
   .sidebar { --size-display: clamp(24px, 7.3vw, 40px); --size-icon: clamp(20px, 5.2vw, 32px); }
   .list-row { padding-right: 16px; padding-left: 16px; }
@@ -542,9 +503,10 @@ body.sidebar-mode header nav {
   flex-shrink: 0;
 }
 
-.logo:hover .firstname-clip { max-width: 56px; }
-.logo:hover .lastname-clip  { max-width: 40px; }
-.logo:hover .name-space     { width: 5px; }
+.firstname-clip { max-width: 56px; }
+.lastname-clip { max-width: 40px; }
+.name-space { width: 5px; }
+
 
 /* Dim inactive rows in sidebar mode */
 body.sidebar-mode .word,
@@ -569,10 +531,14 @@ body.sidebar-mode .list-row:hover .sep--icon-only {
   width: calc(var(--size-display) * 0.3);
 }
 
-/* Disable logo expand in sidebar mode */
-body.sidebar-mode .logo:hover .firstname-clip { max-width: 0; }
-body.sidebar-mode .logo:hover .lastname-clip  { max-width: 0; }
-body.sidebar-mode .logo:hover .name-space     { width: 0; }
+/* Keep the rail compact even when a project is opened directly. */
+body.sidebar-mode .firstname-clip { max-width: 0; animation: none; }
+body.sidebar-mode .lastname-clip { max-width: 0; animation: none; }
+body.sidebar-mode .name-space { width: 0; animation: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .firstname-clip, .lastname-clip, .name-space { animation: none; transition: none; }
+}
 
 
 /* Sidebar mode: keep labels + arrow visible */
@@ -623,8 +589,8 @@ nav {
 .nav-icon { display: none; }
 .nav-icon-linkedin { color: currentColor; }
 .nav-icon-about {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
   color: var(--color-muted);
 }
@@ -641,6 +607,10 @@ body.sidebar-mode .nav-link {
   justify-content: center;
   width: 40px;
   padding: 0;
+}
+
+body.sidebar-mode .nav-link::before {
+  border: 1px solid var(--color-divider);
 }
 
 body.sidebar-mode .nav-link .nav-label,
@@ -664,6 +634,10 @@ body.sidebar-mode .nav-link .nav-icon-about { display: block; }
 .nav-link.active:hover {
   color: var(--color-hover-text);
 }
+
+.about-btn.active::before { background-color: var(--color-hover-bg); }
+.about-btn.active .nav-icon-about { color: var(--color-hover-text); }
+
 
 .nav-link:hover::before {
   background-color: var(--color-hover-bg);
@@ -881,13 +855,8 @@ body.sidebar-mode .nav-link .nav-icon-about { display: block; }
 .list-row:hover .icon { opacity: 1; }
 
 /* ─── Footer ─────────────────────────────────────────────── */
-/* :not(.proj-footer) — this is the site-wide copyright/email bar at the
-   bottom of the homepage list, not a project's own closing footer, but
-   both are literally <footer> elements. Without the exclusion this
-   height:40px was silently overriding .proj-footer's own auto-height
-   sizing (no competing height property there to beat it), compressing
-   its padding instead of centering its content as intended. */
-footer:not(.proj-footer) {
+/* Keep the homepage bar separate from project footers. */
+footer:not(.proj-footer):not(.proj-contact) {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1259,6 +1228,15 @@ body.sidebar-mode .email-btn.copied.reverting .icon-email {
   gap: 40px;
 }
 
+/* Separate the headline from the photos as well as the facts, while
+   reserving enough room for the complete desktop composition. */
+@media (min-width: 769px) {
+  .proj-about-hero {
+    gap: clamp(56px, calc(20vh - 80px), var(--space-3));
+    padding-bottom: 40px;
+  }
+}
+
 .proj-about-headline {
   position: relative;
   z-index: 2;
@@ -1432,6 +1410,7 @@ body.sidebar-mode .email-btn.copied.reverting .icon-email {
 
 .proj-about-current { gap: 4px; }
 .proj-about-current .proj-body { margin: 0; }
+.proj-about-current .proj-inline-link { text-decoration: none; align-items: center; gap: 0; }
 .proj-about-outside { gap: 8px; }
 
 @media (max-width: 600px) {
@@ -2656,12 +2635,13 @@ h1 .proj-inline-link svg {
 }
 
 .proj-assistant-connected .proj-scenario-card {
-  grid-column: 1 / span 4;
+  position: relative;
+  grid-column: 9 / span 4;
   width: 100%;
   height: 56.25cqw;
   min-width: 0;
   gap: 24px;
-  cursor: default;
+  cursor: pointer;
 }
 
 .proj-assistant-connected .proj-scenario-media {
@@ -2675,6 +2655,12 @@ h1 .proj-inline-link svg {
 }
 
 .proj-assistant-caption-row {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1;
+  color: var(--white-brand);
   display: flex;
   gap: 16px;
   align-items: center;
@@ -2683,6 +2669,25 @@ h1 .proj-inline-link svg {
 
 .proj-assistant-caption-row > .proj-body {
   margin: 0;
+  color: inherit;
+}
+
+.proj-assistant-connected .proj-scenario-media::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--space-3);
+  background: linear-gradient(transparent, rgba(var(--black-pure-rgb), 0.65));
+  pointer-events: none;
+}
+
+.proj-assistant-caption-row .proj-assistant-play {
+  color: inherit;
+  border-color: currentColor;
+}
+.proj-assistant-caption-row .proj-assistant-play:hover {
+  background: var(--white-brand);
+  color: var(--black-brand);
 }
 
 .proj-assistant-play {
@@ -2726,7 +2731,7 @@ h1 .proj-inline-link svg {
 }
 
 .proj-assistant-calendar {
-  grid-column: 5 / span 8;
+  grid-column: 1 / span 8;
   min-width: 0;
   overflow: hidden;
 }
@@ -2734,6 +2739,39 @@ h1 .proj-inline-link svg {
 /* Render the original full-width stage, then clip only its right edge. */
 .proj-assistant-calendar > .proj-feature-media {
   width: 100cqw;
+}
+
+.proj-contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 0;
+  padding: var(--space-1) var(--grid-margin);
+  border-top: 1px solid var(--color-divider);
+  font-size: var(--size-copy);
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.proj-contact > p { margin: 0; }
+.proj-contact > p a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.proj-contact-links { display: flex; flex-shrink: 0; gap: 8px; }
+.proj-contact-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-divider);
+  border-radius: 50%;
+  color: var(--color-muted);
+  transition: background-color 0.2s, color 0.2s;
+}
+.proj-contact-links a:hover { background: var(--color-hover-bg); color: var(--color-hover-text); }
+
+@media (max-width: 768px) {
+  .proj-contact { flex-wrap: wrap; gap: 16px; text-align: center; }
 }
 
 @media (max-width: 700px) {
