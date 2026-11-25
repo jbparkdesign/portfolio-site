@@ -973,28 +973,10 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
   animation: icon-in-ccw 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
 }
 
-/* Rest: a solid white circle (always white, not theme-tokened, so it
-   reads as a fixed "success" badge) with a dark check matching the
-   page's own background. Hovering .email-btn inverts both — the circle
-   drops to --color-bg (site bg, theme-aware) and the check picks up
-   the white that the circle just gave up — so the pair stays legible
-   in both the button's resting and filled hover states. */
-.icon-thumb-circle {
-  fill: var(--white-brand);
-  transition: fill 0.2s cubic-bezier(0, 0.3, 0.24, 1);
-}
-
+/* Standalone confirmation check inherits the button's rest and hover colors. */
 .icon-thumb-check {
-  stroke: var(--color-bg);
+  stroke: currentColor;
   transition: stroke 0.2s cubic-bezier(0, 0.3, 0.24, 1);
-}
-
-.email-btn:hover .icon-thumb-circle {
-  fill: var(--color-bg);
-}
-
-.email-btn:hover .icon-thumb-check {
-  stroke: var(--white-brand);
 }
 
 /* Copied: icon animations — counter-clockwise both in and out, matching
@@ -1023,13 +1005,13 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
 }
 
 @keyframes icon-out-ccw {
-  from { opacity: 1; transform: rotate(0deg); }
-  to   { opacity: 0; transform: rotate(-90deg); }
+  from { opacity: 1; }
+  to   { opacity: 0; }
 }
 
 @keyframes icon-in-ccw {
-  from { opacity: 0; transform: rotate(90deg); }
-  to   { opacity: 1; transform: rotate(0deg); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 
@@ -1317,7 +1299,9 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
   display: block;
   width: var(--about-photo-width, 39.95%);
   height: auto;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
   user-select: none;
@@ -1485,7 +1469,6 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
 .proj-about-current .proj-body { margin: 0; }
 .home-intro .proj-inline-link,
 .proj-about-current .proj-inline-link { text-decoration: none; align-items: center; gap: 0; }
-.proj-about-current .proj-inline-link svg { transform: translateY(1px); }
 .home-intro .proj-inline-link:hover,
 .home-intro .proj-inline-link:focus-visible,
 .proj-about-current .proj-inline-link:hover,
@@ -3720,3 +3703,105 @@ body.home-nav-restored header nav .nav-external {
 @media (prefers-reduced-motion: reduce) {
   .proj-about-photos-col.is-visible .proj-about-photo { animation: none; }
 }
+
+/* Photos may move beyond their initial composition without changing their crop. */
+.proj-about-photo.is-dragging { cursor: grabbing; }
+.proj-about-photo-crop-image { pointer-events: none; }
+.proj-about-photos-col { z-index: 3; }
+
+/* Tight arrow bounds put its visible stroke on the label baseline. */
+.external-link-lockup {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.external-link-lockup .external-link-icon {
+  position: static;
+  top: auto;
+  transform: none;
+  flex-shrink: 0;
+  vertical-align: baseline;
+}
+
+/* Anchor confirmation icons while the adjacent label changes width. */
+.email-btn { padding-right: 36px; }
+.email-btn .email-icons {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  translate: 0 -50%;
+  width: 16px;
+  height: 16px;
+  grid-template: 16px / 16px;
+}
+body:is(.sidebar-mode, .rail-expanding) .email-btn .email-icons {
+  position: static;
+  translate: none;
+}
+
+/* Keep the label measurable while the rail control animates between widths. */
+body:is(.sidebar-mode, .rail-expanding) .sidebar footer .email-btn {
+  padding: 0;
+  overflow: hidden;
+}
+body:is(.sidebar-mode, .rail-expanding) .email-btn .email-label-wrap {
+  display: block;
+  position: absolute;
+  left: 16px;
+  right: 36px;
+  margin-right: 0;
+  top: 50%;
+  translate: 0 -50%;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s cubic-bezier(0, 0.3, 0.24, 1);
+}
+body:is(.sidebar-mode, .rail-expanding) .email-btn.copied:not(.reverting) .email-label-wrap {
+  opacity: 1;
+}
+body:is(.sidebar-mode, .rail-expanding) .email-btn .email-icons {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  translate: 0 -50%;
+}
+
+/* Pair the shorter real-world clip with copy, as in the Energy sections. */
+.proj-assistant-example {
+  grid-column: 9 / span 4;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 56.25cqw;
+}
+#proj-rivian-assistant .proj-assistant-example .proj-scenario-card {
+  height: calc(50% + 56px);
+  gap: 16px;
+  min-height: 0;
+  aspect-ratio: auto;
+  flex: none;
+}
+.proj-assistant-example .proj-scenario-media video {
+  object-position: center calc(30% + 16px);
+}
+.proj-assistant-example .proj-mobile-static-copy {
+  max-width: none;
+  flex: 1;
+  justify-content: center;
+  text-align: left;
+  padding-block: 16px;
+}
+@media (max-width: 768px) {
+  .proj-assistant-example { grid-column: 1; height: auto; }
+  #proj-rivian-assistant .proj-assistant-example .proj-scenario-card { height: auto; aspect-ratio: auto; }
+  .proj-assistant-example .proj-mobile-static-copy { padding-block: 24px 0; }
+}
+
+.proj-assistant-example .proj-assistant-caption-row {
+  position: static;
+  justify-content: flex-start;
+  min-height: 40px;
+  color: var(--color-muted);
+}
+.proj-assistant-example .proj-scenario-media::after { display: none; }
