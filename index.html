@@ -6,7 +6,7 @@
   <title>Jeffrey Park, Product Designer</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="stylesheet" href="style.css?v=477">
+  <link rel="stylesheet" href="style.css?v=490">
   <script>
     // Applied here (before body renders) rather than in the main script
     // block so a saved light-mode preference doesn't flash dark first.
@@ -208,7 +208,7 @@
       <!-- ── About ──────────────────────────────────────────── -->
       <div id="proj-about" class="proj-content" hidden>
         <section class="proj-hero proj-about-hero">
-          <h1 class="proj-headline proj-reveal proj-about-headline">I like simple interfaces, a bit of playfulness, and making complex technology useful.</h1>
+          <h1 class="proj-headline proj-reveal proj-about-headline">I like simple interfaces, <span class="proj-about-headline-phrase">a bit of playfulness</span>, and making complex technology useful.</h1>
           <div class="proj-about-columns">
             <div class="proj-about-content-col">
               <div class="proj-about-divider proj-reveal"></div>
@@ -233,7 +233,8 @@
                 <div class="proj-about-fact">
                   <span class="proj-about-fact-label">Outside of work</span>
                   <div class="proj-about-fact-value proj-about-outside">
-                    <span>Chasing down good coffee, pastries, and getting better with a camera</span>
+                    <span>Chasing down good coffee, pastries,<br>and getting better with a camera</span>
+                    <button type="button" class="proj-about-camera-trigger" aria-label="Show a random photo" data-default-emoji="📷" data-hover-emoji="📸"><span class="proj-about-camera-glyph" aria-hidden="true">📷</span></button>
                   </div>
                 </div>
               </div>
@@ -244,9 +245,6 @@
                 <div class="proj-about-photo proj-about-photo--2">
                   <img class="proj-about-photo-crop-image" src="assets/images/about/portrait-5.jpg" alt="Jeffrey Park outdoors with a dog">
                 </div>
-              </div>
-              <div class="proj-about-camera-dock">
-                <button type="button" class="proj-about-camera-trigger" aria-label="Show a random photo" data-default-emoji="📷" data-hover-emoji="📸"><span class="proj-about-camera-glyph" aria-hidden="true">📷</span></button>
               </div>
             </div>
           </div>
@@ -1020,7 +1018,7 @@
               <div class="proj-scenario-card" data-index="0" data-caption="the Nike Wing, a high concept performance eyewear">
                 <div class="proj-scenario-media">
                   <video muted playsinline aria-label="Sports Eyewear">
-                    <source src="assets/videos/archive/nike-wing-refined.mp4?v=15aa451d" type="video/mp4">
+                    <source src="assets/videos/archive/nike-wing-refined.mp4?v=8da9658f" type="video/mp4">
                   </video>
                 </div>
               </div>
@@ -1041,7 +1039,7 @@
               <div class="proj-scenario-card" data-index="3" data-caption="Nike&#x27;s inaugural snow goggles">
                 <div class="proj-scenario-media">
                   <video muted playsinline aria-label="Snow Eyewear">
-                    <source src="assets/videos/archive/snow-eyewear-refined.mp4?v=dc39279e" type="video/mp4">
+                    <source src="assets/videos/archive/snow-eyewear-refined.mp4?v=d52ba6cd" type="video/mp4">
                   </video>
                 </div>
               </div>
@@ -1230,19 +1228,17 @@
       if (!hero || !columns || !col || !group || !photo1 || !photo2) return;
 
       function center() {
-        const desktop = window.matchMedia('(min-width: 769px)').matches;
+        const desktop = window.matchMedia('(min-width: 1025px)').matches;
         if (!hero.getBoundingClientRect().width) return;
-        const cameraRoom = desktop
-          ? (window.matchMedia('(min-width: 1025px)').matches ? 116 : 56)
-          : 56;
         if (desktop) {
           col.style.maxHeight = 'none';
-          const available = Math.max(0, col.clientHeight - cameraRoom);
+          const available = Math.max(0, col.clientHeight);
           const ratio = Math.max(1.5, photo1.naturalHeight / photo1.naturalWidth || 1.5);
-          // Scale one composition: photo size, stagger and overlap stay in
-          // proportion even when viewport height is the limiting dimension.
-          const width = Math.min(col.clientWidth * 0.5,
-            Math.max(0, (available - 24) / (ratio + 0.34 + 0.05)));
+          // Keep the composition smaller on wide screens, with a gentler
+          // width response so portraits retain their presence as the rail narrows.
+          const preferredWidth = Math.min(320, Math.max(220, 168 + col.clientWidth * 0.18));
+          const width = Math.min(preferredWidth, col.clientWidth * 0.62,
+            Math.max(0, (available - 24) / (ratio + 0.34 + 0.05)) * 0.846);
           group.style.setProperty('--about-photo-width', width + 'px');
           group.style.setProperty('--about-photo-offset', (width * 0.34 + 24) + 'px');
           group.style.setProperty('--about-photo-overlap', width * 0.025 + 'px');
@@ -1250,7 +1246,7 @@
           col.style.maxHeight = columns.getBoundingClientRect().height + 'px';
           const ratio = Math.max(1.5, photo1.naturalHeight / photo1.naturalWidth || 1.5);
           const width = Math.min(col.clientWidth * 0.46,
-            Math.max(0, (col.clientHeight - cameraRoom - 96) / ratio));
+            Math.max(0, (col.clientHeight - 96) / ratio)) * 0.94;
           group.style.setProperty('--about-photo-width', width + 'px');
           group.style.setProperty('--about-photo-overlap', width * 0.025 + 'px');
           group.style.removeProperty('--about-photo-offset');
@@ -1274,11 +1270,25 @@
         const unionTop = Math.min(r1.top, r2.top);
         const unionBottom = Math.max(r1.bottom, r2.bottom);
         let delta = (bounds.height - (unionBottom - unionTop)) / 2 - unionTop;
-        const minDelta = -unionTop;
-        const maxDelta = bounds.height - cameraRoom - unionBottom;
-        if (minDelta <= maxDelta) delta = Math.min(Math.max(delta, minDelta), maxDelta);
-        if (desktop) delta = Math.max(minDelta, delta - 24);
-        group.style.transform = `translateY(${delta}px)`;
+        if (desktop) {
+          // Use layout positions so reveal transforms cannot shift the target.
+          const layoutTop = element => {
+            let top = 0;
+            for (let node = element; node; node = node.offsetParent) top += node.offsetTop;
+            return top;
+          };
+          const headline = hero.querySelector('.proj-about-headline');
+          const photoTop = layoutTop(headline) + headline.offsetHeight + 48;
+          delta = photoTop - layoutTop(col) - r1.top;
+        } else {
+          const minDelta = -unionTop;
+          const maxDelta = bounds.height - unionBottom;
+          if (minDelta <= maxDelta) delta = Math.min(Math.max(delta, minDelta), maxDelta);
+        }
+        // Offset the pair optically within the broad right-side negative space.
+        const gutter = parseFloat(getComputedStyle(columns).columnGap) || 0;
+        const opticalShift = desktop ? -(col.clientWidth + gutter) / 12 : 0;
+        group.style.transform = `translate(${opticalShift}px, ${delta}px)`;
       }
 
       if (photo1.complete) center();
@@ -1337,6 +1347,7 @@
         if (!drag || drag.pointer !== event.pointerId) return;
         drag = null;
         photo.classList.remove('is-dragging');
+        photo.style.removeProperty('z-index');
         if (photo.hasPointerCapture(event.pointerId)) photo.releasePointerCapture(event.pointerId);
       };
       photo.addEventListener('pointerup', finish);
@@ -1385,7 +1396,9 @@
         const desktop = window.matchMedia('(min-width: 769px)').matches;
         const inset = 16;
         const columnsRect = stackTarget.closest('.proj-about-columns').getBoundingClientRect();
-        const infoRect = document.querySelector('.proj-about-facts').getBoundingClientRect();
+        const factsRect = document.querySelector('.proj-about-facts').getBoundingClientRect();
+        const infoRect = { top: factsRect.top, right: Math.min(factsRect.right,
+          document.querySelector('.proj-about-content-col').getBoundingClientRect().right) };
         const buttonRect = trigger.getBoundingClientRect();
         const headlineReach = parseFloat(getComputedStyle(stackTarget).getPropertyValue('--space-1')) || 40;
         const top = desktop ? Math.max(rect.top - headlineReach, 80) : 80;

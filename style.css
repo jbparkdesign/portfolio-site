@@ -1232,6 +1232,8 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
 }
 
 .proj-about-content-col {
+  position: relative;
+  z-index: 4;
   grid-column: span 6;
 }
 
@@ -1310,7 +1312,7 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
 .proj-about-photo--1 {
   left: 8%;
   top: 0;
-  z-index: 1;
+  z-index: 3;
   transform: rotate(-2deg);
 }
 
@@ -1351,11 +1353,11 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
   }
   .proj-about-photo-group { bottom: auto; height: 0; }
   .proj-about-photo--1 {
-    left: calc(50% - 16px - var(--about-photo-width) + var(--about-photo-overlap) / 2);
+    left: calc(50% - var(--about-photo-width) + var(--about-photo-overlap) / 2);
     z-index: 3;
   }
   .proj-about-photo--2 {
-    left: calc(50% - 16px - var(--about-photo-overlap) / 2);
+    left: calc(50% - var(--about-photo-overlap) / 2);
     right: auto;
   }
 }
@@ -1403,7 +1405,7 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
   gap: clamp(24px, 2.9vh, 32px);
 }
 
-.proj-about-facts { width: 100%; max-width: 600px; }
+.proj-about-facts { position: relative; z-index: 2; width: 100%; max-width: 600px; }
 
 .proj-about-fact {
   display: grid;
@@ -1475,17 +1477,19 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
 .proj-about-current .proj-inline-link:focus-visible { color: var(--yellow-rivian); }
 .proj-about-outside { flex-direction: column; align-items: flex-start; gap: 8px; }
 
-.proj-about-camera-dock {
+.proj-about-outside { position: relative; width: max-content; }
+.proj-about-outside > .proj-about-camera-trigger {
   position: absolute;
-  inset: auto 0 0;
-  display: flex;
-  justify-content: center;
-  z-index: 4;
+  left: calc(100% + 16px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+@media (max-width: 768px) {
+  .proj-about-fact .proj-about-outside { width: auto; flex-direction: row; align-items: center; gap: 16px; }
+  .proj-about-outside > span { flex: 0 1 auto; min-width: 0; }
+  .proj-about-outside > .proj-about-camera-trigger { position: relative; left: auto; top: auto; transform: none; }
 }
 
-@media (min-width: 1025px) {
-  .proj-about-camera-dock { bottom: calc(var(--space-1) + 20px); }
-}
 .proj-about-camera-trigger {
   border: none;
   background: none;
@@ -1496,8 +1500,9 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 25%;
-  max-width: 100%;
+  isolation: isolate;
+  width: 40px;
+  min-width: 40px;
   height: 40px;
   flex-shrink: 0;
   border-radius: 9999px;
@@ -3670,7 +3675,7 @@ body.home-nav-restored header nav .nav-external {
   .proj-about-fact { display: grid; grid-template-columns: minmax(88px, 28%) minmax(0, 1fr); gap: 16px; }
   .proj-about-fact-label { grid-column: 1; white-space: normal; }
   .proj-about-fact-value { grid-column: 2; }
-  .proj-about-camera-trigger { min-width: 80px; min-height: 44px; }
+  .proj-about-camera-trigger { min-width: 40px; min-height: 40px; }
   .proj-trusted { overflow: hidden; }
   .proj-archive-carousel .proj-scenario-carousel { scroll-padding-inline: 16px; }
   .proj-archive-carousel-nav { align-self: flex-start; order: 4; }
@@ -3805,3 +3810,46 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn .email-icons {
   color: var(--color-muted);
 }
 .proj-assistant-example .proj-scenario-media::after { display: none; }
+
+/* Give desktop facts the full canvas while preserving the original value start. */
+@media (min-width: 1025px) {
+  .proj-about-content-col { min-width: 0; }
+  .proj-about-facts { width: calc(200% + var(--grid-gutter)); max-width: none; }
+  .proj-about-fact {
+    grid-template-columns: max-content minmax(16px, 1fr) minmax(0, calc(100% - min(calc(20% - var(--grid-gutter) * 0.2), 240px)));
+  }
+}
+
+/* About uses the mobile reading order as soon as the tablet layout begins. */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .proj-about-hero { height: auto; min-height: 100svh; gap: 32px; padding-bottom: 64px; }
+  .proj-about-columns { flex: none; grid-template-columns: 1fr; row-gap: 32px; align-items: start; }
+  .proj-about-content-col { grid-column: 1; grid-row: 2; }
+  .proj-about-photos-col {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    width: 100%;
+    height: clamp(320px, 56svh, 480px);
+    min-height: 0;
+    margin: 0;
+  }
+  .proj-about-photo--1 { left: calc(var(--about-photo-width) * 0.026); }
+  .proj-about-photo--2 { left: calc(var(--about-photo-width) * 1.026 - var(--about-photo-overlap, 0px)); right: auto; top: 72px; }
+  .proj-about-facts { max-width: none; gap: 24px; }
+  .proj-about-fact { grid-template-columns: max-content minmax(16px, 1fr) minmax(0, calc(72% - 16px)); column-gap: 8px; }
+  .proj-about-fact::before { display: block; }
+  .proj-about-fact-label { grid-column: 1; white-space: nowrap; }
+  .proj-about-fact-value { grid-column: 3; }
+}
+
+@media (min-width: 1025px) {
+  .proj-about-headline {
+    width: 100%;
+    margin-inline: 0;
+  }
+}
+
+.proj-about-headline-phrase { white-space: nowrap; }
+
+.proj-about-headline { text-wrap: balance; }
