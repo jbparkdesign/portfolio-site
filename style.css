@@ -82,6 +82,9 @@
   --space-3: 120px;
   --space-4: 160px;
   --space-5: 200px;
+
+  --reveal-duration: 300ms;
+  --reveal-stagger: 120ms;
 }
 
 /* ─── Light theme ────────────────────────────────────────── */
@@ -1003,19 +1006,10 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
 .email-btn.copied .icon-thumb {
   animation: icon-in-ccw 0.2s cubic-bezier(0, 0.3, 0.24, 1) forwards;
 }
-.email-btn.copied .email-icons {
-  animation: icon-bounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
 
 @keyframes btn-press {
   0%   { transform: scale(1); }
   40%  { transform: scale(0.94); }
-  100% { transform: scale(1); }
-}
-
-@keyframes icon-bounce {
-  0%   { transform: scale(1); }
-  30%  { transform: scale(0.75); }
   100% { transform: scale(1); }
 }
 
@@ -1047,8 +1041,8 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
 .proj-reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.55s cubic-bezier(0, 0.3, 0.24, 1),
-              transform 0.55s cubic-bezier(0, 0.3, 0.24, 1);
+  transition: opacity var(--reveal-duration) cubic-bezier(0, 0.3, 0.24, 1),
+              transform var(--reveal-duration) cubic-bezier(0, 0.3, 0.24, 1);
 }
 
 .proj-reveal.is-visible {
@@ -1243,7 +1237,6 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
 .proj-about-headline {
   position: relative;
   z-index: 2;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -1252,7 +1245,6 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
   display: grid;
   grid-template-columns: repeat(var(--grid-columns), 1fr);
   align-items: start;
-  max-width: 1200px;
   margin: 0 auto;
   column-gap: var(--grid-gutter);
 }
@@ -1281,6 +1273,7 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
    sets its own transform with higher specificity and would otherwise
    cancel it out once revealed. */
 .proj-about-photos-col {
+  --reveal-duration: 600ms;
   position: absolute;
   z-index: 1;
   top: 0;
@@ -1349,7 +1342,7 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
 }
 
 @media (max-width: 768px) {
-  .proj-about-photo--2 { top: 48px; }
+  .proj-about-photo--2 { top: 72px; }
 }
 
 /* Use the available desktop height for both the facts and photo canvas. */
@@ -1426,7 +1419,7 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
   gap: clamp(24px, 2.9vh, 32px);
 }
 
-.proj-about-facts { width: 100%; max-width: 520px; }
+.proj-about-facts { width: 100%; max-width: 600px; }
 
 .proj-about-fact {
   display: grid;
@@ -1687,41 +1680,15 @@ body:is(.sidebar-mode, .rail-expanding) .email-btn.copied.reverting .icon-email 
   margin-top: auto;
 }
 
-/* Reveal the metadata group as a unit; its rows then stagger from that
-   single intersection trigger instead of entering independently. */
-.proj-hero-facts--stagger.proj-reveal {
-  opacity: 1;
-  transform: none;
-  transition: none;
-}
-
-.proj-hero-facts--stagger .proj-hero-fact {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.55s cubic-bezier(0, 0.3, 0.24, 1),
-              transform 0.55s cubic-bezier(0, 0.3, 0.24, 1);
-}
-
-.proj-hero-facts--stagger.is-visible .proj-hero-fact {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.proj-hero-facts--stagger .proj-hero-fact {
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-.proj-hero-facts--stagger .proj-hero-fact:nth-child(2) {
-  transition-delay: calc(var(--reveal-delay, 0ms) + 80ms);
-}
-
-.proj-hero-facts--stagger .proj-hero-fact:nth-child(3) {
-  transition-delay: calc(var(--reveal-delay, 0ms) + 160ms);
+/* A reopened page must first paint its hidden state without animating
+   backward from the previous visit. Metadata uses the same group reveal
+   as the introduction, rather than a second competing row animation. */
+.is-reveal-resetting .proj-reveal {
+  transition: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .proj-reveal,
-  .proj-hero-facts--stagger .proj-hero-fact {
+  .proj-reveal {
     opacity: 1;
     transform: none;
     transition: none;
@@ -3057,8 +3024,8 @@ h1 .proj-inline-link svg {
      source) and silently drop the fade/slide-up entirely, so this button
      would just pop in instead of animating in with the rest of the hero. */
   transition: color 0.2s cubic-bezier(0, 0.3, 0.24, 1),
-              opacity 0.55s cubic-bezier(0, 0.3, 0.24, 1),
-              transform 0.55s cubic-bezier(0, 0.3, 0.24, 1);
+              opacity var(--reveal-duration) cubic-bezier(0, 0.3, 0.24, 1),
+              transform var(--reveal-duration) cubic-bezier(0, 0.3, 0.24, 1);
 }
 
 .proj-ai-day-cta::before {
@@ -3611,4 +3578,145 @@ body.home-nav-restored header nav .nav-external {
 @media (prefers-reduced-motion: reduce) {
   body.home-nav-restored header nav .nav-label,
   body.home-nav-restored header nav .nav-external { animation: none; }
+}
+
+/* Tablet composition: use the full page width once the rail is hidden. */
+@media (max-width: 1024px) {
+  :root {
+    --grid-margin: 24px;
+    --grid-gutter: 20px;
+    --space-1: 32px;
+    --space-2: 64px;
+    --space-3: 96px;
+    --space-4: 120px;
+    --space-5: 144px;
+  }
+  .sidebar { min-height: 100svh; }
+  .project-panel { min-width: 0; min-height: 100svh; }
+  .project-scroll { height: 100svh; }
+  .home-intro { max-width: 520px; }
+  .proj-hero-media-bleed { height: auto; aspect-ratio: 16 / 9; max-height: 480px; }
+  .proj-hero-split { padding: 32px var(--grid-margin) 0; row-gap: 32px; }
+  .proj-hero-split-headline { grid-column: 1 / -1; grid-row: 1; max-width: 22ch; }
+  .proj-hero-split-meta {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--grid-gutter);
+    row-gap: 24px;
+    align-items: start;
+  }
+  .proj-hero-split-intro,
+  .proj-hero-split-meta > .proj-subtext { grid-column: 1 / span 7; }
+  .proj-hero-split-meta > .proj-hero-facts { grid-column: 8 / span 5; margin-top: 0; }
+  .proj-section-header--feature .proj-section-left { grid-column: 1 / span 4; }
+  .proj-section-header--feature .proj-section-right { grid-column: 5 / span 8; }
+  .scroll-meter { padding-bottom: 56px; }
+  .scroll-meter-divider { margin-bottom: 56px; }
+  .close-btn { top: 16px; right: 16px; }
+  .proj-about-photos-col { height: min(56svh, 560px); align-self: center; }
+  .proj-about-fact { grid-template-columns: max-content minmax(12px, 1fr) minmax(0, 62%); }
+}
+
+/* Phone composition: one readable column, compact rhythm and touch controls. */
+@media (max-width: 768px) {
+  :root {
+    --grid-margin: 16px;
+    --grid-gutter: 16px;
+    --space-1: 24px;
+    --space-2: 48px;
+    --space-3: 72px;
+    --space-4: 96px;
+    --space-5: 120px;
+    --size-h1: clamp(32px, 7vw, 48px);
+    --size-h2: clamp(28px, 5.5vw, 40px);
+    --size-h3: 24px;
+  }
+  .sidebar { padding-top: 12px; padding-bottom: 12px; }
+  .sidebar .list-row { padding: 12px 16px; }
+  .sidebar { --size-display: clamp(20px, 6.5vw, 40px); }
+  .home-intro { margin-top: 16px; padding-right: 8px; }
+  header nav { gap: 0; }
+  header nav .nav-link { padding-inline: 12px; }
+  header nav .nav-link:last-child { padding-right: 0; }
+  footer { padding-inline: 16px; }
+  .proj-hero { padding-top: 80px; padding-bottom: 32px; }
+  .proj-hero-split { gap: 24px; padding: 32px 16px 0; }
+  .proj-hero-split-meta { display: flex; flex-direction: column; gap: 32px; width: 100%; }
+  .proj-hero-split-headline { max-width: none; }
+  .proj-hero-facts { width: 100%; max-width: 480px; gap: 12px; }
+  .proj-hero-fact { grid-template-columns: max-content minmax(16px, 1fr) minmax(0, 70%); }
+  .proj-hero-fact-value { max-width: none; }
+  .proj-section { gap: 24px; }
+  .proj-section-left, .proj-section-right { min-width: 0; width: 100%; }
+  .proj-feature-media:not(.proj-feature-media--screen-bg) { padding: 0; }
+  .proj-feature-media--screen-bg > .proj-feature-media-bg { inset: 0; }
+  .proj-section-header--feature .proj-section-right { max-width: 60ch; }
+  .proj-assistant-caption-row { left: 16px; right: 16px; bottom: 16px; gap: 12px; }
+  .proj-scenario-arrow, .proj-scenario-ctrl, .proj-assistant-play { min-width: 44px; min-height: 44px; }
+  .proj-scenario-arrows { gap: 8px; }
+  .proj-contact { flex-direction: column; gap: 20px; padding: 32px 24px; }
+  .proj-contact p { max-width: 36ch; }
+  .close-btn { width: 44px; height: 44px; }
+  .scroll-meter { padding-bottom: 40px; }
+  .scroll-meter-divider { margin-bottom: 40px; }
+  .scroll-meter-group { font-size: clamp(30px, 7vw, 48px); }
+  .proj-energy-controls-stage { height: clamp(440px, 125vw, 720px); aspect-ratio: auto; }
+  .proj-energy-controls-screen { max-width: calc(100% - 32px); }
+  .proj-energy-phone-stage { height: clamp(440px, 125vw, 640px); aspect-ratio: auto; }
+  .proj-energy-controls-content, .proj-energy-home-content { gap: 24px; }
+  .proj-about-hero { gap: 32px; }
+  .proj-about-columns { width: 100%; row-gap: 32px; }
+  .proj-about-content-col { grid-row: 2; }
+  .proj-about-photos-col {
+    grid-row: 1;
+    height: clamp(320px, 90vw, 480px);
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+  .proj-about-photo--1 {
+    left: calc(50% - 8px - var(--about-photo-width) + var(--about-photo-overlap, 0px) / 2);
+    z-index: 3;
+  }
+  .proj-about-photo--2 {
+    left: calc(50% - 8px - var(--about-photo-overlap, 0px) / 2);
+    right: auto;
+  }
+  .proj-about-facts { gap: 24px; }
+  .proj-about-fact { display: grid; grid-template-columns: minmax(88px, 28%) minmax(0, 1fr); gap: 16px; }
+  .proj-about-fact-label { grid-column: 1; white-space: normal; }
+  .proj-about-fact-value { grid-column: 2; }
+  .proj-about-camera-trigger { min-width: 80px; min-height: 44px; }
+  .proj-trusted { overflow: hidden; }
+  .proj-archive-carousel .proj-scenario-carousel { scroll-padding-inline: 16px; }
+  .proj-archive-carousel-nav { align-self: flex-start; order: 4; }
+}
+
+@media (max-width: 600px) {
+  .sidebar footer { height: auto; min-height: 40px; flex-wrap: wrap; column-gap: 16px; row-gap: 4px; }
+  .sidebar footer .email-btn { padding-inline: 0; }
+  .sidebar .content-section { gap: 24px; }
+}
+
+/* About: fan upward from a lower stack, offset 48px x / 24px y. */
+@keyframes about-photo-spread-left {
+  0% { transform: translate3d(calc(var(--about-stack-dx, 0px) - 24px), calc(2 * var(--about-stack-dy, 0px) - 12px), 0) rotate(0deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(-2deg); }
+}
+@keyframes about-photo-spread-right {
+  0% { transform: translate3d(calc(24px - var(--about-stack-dx, 0px)), 12px, 0) rotate(0deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(2deg); }
+}
+.proj-about-photos-col.is-visible .proj-about-photo--1 {
+  animation: about-photo-spread-left var(--reveal-duration) cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: var(--photo-reveal-delay, 0ms);
+}
+.proj-about-photos-col.is-visible .proj-about-photo--2 {
+  animation: about-photo-spread-right var(--reveal-duration) cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: var(--photo-reveal-delay, 0ms);
+}
+.is-reveal-resetting .proj-about-photo { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .proj-about-photos-col.is-visible .proj-about-photo { animation: none; }
 }

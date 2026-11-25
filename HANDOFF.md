@@ -1,6 +1,6 @@
 # Portfolio handoff — November 24, 2026
 
-Continue on the `simplified` branch. The latest refinements build on `5c5a28f`.
+Continue on the `simplified` branch. The latest refinements build on `54d3567`.
 
 ## Current implementation
 
@@ -20,7 +20,13 @@ Continue on the `simplified` branch. The latest refinements build on `5c5a28f`.
 - Energy uses a seven-column centered phone stage and five-column square home reference photo, preserving phone scale. Added The Rivian Adventure Network and Charging at home titles.
 - Earlier Work caption has a fixed line break before “like”.
 - Responsive breakpoints: 600px (About photo canvas), 768px (mobile layout and Assistant media stacking), 1024px (rail visibility). Redundant About overrides removed.
-- Project reveals follow visual position rather than DOM order. Newly visible batches share a stagger schedule; Role/Scope/Released inherit the group delay and retain 80ms row stagger. Entrance delays are cleared after transitions; reduced-motion skips reveal movement.
+- Project reveals have explicit dependencies: hero media → headline → introduction → metadata, followed by section media/titles/copy. Shared CSS tokens set duration to 300ms and start spacing to 120ms; metadata animates as one group. Nested reveal hooks were removed to avoid double animations. Past components do not hold up content reached by fast scrolling. Reduced-motion skips reveal movement.
+- Tablet uses wider hero headlines and side-by-side introduction/metadata below. Phone uses a single column, tighter spacing, capped portrait device stages, and larger touch targets. About places photos before facts on phone. Shared spacing tokens scale at the existing breakpoints.
+- About no longer has a 1200px headline/columns cap; desktop margins match other projects. Facts have a 600px maximum width. Outside of work copy is “Chasing down good coffee, pastries, and getting better with a camera”.
+- About headline retains a 420ms initial settling delay. Facts start 120ms after it; photos start 100ms after the headline and use a 600ms reveal. Photos rise and fan in one continuous motion from a lower stack, initially offset 48px horizontally and 24px vertically. No horizontal lead-in or overshoot remains. Existing final positions, crops and grayscale treatment remain.
+- Email confirmation retains its icon swap, but the spring-scale effect was removed. Hidden rail label changes no longer measure auto width or resize the 40px circular button.
+- Hero video playback is route-controlled: all three video heroes reset to zero and play on entry; inactive heroes pause, including on Home. Image heroes are unchanged.
+- Scroll handoff intentionally retains the original fixed 500ms transition guard. Pause-based filters and separate-scroll-container prototypes were tested and reverted. Continuing trackpad wheel input after the guard can still move the incoming page; do not claim momentum cancellation is solved or restore the rejected indefinite filters.
 
 ## Preserve
 
@@ -40,4 +46,4 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 Open http://127.0.0.1:8000/ . No dependency installation or build step is needed.
 
-Browser checks covered desktop and 390px mobile layouts, responsive boundaries, project routes, refresh, Back/Forward, close, Next Project, video toggles, random-photo placement, reveal timing and rail expansion timing. Inline JavaScript syntax and `git diff --check` passed before this push.
+Browser checks covered desktop and 390px mobile layouts, responsive boundaries, project routes, refresh, Back/Forward, close, Next Project, video toggles, random-photo placement, reveal timing and rail expansion timing. Browser checks also covered all project reveal hooks on desktop/phone, About stack offsets and timing, steady email-copy confirmation, and hero restart/pause on route changes. Inline JavaScript syntax and `git diff --check` passed before this push.
